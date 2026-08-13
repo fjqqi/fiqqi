@@ -6,112 +6,75 @@ export default function ContactSection() {
       {/* ════════════════ CONTACT ════════════════ */}
       <section
         id="contact"
-        style={{
-          padding: "80px 24px 120px",
-          maxWidth: 700,
-          margin: "0 auto",
-        }}
+        className="py-20 pb-30 px-6 max-w-[700px] mx-auto"
       >
-        <div style={{ textAlign: "center", marginBottom: 50 }}>
-          <p
-            style={{
-              fontSize: "0.8rem",
-              fontWeight: 600,
-              letterSpacing: "0.15em",
-              textTransform: "uppercase",
-              color: "var(--green)",
-              marginBottom: 12,
-            }}
-          >
+        <div className="text-center mb-12">
+          <p className="text-[0.8rem] font-semibold tracking-[0.15em] uppercase text-primary mb-3">
             Get in Touch
           </p>
-          <h2
-            style={{
-              fontSize: "clamp(2rem, 4vw, 3rem)",
-              fontWeight: 800,
-              letterSpacing: "-0.03em",
-              marginBottom: 8,
-            }}
-          >
+          <h2 className="text-[clamp(2rem,4vw,3rem)] font-[800] tracking-[-0.03em] mb-2">
             Let&apos;s work{" "}
-            <span style={{ color: "var(--green)" }}>together</span>
+            <span className="text-primary">together</span>
           </h2>
-          <p style={{ color: "var(--muted-light)", fontSize: "1rem" }}>
+          <p className="text-muted-light text-base">
             Have a project in mind? Drop me a message.
           </p>
         </div>
 
         <form
           onSubmit={(e) => e.preventDefault()}
-          style={{ display: "flex", flexDirection: "column", gap: 32 }}
+          className="flex flex-col gap-8"
         >
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              gap: 28,
-            }}
-          >
+          <div className="grid grid-cols-2 gap-7">
             <input
-              className="contact-input"
+              className="contact-input bg-transparent border-0 border-b-2 border-b-input-border py-3 text-base font-sans text-foreground w-full outline-none transition-[border-color,color] duration-300 focus:border-b-primary"
               type="text"
               placeholder="Your Name"
               id="contact-name"
             />
             <input
-              className="contact-input"
+              className="contact-input bg-transparent border-0 border-b-2 border-b-input-border py-3 text-base font-sans text-foreground w-full outline-none transition-[border-color,color] duration-300 focus:border-b-primary"
               type="email"
               placeholder="Your Email"
               id="contact-email"
             />
           </div>
           <input
-            className="contact-input"
+            className="contact-input bg-transparent border-0 border-b-2 border-b-input-border py-3 text-base font-sans text-foreground w-full outline-none transition-[border-color,color] duration-300 focus:border-b-primary"
             type="text"
             placeholder="Subject"
             id="contact-subject"
           />
           <textarea
-            className="contact-input"
+            className="contact-input bg-transparent border-0 border-b-2 border-b-input-border py-3 text-base font-sans text-foreground w-full outline-none transition-[border-color,color] duration-300 focus:border-b-primary resize-y"
             placeholder="Tell me about your project..."
             rows={4}
             id="contact-message"
-            style={{ resize: "vertical" }}
           />
-          <div style={{ textAlign: "center", marginTop: 8 }}>
-            <button className="pill-green" type="submit" style={{ fontSize: "1rem", padding: "14px 48px" }}>
+          <div className="text-center mt-2">
+            <button
+              className="bg-primary text-white px-12 py-3.5 rounded-full font-semibold text-base cursor-pointer transition-all duration-300 inline-flex items-center gap-1.5 hover:bg-primary-dark hover:scale-105 hover:shadow-[0_4px_20px_rgba(29,185,84,0.3)]"
+              type="submit"
+            >
               Send Message
-              <span style={{ marginLeft: 4 }}>→</span>
+              <span className="ml-1">→</span>
             </button>
           </div>
         </form>
       </section>
 
       {/* ════════════════ FOOTER ════════════════ */}
-      <footer
-        style={{
-          borderTop: "2px solid var(--border)",
-          padding: "40px 24px",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          maxWidth: 1100,
-          margin: "0 auto",
-          width: "100%",
-          flexWrap: "wrap",
-          gap: 16,
-        }}
-      >
-        <p style={{ fontSize: "0.85rem", color: "var(--muted-light)" }}>
+      <footer className="border-t-2 border-border py-10 px-6 flex justify-between items-center max-w-[1100px] mx-auto w-full flex-wrap gap-4">
+        <p className="text-[0.85rem] text-muted-light">
           © {new Date().getFullYear()} Fiqqi. All rights reserved.
         </p>
-        <div style={{ display: "flex", gap: 20 }}>
+        <div className="flex gap-5">
           <a
             href="https://linkedin.com"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn"
-            style={{ color: "var(--muted-light)", transition: "color 0.3s" }}
+            className="text-muted-light transition-colors duration-300 hover:text-primary"
           >
             <LinkedInIcon />
           </a>
@@ -120,7 +83,7 @@ export default function ContactSection() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="GitHub"
-            style={{ color: "var(--muted-light)", transition: "color 0.3s" }}
+            className="text-muted-light transition-colors duration-300 hover:text-primary"
           >
             <GitHubIcon />
           </a>

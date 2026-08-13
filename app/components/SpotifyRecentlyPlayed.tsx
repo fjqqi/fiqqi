@@ -85,49 +85,45 @@ export default function SpotifyRecentlyPlayed() {
         <div className="spotify-sidebar__content">
           <div className="spotify-sidebar__header">
             <span className="spotify-sidebar__title">Recently Played</span>
-            <span className="spotify-sidebar__badge">
-              <span className="spotify-sidebar__pulse" />
-              Live
-            </span>
           </div>
 
           <div className="spotify-sidebar__tracks">
             {loading
               ? Array.from({ length: 4 }).map((_, i) => (
-                  <div key={i} className="spotify-track spotify-track--skeleton">
-                    <div className="spotify-track__art-skeleton" />
-                    <div className="spotify-track__info-skeleton">
-                      <div className="skeleton-line skeleton-line--title" />
-                      <div className="skeleton-line skeleton-line--artist" />
-                    </div>
+                <div key={i} className="spotify-track spotify-track--skeleton">
+                  <div className="spotify-track__art-skeleton" />
+                  <div className="spotify-track__info-skeleton">
+                    <div className="skeleton-line skeleton-line--title" />
+                    <div className="skeleton-line skeleton-line--artist" />
                   </div>
-                ))
+                </div>
+              ))
               : tracks.map((track, i) => (
-                  <a
-                    key={`${track.title}-${i}`}
-                    href={track.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="spotify-track"
-                    style={{ animationDelay: `${i * 0.05}s` }}
-                  >
-                    <img
-                      src={track.albumArt}
-                      alt={track.album}
-                      className="spotify-track__art"
-                      width={44}
-                      height={44}
-                    />
-                    <div className="spotify-track__info">
-                      <span className="spotify-track__title">{track.title}</span>
-                      <span className="spotify-track__artist">{track.artist}</span>
-                    </div>
-                    <div className="spotify-track__meta">
-                      <span className="spotify-track__duration">{formatDuration(track.durationMs)}</span>
-                      <span className="spotify-track__time">{timeAgo(track.playedAt)}</span>
-                    </div>
-                  </a>
-                ))}
+                <a
+                  key={`${track.title}-${i}`}
+                  href={track.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="spotify-track"
+                  style={{ animationDelay: `${i * 0.05}s` }}
+                >
+                  <img
+                    src={track.albumArt}
+                    alt={track.album}
+                    className="spotify-track__art"
+                    width={44}
+                    height={44}
+                  />
+                  <div className="spotify-track__info">
+                    <span className="spotify-track__title">{track.title}</span>
+                    <span className="spotify-track__artist">{track.artist}</span>
+                  </div>
+                  <div className="spotify-track__meta">
+                    <span className="spotify-track__duration">{formatDuration(track.durationMs)}</span>
+                    <span className="spotify-track__time">{timeAgo(track.playedAt)}</span>
+                  </div>
+                </a>
+              ))}
           </div>
         </div>
       )}

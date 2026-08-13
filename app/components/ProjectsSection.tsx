@@ -25,102 +25,49 @@ export default function ProjectsSection() {
   return (
     <section
       id="projects"
-      style={{
-        padding: "80px 24px 120px",
-        maxWidth: 1100,
-        margin: "0 auto",
-      }}
+      className="py-20 px-6 max-w-[1100px] mx-auto"
     >
-      <div style={{ textAlign: "center", marginBottom: 60 }}>
-        <p
-          style={{
-            fontSize: "0.8rem",
-            fontWeight: 600,
-            letterSpacing: "0.15em",
-            textTransform: "uppercase",
-            color: "var(--green)",
-            marginBottom: 12,
-          }}
-        >
+      <div className="text-center mb-15">
+        <p className="text-[0.8rem] font-semibold tracking-[0.15em] uppercase text-primary mb-3">
           Selected Work
         </p>
-        <h2
-          style={{
-            fontSize: "clamp(2rem, 4vw, 3rem)",
-            fontWeight: 800,
-            letterSpacing: "-0.03em",
-          }}
-        >
+        <h2 className="text-[clamp(2rem,4vw,3rem)] font-[800] tracking-[-0.03em]">
           Projects I&apos;ve built
         </h2>
       </div>
 
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
-          gap: 28,
-        }}
-      >
+      <div className="grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] gap-7">
         {projects.map((project) => (
-          <div key={project.title} className="project-card">
+          <div
+            key={project.title}
+            className="bg-card backdrop-blur-[10px] border border-card-border rounded-2xl overflow-hidden cursor-pointer transition-all duration-[400ms] ease-[cubic-bezier(0.4,0,0.2,1)] hover:-translate-y-2 hover:shadow-[0_20px_60px_rgba(0,0,0,0.1)] hover:border-primary dark:hover:shadow-[0_20px_60px_rgba(0,0,0,0.4)]"
+          >
             <div
+              className="h-[200px] flex items-center justify-center border-b border-black/[0.04]"
               style={{
-                height: 200,
                 background: `linear-gradient(135deg, ${project.color}22, ${project.color}08)`,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                borderBottom: "1px solid rgba(0,0,0,0.04)",
               }}
             >
               <span
-                style={{
-                  fontSize: "3rem",
-                  opacity: 0.2,
-                  fontWeight: 900,
-                  color: project.color,
-                }}
+                className="text-5xl opacity-20 font-black"
+                style={{ color: project.color }}
               >
                 ✦
               </span>
             </div>
-            <div style={{ padding: 28 }}>
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  marginBottom: 12,
-                }}
-              >
-                <h3 style={{ fontSize: "1.15rem", fontWeight: 700 }}>
-                  {project.title}
-                </h3>
+            <div className="p-7">
+              <div className="flex items-center justify-between mb-3">
+                <h3 className="text-[1.15rem] font-bold">{project.title}</h3>
                 <ArrowUpRight />
               </div>
-              <p
-                style={{
-                  fontSize: "0.9rem",
-                  lineHeight: 1.7,
-                  color: "var(--muted)",
-                  marginBottom: 20,
-                }}
-              >
+              <p className="text-[0.9rem] leading-[1.7] text-muted mb-5">
                 {project.desc}
               </p>
-              <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+              <div className="flex gap-2 flex-wrap">
                 {project.tags.map((tag) => (
                   <span
                     key={tag}
-                    style={{
-                      fontSize: "0.75rem",
-                      fontWeight: 600,
-                      padding: "4px 12px",
-                      borderRadius: 50,
-                      border: "1.5px solid var(--border)",
-                      color: "var(--muted)",
-                    }}
+                    className="text-xs font-semibold px-3 py-1 rounded-full border-[1.5px] border-border text-muted"
                   >
                     {tag}
                   </span>

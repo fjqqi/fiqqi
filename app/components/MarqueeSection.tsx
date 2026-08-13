@@ -1,27 +1,11 @@
 export default function MarqueeSection() {
   return (
-    <section
-      style={{
-        overflow: "hidden",
-        borderTop: "2px solid var(--border)",
-        borderBottom: "2px solid var(--border)",
-        padding: "20px 0",
-        background: "var(--marquee-bg)",
-      }}
-    >
+    <section className="overflow-hidden border-y-2 bg border-border py-5 bg-green-900">
       <div className="marquee-track">
         {[...Array(2)].map((_, i) => (
           <span
             key={i}
-            style={{
-              fontSize: "clamp(2rem, 5vw, 4.5rem)",
-              fontWeight: 900,
-              letterSpacing: "-0.04em",
-              whiteSpace: "nowrap",
-              padding: "0 40px",
-              color: "var(--foreground)",
-              opacity: 0.9,
-            }}
+            className="text-[clamp(2rem,5vw,4.5rem)] text-white font-black tracking-[-0.04em] whitespace-nowrap px-10  opacity-90"
           >
             just call me if you need a frontend developer ✦ just call me if
             you need a frontend developer ✦&nbsp;

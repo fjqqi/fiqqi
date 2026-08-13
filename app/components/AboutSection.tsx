@@ -11,61 +11,25 @@ export default function AboutSection() {
   return (
     <section
       id="about"
-      style={{
-        padding: "120px 24px",
-        maxWidth: 1100,
-        margin: "0 auto",
-      }}
+      className="relative z-10 py-30 px-6 max-w-[1100px] mx-auto"
     >
-      <div className="about-grid">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-15 items-center">
         <div>
-          <p
-            style={{
-              fontSize: "0.8rem",
-              fontWeight: 600,
-              letterSpacing: "0.15em",
-              textTransform: "uppercase",
-              color: "var(--green)",
-              marginBottom: 12,
-            }}
-          >
+          <p className="text-[0.8rem] font-semibold tracking-[0.15em] uppercase text-primary mb-3">
             About Me
           </p>
-          <h2
-            style={{
-              fontSize: "clamp(2rem, 4vw, 3rem)",
-              fontWeight: 800,
-              lineHeight: 1.1,
-              letterSpacing: "-0.03em",
-              marginBottom: 24,
-            }}
-          >
+          <h2 className="text-[clamp(2rem,4vw,3rem)] font-[800] leading-[1.1] tracking-[-0.03em] mb-6">
             Crafting interfaces
             <br />
-            that feel <span style={{ color: "var(--green)" }}>alive</span>
+            that feel <span className="text-primary">alive</span>
           </h2>
-          <p
-            style={{
-              fontSize: "1.05rem",
-              lineHeight: 1.8,
-              color: "var(--muted)",
-              marginBottom: 20,
-              maxWidth: 480,
-            }}
-          >
+          <p className="text-[1.05rem] leading-[1.8] text-muted mb-5 max-w-[480px]">
             I&apos;m a front-end developer with a passion for clean code and
             stunning user interfaces. I specialize in building modern web
             applications with Next.js, React, and TypeScript, bringing designs
             to life with pixel-perfect precision.
           </p>
-          <p
-            style={{
-              fontSize: "1.05rem",
-              lineHeight: 1.8,
-              color: "var(--muted)",
-              maxWidth: 480,
-            }}
-          >
+          <p className="text-[1.05rem] leading-[1.8] text-muted max-w-[480px]">
             Beyond the browser, I explore mobile development with Flutter and
             backend systems with Laravel. Every project is an opportunity to
             push boundaries and create something truly uncommon.
@@ -74,24 +38,16 @@ export default function AboutSection() {
 
         {/* Skills */}
         <div>
-          <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+          <div className="flex flex-col gap-6">
             {skills.map((skill) => (
               <div key={skill.name}>
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    marginBottom: 8,
-                    fontSize: "0.9rem",
-                    fontWeight: 600,
-                  }}
-                >
+                <div className="flex justify-between mb-2 text-[0.9rem] font-semibold">
                   <span>{skill.name}</span>
-                  <span style={{ color: "var(--muted-light)" }}>{skill.level}%</span>
+                  <span className="text-muted-light">{skill.level}%</span>
                 </div>
-                <div className="skill-bar">
+                <div className="h-1.5 bg-skill-bg rounded-sm overflow-hidden">
                   <div
-                    className="skill-bar-fill"
+                    className="h-full bg-gradient-to-r from-primary to-[#34d399] rounded-sm transition-[width] duration-1000 ease-out"
                     style={{ width: `${skill.level}%` }}
                   />
                 </div>

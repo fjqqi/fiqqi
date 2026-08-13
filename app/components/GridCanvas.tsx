@@ -21,8 +21,9 @@ export default function GridCanvas({
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const mouseRef = useRef({ x: -9999, y: -9999 });
   const rafRef = useRef<number>(0);
+  const timeRef = useRef<number>(0);
 
-  const draw = useCallback(() => {
+  const draw = useCallback((timestamp: number) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -45,16 +46,46 @@ export default function GridCanvas({
 
     const mx = mouseRef.current.x;
     const my = mouseRef.current.y;
+    const t = timestamp * 0.001; // seconds
+
+    /* Traveling pulse parameters */
+    const pulseSpeed = 60;       // pixels per second — slow and visible
+    const pulseWidth = 300;      // pixel height of the pulse envelope (wider = smoother)
+    const pulseAmplitude = 5;    // max displacement in pixels
+    const pulseCycle = 120;      // seconds before the pulse repeats
+
+    /* The wave front Y position — loops every pulseCycle seconds */
+    const cycleT = t % pulseCycle;
+    const waveFrontY = cycleT * pulseSpeed;
+
+    /* Helper: pulse displacement at a point */
+    const waveDisplace = (px: number, py: number): [number, number] => {
+      const dist = py - waveFrontY;
+      /* Only displace points near the wave front */
+      if (dist > pulseWidth * 0.5 || dist < -pulseWidth * 0.5) return [0, 0];
+      /* Smooth bell-curve envelope */
+      const envelope = Math.exp(-0.5 * (dist / (pulseWidth * 0.2)) ** 2);
+      const dx = Math.sin(px * 0.05 + py * 0.03) * pulseAmplitude * envelope;
+      const dy = Math.cos(px * 0.03 - py * 0.02) * pulseAmplitude * 0.5 * envelope;
+      return [dx, dy];
+    };
 
     /* Helper: displace a point away from cursor */
-    const displace = (px: number, py: number): [number, number] => {
+    const cursorDisplace = (px: number, py: number): [number, number] => {
       const dx = px - mx;
       const dy = py - my;
       const dist = Math.sqrt(dx * dx + dy * dy);
-      if (dist > curveRadius || dist < 1) return [px, py];
+      if (dist > curveRadius || dist < 1) return [0, 0];
       const factor = (1 - dist / curveRadius) ** 2 * curveStrength;
       const angle = Math.atan2(dy, dx);
-      return [px + Math.cos(angle) * factor, py + Math.sin(angle) * factor];
+      return [Math.cos(angle) * factor, Math.sin(angle) * factor];
+    };
+
+    /* Combined displacement */
+    const displace = (px: number, py: number): [number, number] => {
+      const [wx, wy] = waveDisplace(px, py);
+      const [cx, cy] = cursorDisplace(px, py);
+      return [px + wx + cx, py + wy + cy];
     };
 
     const cols = Math.ceil(w / cellWidth) + 2;
@@ -90,8 +121,9 @@ export default function GridCanvas({
   }, [cellWidth, cellHeight, lineWidth, curveRadius, curveStrength]);
 
   /* Animation loop */
-  const loop = useCallback(() => {
-    draw();
+  const loop = useCallback((timestamp: number) => {
+    timeRef.current = timestamp;
+    draw(timestamp);
     rafRef.current = requestAnimationFrame(loop);
   }, [draw]);
 

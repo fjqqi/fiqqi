@@ -8,7 +8,7 @@ import MarqueeSection from "./components/MarqueeSection";
 import AboutSection from "./components/AboutSection";
 import ProjectsSection from "./components/ProjectsSection";
 import ContactSection from "./components/ContactSection";
-import SpotifyRecentlyPlayed from "./components/SpotifyRecentlyPlayed";
+import SpotifyNowPlaying from "./components/SpotifyNowPlaying";
 
 export default function Home() {
   const [dark, setDark] = useState(false);
@@ -39,7 +39,7 @@ export default function Home() {
     <div className="grid-paper">
       {/* Dark mode toggle */}
       <button
-        className="dark-toggle"
+        className="fixed top-6 right-6 z-[100] w-11 h-11 rounded-full border-[1.5px] border-pill-border bg-card backdrop-blur-xl flex items-center justify-center cursor-pointer transition-all duration-300 text-foreground text-xl p-0 hover:scale-110 hover:border-primary hover:shadow-[0_4px_16px_rgba(29,185,84,0.2)]"
         onClick={toggleDark}
         aria-label="Toggle dark mode"
         id="dark-mode-toggle"
@@ -50,11 +50,15 @@ export default function Home() {
       {/* Interactive grid canvas */}
       <GridCanvas />
 
-      {/* Spotify recently played sidebar */}
-      <SpotifyRecentlyPlayed />
+      {/* Spotify now playing card */}
+      <SpotifyNowPlaying />
 
-      <HeroSection />
-      <MarqueeSection />
+      <div className="relative">
+        <HeroSection />
+        <div className="absolute bottom-22">
+          <MarqueeSection />
+        </div>
+      </div>
       <AboutSection />
       <ProjectsSection />
       <ContactSection />
