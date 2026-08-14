@@ -6,7 +6,7 @@ export default function ContactSection() {
       {/* ════════════════ CONTACT ════════════════ */}
       <section
         id="contact"
-        className="py-20 pb-30 px-6 max-w-[700px] mx-auto"
+        className="py-0 pb-30 px-6 max-w-[700px] mx-auto"
       >
         <div className="text-center mb-12">
           <p className="text-[0.8rem] font-semibold tracking-[0.15em] uppercase text-primary mb-3">

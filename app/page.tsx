@@ -55,7 +55,7 @@ export default function Home() {
 
       <div className="relative">
         <HeroSection />
-        <div className="absolute bottom-22">
+        <div className="absolute bottom-64">
           <MarqueeSection />
         </div>
       </div>
