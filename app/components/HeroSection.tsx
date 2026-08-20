@@ -11,7 +11,7 @@ export default function HeroSection() {
     >
       {/* Heading */}
       <div className="animate-fade-in-up text-center mb-6">
-        <h1 className="text-[clamp(2.5rem,5vw,4rem)] font-[800] leading-[1.1] tracking-[-0.03em] text-center [text-shadow:0.5px_0_0_black,-0.5px_0_0_black,0_0.5px_0_black,0_-0.5px_0_black,0.5px_0.5px_0_black,-0.5px_-0.5px_0_black,0.5px_-0.5px_0_black,-0.5px_0.5px_0_black]">
+        <h1 className="text-[clamp(2rem,5vw,4rem)] font-[800] leading-[1.1] tracking-[-0.03em] text-center [text-shadow:0.5px_0_0_black,-0.5px_0_0_black,0_0.5px_0_black,0_-0.5px_0_black,0.5px_0.5px_0_black,-0.5px_-0.5px_0_black,0.5px_-0.5px_0_black,-0.5px_0.5px_0_black]">
           Building Aesthetic
           <br />
           Digital <span className="text-primary">Experiences</span>
@@ -20,14 +20,24 @@ export default function HeroSection() {
 
       {/* Intro line */}
       <div className="animate-fade-in-up animate-delay-1 flex items-center gap-3 mb-4 flex-wrap justify-center">
-        <span className="text-[1.1rem] font-semibold tracking-[-0.01em]">
+        <span className="md:text-[1.1rem] font-semibold tracking-[-0.01em]">
           Hi, I&apos;m Fiqqi
         </span>
-        <span className="spin-slow text-primary font-extrabold text-[1.2rem]">✳</span>
+        <span className="spin-slow inline-block">
+          <svg viewBox="0 0 1200 1200" className="w-5 h-5 fill-primary" xmlns="http://www.w3.org/2000/svg">
+            <path d="M489.838,29.354v443.603L68.032,335.894L0,545.285l421.829,137.086l-260.743,358.876l178.219,129.398L600.048,811.84l260.673,358.806l178.146-129.398L778.101,682.465L1200,545.379l-68.032-209.403l-421.899,137.07V29.443H489.84L489.838,29.354z" />
+          </svg>
+        </span>
         <span className="bg-primary text-white px-6 py-2 rounded-full font-semibold text-[0.95rem] tracking-[0.01em] cursor-pointer transition-all duration-300 inline-flex items-center gap-1.5 hover:bg-primary-dark hover:scale-105 hover:shadow-[0_4px_20px_rgba(29,185,84,0.3)]">
           Front-end Developer
         </span>
-        <span className="spin-slow text-primary text-[1.2rem] font-extrabold ">✳</span>
+
+        <span className="spin-slow inline-block">
+          <svg viewBox="0 0 1200 1200" className=" hidden md:inline-block w-5 h-5 fill-primary" xmlns="http://www.w3.org/2000/svg">
+            <path d="M489.838,29.354v443.603L68.032,335.894L0,545.285l421.829,137.086l-260.743,358.876l178.219,129.398L600.048,811.84l260.673,358.806l178.146-129.398L778.101,682.465L1200,545.379l-68.032-209.403l-421.899,137.07V29.443H489.84L489.838,29.354z" />
+          </svg>
+        </span>
+
         <a
           href="https://linkedin.com"
           target="_blank"
@@ -93,12 +103,12 @@ export default function HeroSection() {
         </a>
 
         {/* Bottom-left: Spotify card (mobile only, inside apple container) */}
-        <div className="xl:hidden absolute left-[5%] bottom-[15%] z-20">
+        <div className="xl:hidden absolute left-[0%] bottom-[15%] z-20">
           <SpotifyNowPlaying />
         </div>
 
         {/* Bottom-right: Work card (mobile only, inside apple container) */}
-        <div className="xl:hidden absolute right-[5%] bottom-[15%] z-20">
+        <div className="xl:hidden absolute right-[0%] bottom-[15%] z-20">
           <WorkCard />
         </div>
       </div>
