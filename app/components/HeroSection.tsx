@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { LinkedInIcon, GitHubIcon } from "./Icons";
+import { LinkedInIcon, GitHubIcon, InstagramIcon, UpworkIcon } from "./Icons";
 import WorkCard from "./WorkCard";
 import SpotifyNowPlaying from "./SpotifyNowPlaying";
 
@@ -19,18 +19,23 @@ export default function HeroSection() {
       </div>
 
       {/* Intro line */}
-      <div className="animate-fade-in-up animate-delay-1 flex items-center gap-3 mb-4 flex-wrap justify-center">
-        <span className="md:text-[1.1rem] font-semibold tracking-[-0.01em]">
-          Hi, I&apos;m Fiqqi
-        </span>
-        <span className="spin-slow inline-block">
-          <svg viewBox="0 0 1200 1200" className="w-5 h-5 fill-primary" xmlns="http://www.w3.org/2000/svg">
-            <path d="M489.838,29.354v443.603L68.032,335.894L0,545.285l421.829,137.086l-260.743,358.876l178.219,129.398L600.048,811.84l260.673,358.806l178.146-129.398L778.101,682.465L1200,545.379l-68.032-209.403l-421.899,137.07V29.443H489.84L489.838,29.354z" />
-          </svg>
-        </span>
-        <span className="bg-primary text-white px-6 py-2 rounded-full font-semibold text-[0.95rem] tracking-[0.01em] cursor-pointer transition-all duration-300 inline-flex items-center gap-1.5 hover:bg-primary-dark hover:scale-105 hover:shadow-[0_4px_20px_rgba(29,185,84,0.3)]">
-          Front-end Developer
-        </span>
+      <div className="animate-fade-in-up animate-delay-1 flex flex-col items-center gap-2 mb-4 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-3">
+
+        <div className="flex items-center gap-2">
+          <span className="text-[1.1rem] font-semibold tracking-[-0.01em]">
+            Hi, I&apos;m Fiqqi
+          </span>
+
+          <span className="spin-slow inline-block">
+            <svg viewBox="0 0 1200 1200" className="w-5 h-5 fill-primary" xmlns="http://www.w3.org/2000/svg">
+              <path d="M489.838,29.354v443.603L68.032,335.894L0,545.285l421.829,137.086l-260.743,358.876l178.219,129.398L600.048,811.84l260.673,358.806l178.146-129.398L778.101,682.465L1200,545.379l-68.032-209.403l-421.899,137.07V29.443H489.84L489.838,29.354z" />
+            </svg>
+          </span>
+          <span className="bg-primary text-white px-6 py-2 rounded-full font-semibold text-[0.95rem] tracking-[0.01em] cursor-pointer transition-all duration-300 inline-flex items-center gap-1.5 hover:bg-primary-dark hover:scale-105 hover:shadow-[0_4px_20px_rgba(29,185,84,0.3)]">
+            Front-end Developer
+          </span>
+        </div>
+
 
         <span className="spin-slow inline-block">
           <svg viewBox="0 0 1200 1200" className=" hidden md:inline-block w-5 h-5 fill-primary" xmlns="http://www.w3.org/2000/svg">
@@ -38,24 +43,45 @@ export default function HeroSection() {
           </svg>
         </span>
 
-        <a
-          href="https://linkedin.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="LinkedIn"
-          className="hover:text-primary duration-300"
-        >
-          <LinkedInIcon />
-        </a>
-        <a
-          href="https://github.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="GitHub"
-          className="hover:text-primary duration-300"
-        >
-          <GitHubIcon />
-        </a>
+        {/* Social icons */}
+        <div className="flex items-center gap-3">
+          <a
+            href="https://linkedin.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn"
+            className="hover:text-primary duration-300"
+          >
+            <LinkedInIcon />
+          </a>
+          <a
+            href="https://github.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub"
+            className="hover:text-primary duration-300"
+          >
+            <GitHubIcon />
+          </a>
+          <a
+            href="https://instagram.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Instagram"
+            className="hover:text-primary duration-300"
+          >
+            <InstagramIcon />
+          </a>
+          {/* <a
+            href="https://upwork.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Upwork"
+            className="hover:text-primary duration-300"
+          >
+            <UpworkIcon />
+          </a> */}
+        </div>
       </div>
 
       {/* Tech stack */}
@@ -68,7 +94,7 @@ export default function HeroSection() {
       {/* Apple + scattered nav */}
       <div className="animate-fade-in-up animate-delay-3 relative w-[min(700px,90vw)] h-[min(700px,90vw)] flex items-center justify-center">
         {/* Apple image */}
-        <div className="apple-float absolute top-10 z-0">
+        <div className="apple-float absolute md:top-10 top-4 z-0">
           <Image
             src="/apppple.png"
             alt="Halftone green apple"
