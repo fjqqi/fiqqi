@@ -1,33 +1,10 @@
 import { ArrowUpRight } from "./Icons";
-
-const projects = [
-  {
-    title: "E-Commerce Platform",
-    desc: "Full-stack online store with Next.js, Stripe integration, and real-time inventory management.",
-    tags: ["Next.js", "TypeScript", "Stripe"],
-    color: "#1db954",
-  },
-  {
-    title: "Dashboard Analytics",
-    desc: "Interactive analytics dashboard with live data visualization and customizable widgets.",
-    tags: ["React", "D3.js", "Laravel"],
-    color: "#f87171",
-  },
-  {
-    title: "Mobile Banking App",
-    desc: "Cross-platform banking application with biometric authentication and transaction tracking.",
-    tags: ["Flutter", "Dart", "Firebase"],
-    color: "#6366f1",
-  },
-];
+import { projects } from "../data";
 
 export default function ProjectsSection() {
   return (
-    <section
-      id="projects"
-      className="py-20 px-6 max-w-[1100px] mx-auto"
-    >
-      <div className="text-center mb-15">
+    <section id="projects" className="py-24 px-6 max-w-[1100px] mx-auto">
+      <div className="text-center mb-16">
         <p className="text-[0.8rem] font-semibold tracking-[0.15em] uppercase text-primary mb-3">
           Selected Work
         </p>
@@ -36,29 +13,49 @@ export default function ProjectsSection() {
         </h2>
       </div>
 
-      <div className="grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] gap-7">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7">
         {projects.map((project) => (
           <div
             key={project.title}
-            className="bg-card backdrop-blur-[10px] border border-card-border rounded-2xl overflow-hidden cursor-pointer transition-all duration-[400ms] ease-[cubic-bezier(0.4,0,0.2,1)] hover:-translate-y-2 hover:shadow-[0_20px_60px_rgba(0,0,0,0.1)] hover:border-primary dark:hover:shadow-[0_20px_60px_rgba(0,0,0,0.4)]"
+            className="group bg-card backdrop-blur-[10px] border border-card-border rounded-2xl overflow-hidden cursor-pointer transition-all duration-[400ms] ease-[cubic-bezier(0.4,0,0.2,1)] hover:-translate-y-3 hover:shadow-[0_24px_64px_rgba(29,185,84,0.12),0_8px_24px_rgba(0,0,0,0.08)] hover:border-primary/40 dark:hover:shadow-[0_24px_64px_rgba(29,185,84,0.15),0_8px_24px_rgba(0,0,0,0.5)] shadow-[0_2px_12px_rgba(0,0,0,0.04)]"
           >
+            {/* Card preview */}
             <div
-              className="h-[200px] flex items-center justify-center border-b border-black/[0.04]"
+              className="h-[200px] relative flex items-center justify-center border-b border-black/[0.04] overflow-hidden"
               style={{
                 background: `linear-gradient(135deg, ${project.color}22, ${project.color}08)`,
               }}
             >
+              {/* Large project number */}
               <span
-                className="text-5xl opacity-20 font-black"
+                className="absolute right-5 bottom-3 text-[5rem] font-[900] leading-none select-none pointer-events-none transition-transform duration-500 group-hover:scale-110"
+                style={{ color: `${project.color}18` }}
+              >
+                {project.num}
+              </span>
+              {/* Accent dot grid pattern */}
+              <div
+                className="absolute inset-0 opacity-[0.07]"
+                style={{
+                  backgroundImage: `radial-gradient(${project.color} 1px, transparent 1px)`,
+                  backgroundSize: "20px 20px",
+                }}
+              />
+              {/* Center icon */}
+              <span
+                className="relative text-5xl opacity-30 font-black transition-all duration-500 group-hover:opacity-50 group-hover:scale-110"
                 style={{ color: project.color }}
               >
                 ✦
               </span>
             </div>
+
             <div className="p-7">
               <div className="flex items-center justify-between mb-3">
                 <h3 className="text-[1.15rem] font-bold">{project.title}</h3>
-                <ArrowUpRight />
+                <span className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
+                  <ArrowUpRight />
+                </span>
               </div>
               <p className="text-[0.9rem] leading-[1.7] text-muted mb-5">
                 {project.desc}
@@ -76,6 +73,19 @@ export default function ProjectsSection() {
             </div>
           </div>
         ))}
+      </div>
+
+      {/* View all button */}
+      <div className="text-center mt-12">
+        <a
+          href="https://github.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 border-[1.5px] border-pill-border text-foreground px-8 py-3 rounded-full font-semibold text-sm transition-all duration-300 hover:border-primary hover:text-primary hover:shadow-[0_4px_20px_rgba(29,185,84,0.12)] hover:scale-105 no-underline"
+        >
+          View all on GitHub
+          <ArrowUpRight />
+        </a>
       </div>
     </section>
   );

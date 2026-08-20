@@ -1,34 +1,15 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-
-const greetings = [
-  { text: "Hello!", lang: "English" },
-  { text: "こんにちは!", lang: "Japanese" },
-  { text: "Bonjour!", lang: "French" },
-  { text: "안녕하세요!", lang: "Korean" },
-  { text: "¡Hola!", lang: "Spanish" },
-  { text: "Ciao!", lang: "Italian" },
-  { text: "Olá!", lang: "Portuguese" },
-  { text: "Hallo!", lang: "German" },
-  { text: "Halo!", lang: "Indonesian" },
-  { text: "你好!", lang: "Chinese" },
-];
-
-const skills = [
-  { name: "Next.js / React", level: 92 },
-  { name: "TypeScript", level: 88 },
-  { name: "CSS / Tailwind", level: 90 },
-  { name: "Laravel / PHP", level: 78 },
-  { name: "Flutter / Dart", level: 72 },
-  { name: "UI / UX Design", level: 80 },
-];
+import { greetings, stats, skills } from "../data";
 
 export default function AboutSection() {
   const [hoveredCard, setHoveredCard] = useState<"left" | "right" | null>(null);
   const [greetingIndex, setGreetingIndex] = useState(0);
   const [fadeState, setFadeState] = useState<"in" | "out">("in");
+  const [skillsVisible, setSkillsVisible] = useState(false);
+  const skillsRef = useRef<HTMLDivElement>(null);
 
   const isRightHovered = hoveredCard === "right";
 
@@ -40,33 +21,48 @@ export default function AboutSection() {
         setFadeState("in");
       }, 200);
     }, 2000);
-
     return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setSkillsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.3 }
+    );
+    if (skillsRef.current) observer.observe(skillsRef.current);
+    return () => observer.disconnect();
   }, []);
 
   return (
     <section
       id="about"
-      className="relative z-10 px-6 max-w-[1100px] mx-auto bg-gree"
+      className="relative z-10 px-6 py-16 max-w-[1100px] mx-auto"
     >
       {/* Interactive Top Cards */}
-      <div className="relative pt-12 mb-12 flex flex-row gap-4 sm:gap-6 w-full h-[260px] sm:h-[290px] md:h-[310px] select-none">
+      <div className="relative pt-12 mb-16 flex flex-col sm:flex-row gap-4 sm:gap-6 w-full select-none">
         {/* Left Box (Photo card) */}
         <div
           onMouseEnter={() => setHoveredCard("left")}
           onMouseLeave={() => setHoveredCard(null)}
-          className={`relative h-full bg-primary rounded-[36px] sm:rounded-[44px] transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] ${isRightHovered ? "w-[28%]" : "w-[62%]"
-            }`}
+          className={`relative bg-primary rounded-[28px] sm:rounded-[44px] transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)]
+            h-[220px] sm:h-[290px] md:h-[310px]
+            ${isRightHovered ? "sm:w-[28%]" : "sm:w-[62%]"} w-full`}
         >
-          <div className="relative w-full h-full overflow-visible">
+          <div className="relative w-full z-30 h-full overflow-visible">
             <Image
               src="/fiqqi.png"
               alt="Fiqqi"
               width={500}
               height={600}
               priority
-              className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-[320px] sm:h-[360px] md:h-[390px] w-auto max-w-none object-contain pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] origin-bottom ${isRightHovered ? "scale-[0.88] sm:scale-90 md:scale-95" : "scale-100"
-                }`}
+              className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-[260px] sm:h-[340px] md:h-[390px] w-auto max-w-none object-contain pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] origin-bottom ${
+                isRightHovered ? "scale-[0.88] sm:scale-90" : "scale-100"
+              }`}
             />
           </div>
         </div>
@@ -75,45 +71,46 @@ export default function AboutSection() {
         <div
           onMouseEnter={() => setHoveredCard("right")}
           onMouseLeave={() => setHoveredCard(null)}
-          className={`relative h-full bg-primary rounded-[36px] sm:rounded-[44px] cursor-pointer flex items-center justify-center overflow-hidden p-4 sm:p-6 transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] ${isRightHovered ? "w-[72%]" : "w-[38%]"
-            }`}
+          className={`relative bg-primary rounded-[28px] sm:rounded-[44px] cursor-pointer flex items-center justify-center overflow-hidden p-4 sm:p-6 transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)]
+            h-[140px] sm:h-[290px] md:h-[310px]
+            ${isRightHovered ? "sm:w-[72%]" : "sm:w-[38%]"} w-full`}
         >
           {/* Default Text: Multilingual Hello */}
           <div
-            className={`absolute transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] flex items-center justify-center ${isRightHovered
-              ? "opacity-0 scale-75 blur-xs pointer-events-none"
-              : "opacity-100 scale-100 blur-none"
-              }`}
+            className={`absolute transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] flex items-center justify-center ${
+              isRightHovered ? "opacity-0 scale-75 blur-xs pointer-events-none" : "opacity-100 scale-100 blur-none"
+            }`}
           >
             <span
-              className={`text-4xl sm:text-6xl md:text-7xl font-bold text-white tracking-tight transition-all duration-300 ease-out text-center ${fadeState === "out"
-                ? "opacity-0 scale-90 blur-xs translate-y-1"
-                : "opacity-100 scale-100 blur-none translate-y-0"
-                }`}
+              className={`text-3xl sm:text-6xl md:text-7xl font-bold text-white tracking-tight transition-all duration-300 ease-out text-center ${
+                fadeState === "out"
+                  ? "opacity-0 scale-90 blur-xs translate-y-1"
+                  : "opacity-100 scale-100 blur-none translate-y-0"
+              }`}
             >
               {greetings[greetingIndex].text}
             </span>
           </div>
 
-          {/* Hover Text: Nice to meet you- */}
+          {/* Hover Text: Nice to meet you */}
           <div
-            className={`absolute transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] flex flex-col items-center justify-center text-center leading-[0.95] ${isRightHovered
-              ? "opacity-100 scale-100 blur-none delay-75"
-              : "opacity-0 scale-90 blur-xs pointer-events-none"
-              }`}
+            className={`absolute transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] flex flex-col items-center justify-center text-center leading-[0.95] ${
+              isRightHovered ? "opacity-100 scale-100 blur-none delay-75" : "opacity-0 scale-90 blur-xs pointer-events-none"
+            }`}
           >
-            <span className="text-3xl sm:text-6xl md:text-7xl font-bold text-white tracking-tight whitespace-nowrap">
+            <span className="text-2xl sm:text-6xl md:text-7xl font-bold text-white tracking-tight whitespace-nowrap">
               Nice to
             </span>
-            <span className="text-3xl sm:text-6xl md:text-7xl font-bold text-white tracking-tight whitespace-nowrap">
+            <span className="text-2xl sm:text-6xl md:text-7xl font-bold text-white tracking-tight whitespace-nowrap">
               meet you-
             </span>
           </div>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-15 items-center">
-        <div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-start">
+        {/* Text content */}
+        <div className="text-center sm:text-left">
           <p className="text-[0.8rem] font-semibold tracking-[0.15em] uppercase text-primary mb-3">
             About Me
           </p>
@@ -122,21 +119,35 @@ export default function AboutSection() {
             <br />
             that feel <span className="text-primary">alive</span>
           </h2>
-          <p className="text-[1.05rem] leading-[1.8] text-muted mb-5 max-w-[480px]">
+          <p className="text-[1.05rem] leading-[1.8] text-muted mb-5 max-w-[480px] mx-auto sm:mx-0">
             I&apos;m a front-end developer with a passion for clean code and
             stunning user interfaces. I specialize in building modern web
             applications with Next.js, React, and Laravel, bringing designs
             to life with pixel-perfect precision.
           </p>
-          <p className="text-[1.05rem] leading-[1.8] text-muted max-w-[480px]">
+          <p className="text-[1.05rem] leading-[1.8] text-muted max-w-[480px] mx-auto sm:mx-0">
             Beyond the browser, I explore mobile development with Flutter and
             backend systems with Laravel. Every project is an opportunity to
             push boundaries and create something truly uncommon.
           </p>
+
+          {/* Stats strip */}
+          <div className="flex justify-center sm:justify-start gap-8 mt-8 pt-6 border-t border-border">
+            {stats.map((stat) => (
+              <div key={stat.label} className="flex flex-col items-center sm:items-start">
+                <span className="text-[2rem] font-[800] leading-none text-foreground tracking-[-0.03em]">
+                  {stat.value}
+                </span>
+                <span className="text-xs text-muted-light font-medium mt-1 whitespace-nowrap">
+                  {stat.label}
+                </span>
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* Skills */}
-        <div>
+        <div ref={skillsRef}>
           <div className="flex flex-col gap-6">
             {skills.map((skill) => (
               <div key={skill.name}>
@@ -147,7 +158,10 @@ export default function AboutSection() {
                 <div className="h-1.5 bg-skill-bg rounded-sm overflow-hidden">
                   <div
                     className="h-full bg-gradient-to-r from-primary to-[#34d399] rounded-sm transition-[width] duration-1000 ease-out"
-                    style={{ width: `${skill.level}%` }}
+                    style={{
+                      width: skillsVisible ? `${skill.level}%` : "0%",
+                      transitionDelay: skillsVisible ? `${skills.indexOf(skill) * 100}ms` : "0ms",
+                    }}
                   />
                 </div>
               </div>
@@ -158,4 +172,3 @@ export default function AboutSection() {
     </section>
   );
 }
-

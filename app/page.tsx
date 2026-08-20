@@ -8,6 +8,8 @@ import MarqueeSection from "./components/MarqueeSection";
 import AboutSection from "./components/AboutSection";
 import ProjectsSection from "./components/ProjectsSection";
 import ContactSection from "./components/ContactSection";
+import StickyNav from "./components/StickyNav";
+import CursorGlow from "./components/CursorGlow";
 
 
 export default function Home() {
@@ -47,20 +49,32 @@ export default function Home() {
         {dark ? <SunIcon /> : <MoonIcon />}
       </button>
 
+      {/* Sticky nav — appears on scroll beside dark mode toggle */}
+      <StickyNav />
+
       {/* Interactive grid canvas */}
       <GridCanvas />
 
+      {/* Cursor-following green glow */}
+      <CursorGlow />
 
-
-      <div className="relative">
+      <div className="relative z-10">
         <HeroSection />
-        <div className="absolute lg:bottom-44">
-          <MarqueeSection />
-        </div>
       </div>
-      <AboutSection />
 
-      <ProjectsSection />
+      {/* Marquee — GPU layer promoted to avoid scroll jank */}
+      <div className="relative z-30 mt-10 sm:-mt-60 md:-mt-80" style={{ willChange: "transform" }}>
+        <MarqueeSection />
+      </div>
+
+      <div className="relative z-10 bg-background">
+        <AboutSection />
+      </div>
+
+      <div className="relative z-10">
+        <ProjectsSection />
+      </div>
+
       <ContactSection />
     </div>
   );

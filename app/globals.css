@@ -1,41 +1,43 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f5f5f0;
-  --foreground: #111111;
+  --background: #f7f5ee;
+  --foreground: #0f0f0d;
   --green: #1db954;
   --green-dark: #17a34a;
-  --coral: #f87171;
-  --grid-color: rgba(180, 200, 180, 0.25);
+  --green-glow: rgba(29, 185, 84, 0.15);
+  --coral: #ef5350;
+  --grid-color: rgba(140, 175, 140, 0.22);
   --grid-size: 28px;
-  --grid-bg: #f8f8f3;
-  --card-bg: rgba(255, 255, 255, 0.7);
-  --card-border: rgba(0, 0, 0, 0.06);
-  --muted: #555;
-  --muted-light: #888;
-  --border: #e5e5e5;
-  --input-border: #ddd;
-  --pill-outline-border: #ccc;
-  --skill-bg: #e5e5e5;
+  --grid-bg: #f9f8f2;
+  --card-bg: rgba(255, 255, 255, 0.82);
+  --card-border: rgba(0, 0, 0, 0.07);
+  --muted: #4a4a44;
+  --muted-light: #8a8a80;
+  --border: #e0dfd6;
+  --input-border: #d4d2c8;
+  --pill-outline-border: #c8c6bc;
+  --skill-bg: #eae8e0;
   --marquee-bg: rgba(255, 255, 255, 0.4);
   --font-helvetica: 'Helvetica Neue LT Pro 55', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 /* Dark mode variables */
 .dark {
-  --background: #0a0a0a;
-  --foreground: #ededed;
-  --grid-color: rgba(80, 100, 80, 0.2);
-  --grid-bg: #111111;
-  --card-bg: rgba(30, 30, 30, 0.7);
-  --card-border: rgba(255, 255, 255, 0.08);
-  --muted: #aaa;
-  --muted-light: #777;
-  --border: #2a2a2a;
-  --input-border: #333;
-  --pill-outline-border: #444;
-  --skill-bg: #2a2a2a;
-  --marquee-bg: rgba(20, 20, 20, 0.6);
+  --background: #080f09;
+  --foreground: #eef0ec;
+  --green-glow: rgba(29, 185, 84, 0.12);
+  --grid-color: rgba(40, 90, 50, 0.25);
+  --grid-bg: #0a1209;
+  --card-bg: rgba(14, 24, 14, 0.85);
+  --card-border: rgba(29, 185, 84, 0.1);
+  --muted: #a8b0a4;
+  --muted-light: #6a7068;
+  --border: #1e2e1e;
+  --input-border: #243024;
+  --pill-outline-border: #2e402e;
+  --skill-bg: #162016;
+  --marquee-bg: rgba(8, 15, 9, 0.7);
 }
 
 @theme inline {
@@ -43,6 +45,7 @@
   --color-foreground: var(--foreground);
   --color-primary: var(--green);
   --color-primary-dark: var(--green-dark);
+  --color-green-glow: var(--green-glow);
   --color-accent: var(--coral);
   --color-muted: var(--muted);
   --color-muted-light: var(--muted-light);
@@ -75,30 +78,42 @@ body {
   overflow: hidden;
 }
 
-/* Top green bar */
+/* Noise texture overlay — adds grain/depth on top of everything */
 .grid-paper::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url('/noise.jpg');
+  background-size: 200px 200px;
+  background-repeat: repeat;
+  opacity: 0.025;
+  z-index: 1;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+}
+
+/* Top green gradient bar */
+.grid-paper::after {
   content: '';
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  height: 6px;
-  background: var(--green);
-  z-index: 100;
+  height: 4px;
+  background: linear-gradient(90deg, #17a34a 0%, #1db954 40%, #34d399 100%);
+  z-index: 200;
   pointer-events: none;
+  box-shadow: 0 0 16px rgba(29, 185, 84, 0.6);
 }
 
-/* Right red margin line */
-.grid-paper::after {
-  content: '';
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  right: 60px;
-  width: 2px;
-  opacity: 0.5;
-  z-index: 50;
+/* Ambient glow blob utility */
+.ambient-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
   pointer-events: none;
+  z-index: 0;
+  animation: float 8s ease-in-out infinite;
 }
 
 /* Scrollbar */
@@ -168,6 +183,16 @@ body {
   50% { opacity: 0.3; }
 }
 
+@keyframes scroll-bounce {
+  0%, 100% { transform: translateY(0); opacity: 0.8; }
+  50% { transform: translateY(8px); opacity: 0.3; }
+}
+
+@keyframes skill-fill {
+  from { width: 0%; }
+  to { width: var(--tw-skill-width, 0%); }
+}
+
 /* ═══ Animation utility classes ═══ */
 .animate-fade-in-up {
   animation: fadeInUp 0.8s ease-out forwards;
@@ -193,6 +218,11 @@ body {
   display: flex;
   animation: marquee 20s linear infinite;
   width: max-content;
+  will-change: transform;
+}
+
+.scroll-bounce {
+  animation: scroll-bounce 1.8s ease-in-out infinite;
 }
 
 /* ═══ Pseudo-element styles (can't be Tailwind) ═══ */
