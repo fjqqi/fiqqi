@@ -56,12 +56,12 @@ export default function SpotifyNowPlaying() {
   if (error || (!loading && !track)) return null;
 
   return (
-    <div className="absolute top-60 left-20 z-40 w-80 animate-[spotify-slide-in_0.6s_ease-out] max-[1100px]:hidden">
+    <div className="w-[160px] sm:w-[200px] xl:w-[310px] animate-[spotify-slide-in_0.6s_ease-out]">
       {loading ? (
-        <div className="flex items-center gap-3 px-4 py-3.5 bg-card backdrop-blur-[20px] border-[1.5px] border-card-border rounded-[18px]">
-          <div className="w-14 h-14 rounded-[10px] bg-skill-bg animate-[skeleton-pulse_1.5s_ease-in-out_infinite] shrink-0" />
-          <div className="flex-1 flex flex-col gap-1.5">
-            <div className="h-2.5 w-4/5 rounded bg-skill-bg animate-[skeleton-pulse_1.5s_ease-in-out_infinite]" />
+        <div className="flex items-center gap-2 p-2.5 sm:px-4 sm:py-3.5 bg-card backdrop-blur-[20px] border-[1.5px] border-card-border rounded-[14px] sm:rounded-[18px]">
+          <div className="w-9 h-9 sm:w-14 sm:h-14 rounded-[8px] bg-skill-bg animate-[skeleton-pulse_1.5s_ease-in-out_infinite] shrink-0" />
+          <div className="flex-1 flex flex-col gap-1">
+            <div className="h-2 w-4/5 rounded bg-skill-bg animate-[skeleton-pulse_1.5s_ease-in-out_infinite]" />
             <div className="h-2 w-[55%] rounded bg-skill-bg animate-[skeleton-pulse_1.5s_ease-in-out_infinite]" />
           </div>
         </div>
@@ -70,26 +70,26 @@ export default function SpotifyNowPlaying() {
           href={track.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex flex-col gap-3 px-4 py-3.5 bg-card backdrop-blur-[20px] border-[1.5px] border-card-border rounded-[18px] shadow-[0_8px_32px_rgba(0,0,0,0.08)] no-underline text-inherit transition-all duration-300 cursor-pointer hover:border-primary hover:shadow-[0_4px_20px_rgba(29,185,84,0.12)] hover:-translate-y-0.5 dark:shadow-[0_8px_32px_rgba(0,0,0,0.3)] group"
+          className="flex flex-col gap-2 p-2.5 sm:px-4 sm:py-3.5 bg-card backdrop-blur-[20px] border-[1.5px] border-card-border rounded-[14px] sm:rounded-[18px] shadow-[0_8px_32px_rgba(0,0,0,0.08)] no-underline text-inherit transition-all duration-300 cursor-pointer hover:border-primary hover:shadow-[0_4px_20px_rgba(29,185,84,0.12)] hover:-translate-y-0.5 dark:shadow-[0_8px_32px_rgba(0,0,0,0.3)] group"
         >
           {/* Top row: art + info + spotify logo */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
             <img
               src={track.albumArt}
               alt={track.album}
-              className="w-14 h-14 rounded-[10px] object-cover shrink-0 transition-transform duration-200 group-hover:scale-[1.04]"
-              width={56}
-              height={56}
+              className="w-9 h-9 sm:w-12 sm:h-12 rounded-[8px] object-cover shrink-0 transition-transform duration-200 group-hover:scale-[1.04]"
+              width={48}
+              height={48}
             />
-            <div className="flex-1 min-w-0 flex flex-col gap-[3px]">
-              <span className="text-[0.85rem] font-semibold whitespace-nowrap overflow-hidden text-ellipsis text-foreground leading-[1.4]">
-                {track.title} &nbsp;•&nbsp; {track.artist}
+            <div className="flex-1 min-w-0 flex flex-col gap-[2px]">
+              <span className="text-[0.7rem] sm:text-[0.85rem] font-semibold whitespace-nowrap overflow-hidden text-ellipsis text-foreground leading-[1.3]">
+                {track.title}
               </span>
-              <span className="text-xs text-muted-light leading-[1.3]">
-                Now Listening
+              <span className="text-[0.65rem] sm:text-xs text-muted-light leading-[1.2] whitespace-nowrap overflow-hidden text-ellipsis">
+                {track.artist}
               </span>
             </div>
-            <div className="shrink-0 opacity-85 transition-opacity duration-200 group-hover:opacity-100">
+            <div className="shrink-0 opacity-85 transition-opacity duration-200 group-hover:opacity-100 hidden sm:block">
               <SpotifyLogo />
             </div>
           </div>

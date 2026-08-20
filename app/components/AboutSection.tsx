@@ -47,7 +47,7 @@ export default function AboutSection() {
   return (
     <section
       id="about"
-      className="relative z-10 py-30 px-6 max-w-[1100px] mx-auto"
+      className="relative z-10 px-6 max-w-[1100px] mx-auto bg-gree"
     >
       {/* Interactive Top Cards */}
       <div className="relative pt-12 mb-12 flex flex-row gap-4 sm:gap-6 w-full h-[260px] sm:h-[290px] md:h-[310px] select-none">
@@ -125,7 +125,7 @@ export default function AboutSection() {
           <p className="text-[1.05rem] leading-[1.8] text-muted mb-5 max-w-[480px]">
             I&apos;m a front-end developer with a passion for clean code and
             stunning user interfaces. I specialize in building modern web
-            applications with Next.js, React, and TypeScript, bringing designs
+            applications with Next.js, React, and Laravel, bringing designs
             to life with pixel-perfect precision.
           </p>
           <p className="text-[1.05rem] leading-[1.8] text-muted max-w-[480px]">

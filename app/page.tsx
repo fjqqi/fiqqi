@@ -8,7 +8,7 @@ import MarqueeSection from "./components/MarqueeSection";
 import AboutSection from "./components/AboutSection";
 import ProjectsSection from "./components/ProjectsSection";
 import ContactSection from "./components/ContactSection";
-import SpotifyNowPlaying from "./components/SpotifyNowPlaying";
+
 
 export default function Home() {
   const [dark, setDark] = useState(false);
@@ -50,16 +50,16 @@ export default function Home() {
       {/* Interactive grid canvas */}
       <GridCanvas />
 
-      {/* Spotify now playing card */}
-      <SpotifyNowPlaying />
+
 
       <div className="relative">
         <HeroSection />
-        <div className="absolute bottom-64">
+        <div className="absolute lg:bottom-44">
           <MarqueeSection />
         </div>
       </div>
       <AboutSection />
+
       <ProjectsSection />
       <ContactSection />
     </div>

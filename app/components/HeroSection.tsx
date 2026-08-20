@@ -1,12 +1,13 @@
 import Image from "next/image";
 import { LinkedInIcon, GitHubIcon } from "./Icons";
 import WorkCard from "./WorkCard";
+import SpotifyNowPlaying from "./SpotifyNowPlaying";
 
 export default function HeroSection() {
   return (
     <section
       id="hero"
-      className="min-h-screen flex flex-col items-center justify-center px-6 pt-20 lg:pt-28 pb-15 relative"
+      className="min-h-screen flex flex-col items-center justify-center px-6 pt-20 lg:pt-28 pb-2 relative"
     >
       {/* Heading */}
       <div className="animate-fade-in-up text-center mb-6">
@@ -57,9 +58,9 @@ export default function HeroSection() {
       {/* Apple + scattered nav */}
       <div className="animate-fade-in-up animate-delay-3 relative w-[min(700px,90vw)] h-[min(700px,90vw)] flex items-center justify-center">
         {/* Apple image */}
-        <div className="apple-float relative z-0">
+        <div className="apple-float absolute top-10 z-0">
           <Image
-            src="/apple.png"
+            src="/apppple.png"
             alt="Halftone green apple"
             width={700}
             height={700}
@@ -91,16 +92,27 @@ export default function HeroSection() {
           About Me
         </a>
 
-        {/* <a
-          href="#contact"
-          className="nav-link absolute right-[18%] bottom-[12%] z-10 no-underline text-lg sm:text-xl font-semibold text-foreground rotate-2 transition-all duration-300 cursor-pointer hover:-translate-y-0.5"
-        >
-          Contact
-        </a> */}
+        {/* Bottom-left: Spotify card (mobile only, inside apple container) */}
+        <div className="xl:hidden absolute left-[5%] bottom-[15%] z-20">
+          <SpotifyNowPlaying />
+        </div>
+
+        {/* Bottom-right: Work card (mobile only, inside apple container) */}
+        <div className="xl:hidden absolute right-[5%] bottom-[15%] z-20">
+          <WorkCard />
+        </div>
       </div>
 
-      {/* Work availability card — right side */}
-      <WorkCard />
+
+      {/* Desktop-only: Spotify card — left side of section */}
+      <div className="hidden xl:block absolute left-24 top-72 z-40 animate-[spotify-slide-in_0.6s_ease-out]">
+        <SpotifyNowPlaying />
+      </div>
+
+      {/* Desktop-only: Work card — right side of section */}
+      <div className="hidden xl:block absolute right-24 top-72 z-40">
+        <WorkCard />
+      </div>
     </section>
   );
 }
