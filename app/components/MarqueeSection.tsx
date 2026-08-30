@@ -1,7 +1,7 @@
 export default function MarqueeSection() {
   return (
     <section
-      className="overflow-hidden border-y-2 border-black py-5 relative"
+      className="overflow-hidden border-y-2 border-black py-4 md:py-5 relative w-full"
       style={{ background: "#0a1a0c", contain: "layout paint" }}
     >
       {/* Edge fade masks */}

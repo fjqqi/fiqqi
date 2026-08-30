@@ -5,7 +5,7 @@ export default function ContactSection() {
     <>
       {/* ════════════════ CONTACT ════════════════ */}
       <section id="contact" className="py-24 pb-32 px-6 max-w-[700px] mx-auto">
-        <div className="text-center mb-12">
+        <div className="reveal-on-scroll text-center mb-12">
           <p className="text-[0.8rem] font-semibold tracking-[0.15em] uppercase text-primary mb-3">
             Get in Touch
           </p>
@@ -28,7 +28,7 @@ export default function ContactSection() {
           </a>
         </div>
 
-        <form onSubmit={(e) => e.preventDefault()} className="flex flex-col gap-8">
+        <form onSubmit={(e) => e.preventDefault()} className="reveal-on-scroll flex flex-col gap-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-7">
             <input
               className="contact-input bg-transparent border-0 border-b-2 border-b-input-border py-3 text-base font-sans text-foreground w-full outline-none transition-[border-color,color] duration-300 focus:border-b-primary"
@@ -68,7 +68,7 @@ export default function ContactSection() {
       </section>
 
       {/* ════════════════ FOOTER ════════════════ */}
-      <footer className="border-t-2 border-border py-10 px-6 max-w-[1100px] mx-auto w-full">
+      <footer className="reveal-on-scroll border-t-2 border-border py-10 px-6 max-w-[1100px] mx-auto w-full">
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
           <div className="text-center sm:text-left">
             <p className="text-[0.9rem] font-semibold text-foreground">Fiqqi</p>

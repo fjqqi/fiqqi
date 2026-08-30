@@ -4,40 +4,25 @@ import { useEffect, useRef } from "react";
 
 export default function CursorGlow() {
   const glowRef = useRef<HTMLDivElement>(null);
-  const posRef = useRef({ x: -9999, y: -9999 });
-  const currentRef = useRef({ x: -9999, y: -9999 });
-  const rafRef = useRef<number>(0);
 
   useEffect(() => {
+    const glow = glowRef.current;
+    if (!glow) return;
+
     const onMove = (e: MouseEvent) => {
-      posRef.current = { x: e.clientX, y: e.clientY };
+      /* Direct DOM mutation — no React state, no rAF loop, just one transform */
+      glow.style.transform = `translate3d(${e.clientX - 300}px, ${e.clientY - 300}px, 0)`;
+      glow.style.opacity = "1";
     };
 
     const onLeave = () => {
-      posRef.current = { x: -9999, y: -9999 };
+      glow.style.opacity = "0";
     };
 
     window.addEventListener("mousemove", onMove, { passive: true });
     document.addEventListener("mouseleave", onLeave);
 
-    // Smooth lerp loop — no state updates, direct DOM mutation for 60fps
-    const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
-
-    const loop = () => {
-      const glow = glowRef.current;
-      if (glow) {
-        const cx = lerp(currentRef.current.x, posRef.current.x, 0.08);
-        const cy = lerp(currentRef.current.y, posRef.current.y, 0.08);
-        currentRef.current = { x: cx, y: cy };
-        glow.style.transform = `translate(${cx - 400}px, ${cy - 400}px)`;
-      }
-      rafRef.current = requestAnimationFrame(loop);
-    };
-
-    rafRef.current = requestAnimationFrame(loop);
-
     return () => {
-      cancelAnimationFrame(rafRef.current);
       window.removeEventListener("mousemove", onMove);
       document.removeEventListener("mouseleave", onLeave);
     };
@@ -47,13 +32,15 @@ export default function CursorGlow() {
     <div
       ref={glowRef}
       aria-hidden="true"
-      className="pointer-events-none fixed top-0 left-0 z-[2] w-[800px] h-[800px] rounded-full will-change-transform"
+      className="pointer-events-none fixed top-0 left-0 z-[2] rounded-full"
       style={{
+        width: 600,
+        height: 600,
         background:
-          "radial-gradient(circle at center, rgba(29,185,84,0.13) 0%, rgba(29,185,84,0.05) 35%, transparent 70%)",
-        transform: "translate(-9999px, -9999px)",
-        // Slightly stronger in dark mode via a second layer
-        filter: "blur(2px)",
+          "radial-gradient(circle at center, rgba(29,185,84,0.10) 0%, rgba(29,185,84,0.04) 35%, transparent 65%)",
+        transform: "translate3d(-9999px, -9999px, 0)",
+        opacity: 0,
+        transition: "opacity 0.3s ease",
       }}
     />
   );

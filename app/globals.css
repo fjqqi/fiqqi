@@ -67,7 +67,46 @@ body {
   font-family: var(--font-helvetica);
   margin: 0;
   padding: 0;
-  overflow-x: hidden;
+  overflow-x: clip;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+/* Content sheet that overlaps the pinned hero (Stacking Layer) */
+.content-sheet {
+  box-shadow: 0 -24px 60px rgba(0, 0, 0, 0.15);
+  border-top-left-radius: 32px;
+  border-top-right-radius: 32px;
+}
+
+@media (min-width: 768px) {
+  .content-sheet {
+    border-top-left-radius: 48px;
+    border-top-right-radius: 48px;
+  }
+}
+
+.dark .content-sheet {
+  box-shadow: 0 -24px 60px rgba(0, 0, 0, 0.6);
 }
 
 /* Grid paper background */
@@ -75,7 +114,7 @@ body {
   background-color: var(--grid-bg);
   position: relative;
   transition: background-color 0.4s ease;
-  overflow: hidden;
+  overflow-x: clip;
 }
 
 /* Noise texture overlay — adds grain/depth on top of everything */
@@ -204,6 +243,47 @@ body {
 .animate-delay-4 { animation-delay: 0.4s; opacity: 0; }
 .animate-delay-5 { animation-delay: 0.5s; opacity: 0; }
 .animate-delay-6 { animation-delay: 0.6s; opacity: 0; }
+
+/* ═══ Native Scroll Reveal Classes (No GSAP required) ═══ */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-slide-left {
+  opacity: 0;
+  transform: translateX(-35px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-slide-left.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-slide-right {
+  opacity: 0;
+  transform: translateX(35px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-slide-right.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.stagger-1 { transition-delay: 0.1s; }
+.stagger-2 { transition-delay: 0.2s; }
+.stagger-3 { transition-delay: 0.3s; }
 
 .apple-float {
   animation: float 6s ease-in-out infinite;

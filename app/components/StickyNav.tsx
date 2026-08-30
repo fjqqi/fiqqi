@@ -1,11 +1,13 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useLenis } from "lenis/react";
 import { navLinks } from "../data";
 
 export default function StickyNav() {
   const [visible, setVisible] = useState(false);
   const [open, setOpen] = useState(false);
+  const lenis = useLenis();
 
   useEffect(() => {
     const onScroll = () => {
@@ -15,6 +17,21 @@ export default function StickyNav() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (href.startsWith("#")) {
+      e.preventDefault();
+      const target = document.querySelector(href);
+      if (target) {
+        if (lenis) {
+          lenis.scrollTo(target as HTMLElement, { offset: -20, duration: 1.2 });
+        } else {
+          target.scrollIntoView({ behavior: "smooth" });
+        }
+      }
+      setOpen(false);
+    }
+  };
 
   return (
     <div
@@ -30,6 +47,7 @@ export default function StickyNav() {
           <a
             key={link.label}
             href={link.href}
+            onClick={(e) => handleNavClick(e, link.href)}
             className="px-4 py-1.5 rounded-full text-sm font-semibold text-foreground no-underline transition-all duration-200 hover:bg-primary hover:text-white hover:scale-105"
           >
             {link.label}
@@ -50,7 +68,7 @@ export default function StickyNav() {
               <a
                 key={link.label}
                 href={link.href}
-                onClick={() => setOpen(false)}
+                onClick={(e) => handleNavClick(e, link.href)}
                 className="px-3 py-1.5 rounded-full text-sm font-semibold text-foreground no-underline transition-all duration-200 hover:bg-primary hover:text-white"
               >
                 {link.label}
