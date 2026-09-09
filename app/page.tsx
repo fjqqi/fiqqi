@@ -4,13 +4,13 @@ import { useState, useEffect, useRef } from "react";
 import { useLenis } from "lenis/react";
 import GridCanvas from "./components/GridCanvas";
 import { SunIcon, MoonIcon } from "./components/Icons";
-import HeroSection from "./components/HeroSection";
-import MarqueeSection from "./components/MarqueeSection";
-import AboutSection from "./components/AboutSection";
-import ProjectsSection from "./components/ProjectsSection";
-import ContactSection from "./components/ContactSection";
+import HeroSection from "./components/sections/HeroSection";
+import ProjectsSection from "./components/sections/ProjectsSection";
+import AboutSection from "./components/sections/AboutSection";
+import ContactSection from "./components/sections/ContactSection";
 import StickyNav from "./components/StickyNav";
 import CursorGlow from "./components/CursorGlow";
+import ClientMarquee from "./components/ClientMarquee";
 
 export default function Home() {
   const [dark, setDark] = useState(false);
@@ -116,20 +116,22 @@ export default function Home() {
       </div>
 
       {/* ═══ OVERLAPPING CONTENT SHEET (Card Stack) ═══ */}
+
       <div
         ref={contentSheetRef}
-        className="content-sheet relative z-20 bg-background rounded-t-[32px] md:rounded-t-[48px] border-t border-card-border"
+        className="content-sheet -mt-18  border-2 border-solid border-white/10 relative z-20 bg-background "
       >
-        {/* Grab handle indicator */}
+        {/* Trusted by Client Logo Marquee */}
+        <ClientMarquee />
         {/* <div className="flex justify-center pt-3 pb-1">
           <div className="w-12 h-1.5 rounded-full bg-muted-light/30" />
         </div> */}
 
-        {/* About (includes top Marquee on the screen) */}
-        <AboutSection />
-
-        {/* Projects (Lenis Horizontal Showcase) */}
+        {/* Projects */}
         <ProjectsSection />
+
+        {/* About (includes top Marquee on the screen) */}
+        {/* <AboutSection /> */}
 
         {/* Contact + Footer */}
         <ContactSection />

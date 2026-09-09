@@ -1,4 +1,4 @@
-import { LinkedInIcon, GitHubIcon, InstagramIcon } from "./Icons";
+import { LinkedInIcon, GitHubIcon, InstagramIcon } from "../Icons";
 
 export default function ContactSection() {
   return (

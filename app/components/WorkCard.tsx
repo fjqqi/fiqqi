@@ -8,16 +8,17 @@ export default function WorkCard() {
         <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-primary animate-[pulse-dot_2s_ease-in-out_infinite] shrink-0" />
         <span className="text-[0.6rem] sm:text-[0.7rem] font-bold tracking-[0.08em] uppercase text-primary leading-tight">
           AVAILABLE FOR WORK
+          & NEW PROJECT
         </span>
       </div>
 
       {/* Open to */}
-      <div className="flex flex-col gap-0.5 sm:gap-1">
+      {/* <div className="flex flex-col gap-0.5 sm:gap-1">
         <span className="text-[0.65rem] sm:text-xs text-muted-light font-medium">Open to</span>
         <span className="text-[0.72rem] sm:text-[0.85rem] font-semibold text-foreground tracking-[-0.01em] leading-tight">
           Freelance · Part-time · Full-time
         </span>
-      </div>
+      </div> */}
 
       {/* Location */}
       <div className="hidden lg:flex items-center gap-1 sm:gap-1.5 text-[0.65rem] sm:text-xs text-muted font-medium pt-1 border-t border-card-border">
