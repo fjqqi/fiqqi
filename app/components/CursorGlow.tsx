@@ -32,7 +32,7 @@ export default function CursorGlow() {
     <div
       ref={glowRef}
       aria-hidden="true"
-      className="pointer-events-none fixed top-0 left-0 z-[2] rounded-full"
+      className="pointer-events-none fixed top-0 left-0 z-50 rounded-full"
       style={{
         width: 600,
         height: 600,

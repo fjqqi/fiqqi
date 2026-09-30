@@ -8,9 +8,12 @@ import HeroSection from "./components/sections/HeroSection";
 import ProjectsSection from "./components/sections/ProjectsSection";
 import AboutSection from "./components/sections/AboutSection";
 import ContactSection from "./components/sections/ContactSection";
+import StackSection from "./components/sections/StackSection";
 import StickyNav from "./components/StickyNav";
 import CursorGlow from "./components/CursorGlow";
 import ClientMarquee from "./components/ClientMarquee";
+import TextMarquee from "./components/TextMarquee";
+import SmoothCursor from "./components/SmoothCursor";
 
 export default function Home() {
   const [dark, setDark] = useState(false);
@@ -40,22 +43,31 @@ export default function Home() {
     });
   };
 
-  /* ═══════════════════════════════════════════════
-     Hero Depth Parallax (Pure Lenis momentum)
-     ═══════════════════════════════════════════════ */
+  const vhRef = useRef(typeof window !== "undefined" ? window.innerHeight : 800);
+  useEffect(() => {
+    const onResize = () => { vhRef.current = window.innerHeight; };
+    window.addEventListener("resize", onResize, { passive: true });
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
   useLenis(({ scroll }) => {
     const heroInner = heroInnerRef.current;
     if (!heroInner) return;
 
-    const vh = window.innerHeight || 1;
-    const progress = Math.min(Math.max(scroll / (vh * 0.85), 0), 1);
+    const vh = vhRef.current;
+    const progress = Math.min(Math.max(scroll / (vh * 0.75), 0), 1);
+    // Smoothstep — fluid natural easing
+    const ease = progress * progress * (3 - 2 * progress);
 
-    const scale = 1 - progress * 0.1; // 1.0 -> 0.9
-    const opacity = 1 - progress * 0.8; // 1.0 -> 0.2
-    const y = progress * 50; // 0 -> 50px
+    const opacity = 1 - ease;
+    const y = ease * 40;
 
-    heroInner.style.transform = `scale3d(${scale}, ${scale}, 1) translate3d(0, ${y}px, 0)`;
-    heroInner.style.opacity = `${opacity}`;
+    // Only translateY + opacity — no scale (avoids layout/paint triggers)
+    heroInner.style.transform = `translate3d(0, ${y.toFixed(2)}px, 0)`;
+    heroInner.style.opacity = opacity.toFixed(3);
+    heroInner.style.willChange = "transform, opacity";
+    heroInner.style.visibility = progress >= 1 ? "hidden" : "visible";
+    heroInner.style.pointerEvents = progress >= 0.85 ? "none" : "auto";
   });
 
   /* ═══════════════════════════════════════════════
@@ -105,11 +117,15 @@ export default function Home() {
       {/* Cursor-following green glow */}
       <CursorGlow />
 
+      {/* Smooth Dot + Ring Custom Cursor */}
+      <SmoothCursor />
+
       {/* ═══ PINNED HERO (Sticky native pinning) ═══ */}
       <div className="sticky top-0 h-screen w-full overflow-hidden z-[1]">
         <div
           ref={heroInnerRef}
-          className="w-full h-full will-change-transform"
+          className="w-full h-full"
+          style={{ willChange: "transform, opacity" }}
         >
           <HeroSection />
         </div>
@@ -119,22 +135,25 @@ export default function Home() {
 
       <div
         ref={contentSheetRef}
-        className="content-sheet -mt-18  border-2 border-solid border-white/10 relative z-20 bg-background "
+        className="content-sheet -mt-18  border border-solid border-white/10 relative z-20 bg-background "
       >
-        {/* Trusted by Client Logo Marquee */}
-        <ClientMarquee />
-        {/* <div className="flex justify-center pt-3 pb-1">
-          <div className="w-12 h-1.5 rounded-full bg-muted-light/30" />
-        </div> */}
+        <TextMarquee />
 
         {/* Projects */}
         <ProjectsSection />
+        <StackSection />
+        {/* Stack & Skills */}
+
 
         {/* About (includes top Marquee on the screen) */}
         {/* <AboutSection /> */}
+      </div>
 
-        {/* Contact + Footer */}
+      {/* ═══ CONTACT & FOOTER (Outside content sheet, on main page canvas) ═══ */}
+      <div className="relative z-20 w-full">
+        experience here
         <ContactSection />
+
       </div>
     </div>
   );

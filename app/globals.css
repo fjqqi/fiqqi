@@ -96,14 +96,11 @@ html.lenis body {
 /* Content sheet that overlaps the pinned hero (Stacking Layer) */
 .content-sheet {
   box-shadow: 0 -24px 60px rgba(0, 0, 0, 0.15);
-  border-top-left-radius: 32px;
-  border-top-right-radius: 32px;
 }
 
 @media (min-width: 768px) {
   .content-sheet {
-    border-top-left-radius: 48px;
-    border-top-right-radius: 48px;
+
   }
 }
 
@@ -338,5 +335,13 @@ body,
 @media (max-width: 768px) {
   .grid-paper::after {
     display: none;
+  }
+}
+
+/* Custom smooth cursor: hide native cursor on desktop/fine pointers */
+@media (pointer: fine) {
+  body,
+  body * {
+    cursor: none !important;
   }
 }
