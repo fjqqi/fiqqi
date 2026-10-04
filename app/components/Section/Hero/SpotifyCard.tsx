@@ -13,6 +13,16 @@ interface SpotifyData {
     durationMs?: number;
 }
 
+const DEFAULT_TRACK = {
+    title: "Automatic",
+    artist: "Hikaru Utada",
+    albumImageUrl: "/albumcover.webp",
+    songUrl: "https://open.spotify.com/track/6DJ3dfsY7fOU161ZMjzWIH",
+    currentTime: "3.04",
+    remainingTime: "-1.42",
+    progressPercent: 68,
+};
+
 export default function SpotifyCard() {
     const [data, setData] = useState<SpotifyData | null>(null);
 
@@ -20,68 +30,107 @@ export default function SpotifyCard() {
         const fetchNowPlaying = async () => {
             try {
                 const res = await fetch("/api/spotify");
-                const json = await res.json();
-                setData(json);
+                if (res.ok) {
+                    const json = await res.json();
+                    if (json.isPlaying) {
+                        setData(json);
+                    }
+                }
             } catch (err) {
                 console.error("Failed to fetch Spotify", err);
             }
         };
 
         fetchNowPlaying();
-        // Poll every 15 seconds so it updates automatically
         const interval = setInterval(fetchNowPlaying, 15000);
         return () => clearInterval(interval);
     }, []);
 
-    const isPlaying = data?.isPlaying;
-    const title = isPlaying ? data?.title : "Not Playing";
-    const artist = isPlaying ? data?.artist : "Spotify";
-    const progressPercent =
-        data?.progressMs && data?.durationMs
-            ? (data.progressMs / data.durationMs) * 100
-            : 0;
+    const isLive = data?.isPlaying;
+    const title = isLive && data?.title ? data.title : DEFAULT_TRACK.title;
+    const artist = isLive && data?.artist ? data.artist : DEFAULT_TRACK.artist;
+    const albumImageUrl = isLive && data?.albumImageUrl ? data.albumImageUrl : DEFAULT_TRACK.albumImageUrl;
+    const songUrl = isLive && data?.songUrl ? data.songUrl : DEFAULT_TRACK.songUrl;
+
+    const formatTime = (ms: number) => {
+        const totalSeconds = Math.floor(ms / 1000);
+        const minutes = Math.floor(totalSeconds / 60);
+        const seconds = totalSeconds % 60;
+        return `${minutes}.${seconds < 10 ? "0" : ""}${seconds}`;
+    };
+
+    const currentTime = isLive && data?.progressMs != null
+        ? formatTime(data.progressMs)
+        : DEFAULT_TRACK.currentTime;
+
+    const remainingTime = isLive && data?.progressMs != null && data?.durationMs != null
+        ? `-${formatTime(Math.max(0, data.durationMs - data.progressMs))}`
+        : DEFAULT_TRACK.remainingTime;
+
+    const progressPercent = isLive && data?.progressMs != null && data?.durationMs != null
+        ? Math.min(100, Math.max(0, (data.progressMs / data.durationMs) * 100))
+        : DEFAULT_TRACK.progressPercent;
 
     return (
-        <div className="spotifyCard w-60 bg-white flex-col flex h-fit p-2.5 rounded-xl shadow-sm">
-            <div className="flex items-center">
+        <a
+            href={songUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="spotifyCard group block w-full bg-white text-black p-2.5 rounded-[20px] shadow-sm hover:shadow-md transition-all duration-200"
+        >
+            <div className="flex items-center gap-2.5">
                 {/* Album Cover */}
-                <div className="albumCover relative w-12 h-12 bg-black rounded-lg overflow-hidden shrink-0">
-                    {data?.albumImageUrl ? (
-                        <Image
-                            src={data.albumImageUrl}
-                            alt={title || "Album Cover"}
-                            fill
-                            className="object-cover"
-                        />
-                    ) : (
-                        <div className="w-full h-full flex items-center justify-center text-xs text-white">
-                            🎵
-                        </div>
-                    )}
+                <div className="relative w-11 h-11 rounded-[10px] overflow-hidden shrink-0 shadow-inner bg-neutral-100">
+                    <Image
+                        src={albumImageUrl}
+                        alt={`${title} by ${artist}`}
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-300"
+                        sizes="44px"
+                    />
                 </div>
 
-                {/* Title & Artist */}
-                <div className="ml-2.5 min-w-0 flex-1">
-                    <div className="text-sm flex items-center gap-1.5 font-medium text-black">
+                {/* Song Details */}
+                <div className="min-w-0 flex-1">
+                    <div className="flex items-center gap-1.5 text-[14px] font-semibold text-neutral-800 leading-tight">
                         <span className="truncate max-w-[90px]">{title}</span>
-                        <span className="text-gray-400">•</span>
-                        <span className="truncate text-xs text-gray-500 max-w-[70px]">{artist}</span>
-                    </div>
-                    <span className="text-xs text-gray-500">
-                        {isPlaying ? "Now Playing" : "Offline"}
-                    </span>
-                </div>
-            </div>
 
-            {/* Progress Bar */}
-            <div className="timeStamp mt-2">
-                <div className="w-full h-1.5 bg-gray-200 rounded-full overflow-hidden">
-                    <div
-                        className="h-full bg-green-500 rounded-full transition-all duration-500"
-                        style={{ width: `${progressPercent}%` }}
+                    </div>
+
+                    <div className="text-[12px] text-neutral-500 font-normal mt-0.5">
+                        <span className="truncate text-neutral-500 font-normal max-w-[75px]">{artist}</span>
+                    </div>
+                </div>
+
+                {/* Spotify Logo */}
+                <div className="shrink-0 self-start mt-0.5">
+                    <Image
+                        src="/spotify.svg"
+                        alt="Spotify"
+                        width={18}
+                        height={18}
+                        className="w-[24px] h-[24px]  opacity-90 group-hover:opacity-100 transition-opacity"
                     />
                 </div>
             </div>
-        </div>
+
+            {/* Time / Progress Bar */}
+            <div className="flex items-center gap-2 mt-3 px-0.5">
+                <span className="text-[10.5px] font-medium text-neutral-400 tabular-nums shrink-0">
+                    {currentTime}
+                </span>
+
+                <div className="flex-1 h-1.5 bg-neutral-200/90 rounded-full overflow-hidden">
+                    <div
+                        className="h-full bg-neutral-400 rounded-full transition-all duration-500"
+                        style={{ width: `${progressPercent}%` }}
+                    />
+                </div>
+
+                <span className="text-[10.5px] font-medium text-neutral-400 tabular-nums shrink-0">
+                    {remainingTime}
+                </span>
+            </div>
+        </a>
     );
 }
