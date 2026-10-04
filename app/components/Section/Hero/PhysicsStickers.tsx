@@ -75,8 +75,8 @@ export default function PhysicsStickers() {
         });
 
         const rect = container.getBoundingClientRect();
-        const W = rect.width || 340;
-        const H = rect.height || 450;
+        const W = container.offsetWidth || rect.width || 340;
+        const H = container.offsetHeight || rect.height || 450;
         // Spotify card height (~85px) + bottom padding (14px) + margin = ~110px from bottom
         const floorY = H - 110;
 
