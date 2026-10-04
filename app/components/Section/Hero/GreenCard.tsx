@@ -4,7 +4,18 @@ import PhysicsStickers from "./PhysicsStickers";
 
 export default function GreenCard() {
     return (
-        <div className="relative w-full h-[360px] md:w-[340px] md:h-[450px] p-3.5 rounded-[34px] bg-primary flex flex-col justify-end overflow-hidden shadow-sm">
+        <div className="relative w-full h-[360px] md:w-[340px] md:h-[450px] p-3.5 rounded-[34px] bg-primary/75 dark:bg-primary/60 backdrop-blur-2xl backdrop-saturate-150 border border-white/30 dark:border-white/20 shadow-[inset_0_1px_2px_rgba(255,255,255,0.4),0_16px_40px_rgba(55,93,5,0.25)] flex flex-col justify-end overflow-hidden">
+            {/* Subtle Glass Sheen / Reflection */}
+            <div className="absolute inset-0 bg-gradient-to-br from-white/25 via-transparent to-black/10 pointer-events-none rounded-[34px] z-0" />
+
+            {/* Frosted Glass Grain / Noise Texture */}
+            <div
+                className="absolute inset-0 pointer-events-none rounded-[34px] opacity-25 dark:opacity-35 mix-blend-overlay z-0"
+                style={{
+                    backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+                }}
+            />
+
             {/* Interactive Physics Stickers with 4px Gap */}
             <PhysicsStickers />
 

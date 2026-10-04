@@ -1,5 +1,6 @@
-import { ArrowDownRightIcon, ArrowUpRightIcon } from "../Icons";
+import { ArrowDownRightIcon } from "../Icons";
 import GreenCard from "./Hero/GreenCard";
+import HeroBottom from "./Hero/HeroBottom";
 import HeroText from "./Hero/HeroText";
 
 export default function HeroSection() {
@@ -10,6 +11,11 @@ export default function HeroSection() {
                     {/* Top Content: HeroText + Mobile Buttons (fills viewport so GreenCard is 30% visible before scroll) */}
                     <div className="w-full md:w-auto flex flex-col items-center md:items-start justify-center min-h-[calc(100dvh-135px-5rem)] md:min-h-0 py-6 md:py-0">
                         <HeroText />
+
+                    </div>
+
+                    {/* Green Card Container: peeks 30% (135px) on mobile at the bottom before scrolling */}
+                    <div className="w-full md:w-auto flex flex-col gap-4 justify-center pb-12 md:pb-0">
 
                         {/* Mobile Buttons: shown only on mobile between text and green card */}
                         <div className="flex md:hidden items-center justify-center gap-2.5 sm:gap-4 w-full max-w-[340px] mt-6">
@@ -22,34 +28,14 @@ export default function HeroSection() {
                                 <ArrowDownRightIcon className="w-3.5 h-3.5 shrink-0" />
                             </div>
                         </div>
-                    </div>
-
-                    {/* Green Card Container: peeks 30% (135px) on mobile at the bottom before scrolling */}
-                    <div className="w-full md:w-auto flex justify-center pb-12 md:pb-0">
                         <GreenCard />
                     </div>
                 </div>
+
             </main>
 
-            <div className="w-full h-[1px] bg-black/15 dark:bg-white/15"></div>
+            <HeroBottom />
 
-            <div className="bottomHero max-w-7xl mx-auto w-full py-6 md:py-8 px-6 sm:px-12 md:px-16 flex flex-col sm:flex-row justify-between items-center gap-4">
-                <h1 className="text-black text-sm tracking-tighter dark:text-white text-center sm:text-left">
-                    based in makassar, indonesia
-                </h1>
-
-                {/* Desktop Buttons (hidden on mobile, where they appear above GreenCard) */}
-                <div className="hidden md:flex items-center gap-2">
-                    <div className="px-4 py-2 flex items-center font-light tracking-widest gap-2 rounded-full justify-center border border-black/80 dark:border-white/80 cursor-pointer">
-                        <h1>SAY HELLO</h1>
-                        <ArrowUpRightIcon className="w-5 h-5 stroke-[2.5] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                    </div>
-                    <div className="px-4 py-2 flex items-center font-light tracking-widest gap-2 rounded-full justify-center border border-black/80 dark:border-white/80 cursor-pointer">
-                        <h1>SELECTED WORK</h1>
-                        <ArrowUpRightIcon className="w-5 h-5 stroke-[2.5] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                    </div>
-                </div>
-            </div>
         </div>
     );
 }

@@ -9,10 +9,8 @@ interface StickerData {
     label: string;
     textColor: string;
     icon?: "linkedin" | "github";
+    hasGreenLight?: boolean;
     href?: string;
-    xPercent: number;
-    startY: number;
-    angle: number;
 }
 
 const STICKERS: StickerData[] = [
@@ -22,9 +20,6 @@ const STICKERS: StickerData[] = [
         textColor: "text-[#0A66C2]",
         icon: "linkedin",
         href: "https://linkedin.com",
-        xPercent: 0.35,
-        startY: -120,
-        angle: -0.35,
     },
     {
         id: "github",
@@ -32,41 +27,32 @@ const STICKERS: StickerData[] = [
         textColor: "text-[#6366F1]",
         icon: "github",
         href: "https://github.com/fjqqi",
-        xPercent: 0.68,
-        startY: -240,
-        angle: 0.28,
     },
     {
         id: "web-dev",
         label: "Web Developer",
         textColor: "text-black",
-        xPercent: 0.3,
-        startY: -360,
-        angle: -0.15,
     },
     {
         id: "ui-ux",
         label: "UI / UX",
         textColor: "text-[#0066FF]",
-        xPercent: 0.72,
-        startY: -480,
-        angle: -0.22,
     },
     {
         id: "front-end",
         label: "Front - End",
         textColor: "text-black",
-        xPercent: 0.62,
-        startY: -600,
-        angle: 0.18,
     },
     {
         id: "mobile-dev",
         label: "Mobile Developer",
         textColor: "text-black",
-        xPercent: 0.38,
-        startY: -720,
-        angle: -0.32,
+    },
+    {
+        id: "open-work",
+        label: "Available for new project",
+        textColor: "text-emerald-600 font-medium",
+        hasGreenLight: true,
     },
 ];
 
@@ -100,21 +86,27 @@ export default function PhysicsStickers() {
             restitution: 0.15,
             friction: 0.9,
         });
-        const leftWall = Bodies.rectangle(6, -200, 20, 1800, {
+        const leftWall = Bodies.rectangle(6, -500, 20, 2600, {
             isStatic: true,
             restitution: 0.15,
             friction: 0.8,
         });
-        const rightWall = Bodies.rectangle(W - 6, -200, 20, 1800, {
+        const rightWall = Bodies.rectangle(W - 6, -500, 20, 2600, {
             isStatic: true,
             restitution: 0.15,
             friction: 0.8,
         });
-        const ceiling = Bodies.rectangle(W / 2, -1000, W * 3, 40, {
+        const ceiling = Bodies.rectangle(W / 2, -1800, W * 3, 40, {
             isStatic: true,
         });
 
         Composite.add(engine.world, [floor, leftWall, rightWall, ceiling]);
+
+        // Shuffle other stickers randomly, but keep open-work as the final sticker to drop so it always lands on top
+        const openWorkIdx = STICKERS.findIndex((s) => s.id === "open-work");
+        const otherIndices = STICKERS.map((_, i) => i).filter((i) => i !== openWorkIdx);
+        const shuffledOthers = otherIndices.sort(() => Math.random() - 0.5);
+        const dropOrder = [...shuffledOthers, openWorkIdx];
 
         // Create sticker bodies
         const stickerBodies: Matter.Body[] = [];
@@ -129,21 +121,44 @@ export default function PhysicsStickers() {
             const bodyH = h + 4;
             const radius = Math.min(bodyW, bodyH) / 2;
 
-            const startX = W * item.xPercent;
-            const startY = item.startY;
+            // Ensure sticker spawns safely between walls without clipping
+            const minX = bodyW / 2 + 14;
+            const maxX = Math.max(minX, W - bodyW / 2 - 14);
+
+            // open-work drops centrally to cap the pile cleanly; others are randomly distributed
+            const isTop = item.id === "open-work";
+            const startX = isTop
+                ? Math.max(minX, Math.min(maxX, W * 0.5 + (Math.random() - 0.5) * 35))
+                : minX + Math.random() * (maxX - minX);
+
+            // Staggered drop height: open-work drops last after the stack forms
+            const dropRank = dropOrder.indexOf(index);
+            const startY = -120 - dropRank * (105 + Math.random() * 25);
+
+            // Subtle angle for open-work so it rests balanced; dynamic angle for others
+            const randomAngle = isTop
+                ? (Math.random() - 0.5) * 0.25
+                : (Math.random() - 0.5) * 0.8;
 
             const body = Bodies.rectangle(startX, startY, bodyW, bodyH, {
                 chamfer: { radius },
-                restitution: 0.22,
-                friction: 0.85,
+                restitution: isTop ? 0.15 : 0.22,
+                friction: 0.9,
                 frictionAir: 0.025,
                 frictionStatic: 1.0,
                 density: 0.003,
-                angle: item.angle,
+                angle: randomAngle,
             });
 
-            // Subtle tumbling spin while falling
-            Matter.Body.setAngularVelocity(body, (index % 2 === 0 ? -1 : 1) * 0.025);
+            // Random tumbling spin while falling
+            const randomSpin = isTop
+                ? (Math.random() - 0.5) * 0.02
+                : (Math.random() - 0.5) * 0.05;
+            Matter.Body.setAngularVelocity(body, randomSpin);
+
+            // Subtle random horizontal drift
+            const driftX = isTop ? 0 : (Math.random() - 0.5) * 1.5;
+            Matter.Body.setVelocity(body, { x: driftX, y: 0 });
 
             stickerBodies.push(body);
         });
@@ -233,14 +248,21 @@ export default function PhysicsStickers() {
             {STICKERS.map((s, i) => {
                 const content = (
                     <>
+                        {s.hasGreenLight && (
+                            <span className="relative flex h-2.5 w-2.5 items-center justify-center shrink-0">
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.9)]"></span>
+                            </span>
+                        )}
                         {s.icon === "linkedin" && <LinkedInIcon className="w-[18px] h-[18px] shrink-0" />}
                         {s.icon === "github" && <GithubIcon className="w-[18px] h-[18px] shrink-0 fill-[#6366F1]" />}
                         <span>{s.label}</span>
                     </>
                 );
 
+                const zIndex = s.id === "open-work" ? "z-30" : "z-20";
                 const commonClass =
-                    "absolute top-0 left-0 bg-white select-none rounded-full inline-flex items-center justify-center gap-1.5 px-5 py-2.5 text-[15px] font-normal tracking-tight shadow-[0_4px_14px_rgba(0,0,0,0.14)] cursor-grab active:cursor-grabbing !transition-none will-change-transform z-20";
+                    `absolute top-0 left-0 bg-white select-none rounded-full inline-flex items-center justify-center gap-1.5 px-5 py-2.5 text-[15px] font-normal tracking-tight shadow-[0_4px_14px_rgba(0,0,0,0.14)] cursor-grab active:cursor-grabbing !transition-none will-change-transform ${zIndex}`;
 
                 if (s.href) {
                     return (

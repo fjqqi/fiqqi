@@ -124,3 +124,16 @@ export function SpotifyIcon({ className = "w-5 h-5", ...props }: SVGProps<SVGSVG
         </svg>
     );
 }
+
+export function AsteriskIcon({ className = "w-5 h-5", ...props }: SVGProps<SVGSVGElement>) {
+    return (
+        <svg
+            viewBox="0 0 512 512"
+            fill="currentColor"
+            className={className}
+            {...props}
+        >
+            <polygon points="501.539,169.221 453.886,86.7 303.669,173.449 303.669,0 208.365,0 208.365,173.479 58.114,86.73 10.461,169.261 160.674,255.99 10.501,342.71 58.154,425.231 208.365,338.482 208.365,512 303.669,512 303.669,338.542 453.846,425.271 501.499,342.74 351.267,255.99" />
+        </svg>
+    );
+}
