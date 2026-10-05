@@ -14,13 +14,35 @@ function InteractiveAsterisk({ className }: { className: string }) {
     const prevAngleRef = useRef<number | null>(null);
 
     useEffect(() => {
-        let animId: number;
+        let animId: number = 0;
+        let isAnimating = false;
+
+        const update = () => {
+            const diff = targetAngleRef.current - currentAngleRef.current;
+            if (Math.abs(diff) < 0.05) {
+                currentAngleRef.current = targetAngleRef.current;
+                if (ref.current) {
+                    ref.current.style.transform = `rotate(${currentAngleRef.current}deg)`;
+                }
+                isAnimating = false;
+                animId = 0;
+                return;
+            }
+
+            currentAngleRef.current += diff * 0.15;
+            if (ref.current) {
+                ref.current.style.transform = `rotate(${currentAngleRef.current}deg)`;
+            }
+            animId = requestAnimationFrame(update);
+        };
 
         const handlePointerMove = (e: PointerEvent) => {
+            // Do not compute or animate on mobile touch scroll
+            if (e.pointerType === "touch") return;
+
             const el = ref.current;
             if (!el) return;
             const rect = el.getBoundingClientRect();
-            // Skip calculations if hidden in current responsive layout
             if (rect.width === 0 && rect.height === 0) return;
 
             const centerX = rect.left + rect.width / 2;
@@ -35,29 +57,23 @@ function InteractiveAsterisk({ className }: { className: string }) {
                 targetAngleRef.current = deg;
             } else {
                 let delta = deg - prevAngleRef.current;
-                // Unwrap angles to always rotate along the shortest path without 360-degree snap jumps
                 while (delta > 180) delta -= 360;
                 while (delta < -180) delta += 360;
                 targetAngleRef.current += delta;
                 prevAngleRef.current = deg;
             }
-        };
 
-        const update = () => {
-            // Smooth lerp interpolation for silky, responsive rotation
-            currentAngleRef.current += (targetAngleRef.current - currentAngleRef.current) * 0.15;
-            if (ref.current) {
-                ref.current.style.transform = `rotate(${currentAngleRef.current}deg)`;
+            if (!isAnimating) {
+                isAnimating = true;
+                animId = requestAnimationFrame(update);
             }
-            animId = requestAnimationFrame(update);
         };
 
         window.addEventListener("pointermove", handlePointerMove, { passive: true });
-        animId = requestAnimationFrame(update);
 
         return () => {
             window.removeEventListener("pointermove", handlePointerMove);
-            cancelAnimationFrame(animId);
+            if (animId) cancelAnimationFrame(animId);
         };
     }, []);
 

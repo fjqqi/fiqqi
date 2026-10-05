@@ -203,30 +203,82 @@ export default function PhysicsStickers() {
             }, 50);
         });
 
+        // Cache sticker dimensions once to avoid layout thrashing during animation frames
+        const stickerSizes = STICKERS.map((_, i) => {
+            const el = stickerRefs.current[i];
+            return {
+                w: el?.offsetWidth || 140,
+                h: el?.offsetHeight || 42,
+            };
+        });
+
         setReady(true);
 
-        // Animation frame loop
-        let animId: number;
+        // Animation frame loop with idle sleep
+        let animId: number = 0;
+        let isRunning = true;
+        let idleFrames = 0;
+
         const tick = () => {
+            if (!isRunning) return;
             Engine.update(engine, 1000 / 60);
 
-            stickerBodies.forEach((body, i) => {
+            let hasMovement = false;
+
+            for (let i = 0; i < stickerBodies.length; i++) {
+                const body = stickerBodies[i];
                 const el = stickerRefs.current[i];
-                if (!el) return;
-                const w = el.offsetWidth;
-                const h = el.offsetHeight;
+                if (!el) continue;
+
+                const { w, h } = stickerSizes[i];
                 const x = body.position.x - w / 2;
                 const y = body.position.y - h / 2;
                 el.style.transform = `translate3d(${x}px, ${y}px, 0) rotate(${body.angle}rad)`;
-            });
+
+                if (
+                    Math.abs(body.velocity.x) > 0.04 ||
+                    Math.abs(body.velocity.y) > 0.04 ||
+                    Math.abs(body.angularVelocity) > 0.008
+                ) {
+                    hasMovement = true;
+                }
+            }
+
+            if (isDraggingRef.current || mouseConstraint.body) {
+                hasMovement = true;
+            }
+
+            if (!hasMovement) {
+                idleFrames++;
+                // When stickers settle (after ~1.5s idle), stop the RAF loop to save CPU & GPU
+                if (idleFrames > 90) {
+                    animId = 0;
+                    return;
+                }
+            } else {
+                idleFrames = 0;
+            }
 
             animId = requestAnimationFrame(tick);
         };
 
+        const wakeUp = () => {
+            idleFrames = 0;
+            if (!animId && isRunning) {
+                animId = requestAnimationFrame(tick);
+            }
+        };
+
+        Matter.Events.on(mouseConstraint, "startdrag", wakeUp);
+        Matter.Events.on(mouseConstraint, "mousedown", wakeUp);
+        container.addEventListener("pointerdown", wakeUp, { passive: true });
+
         animId = requestAnimationFrame(tick);
 
         return () => {
+            isRunning = false;
             cancelAnimationFrame(animId);
+            container.removeEventListener("pointerdown", wakeUp);
             Composite.clear(engine.world, false);
             Engine.clear(engine);
         };
