@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter, Inria_Serif } from "next/font/google";
 import "./globals.css";
+import "lenis/dist/lenis.css";
+import SmoothScroll from "./components/SmoothScroll";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -41,7 +43,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         />
       </head>
       <body className="min-h-full flex flex-col font-sans bg-[var(--background)] text-[var(--foreground)] transition-colors duration-200">
-        {children}
+        <SmoothScroll>
+          {children}
+        </SmoothScroll>
       </body>
     </html>
   );
