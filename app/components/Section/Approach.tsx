@@ -48,7 +48,7 @@ export default function ApproachSection() {
 
                 <div
                     ref={containerRef}
-                    className="md:text-6xl text-3xl tracking-tighter font-light leading-snug md:leading-tight"
+                    className="md:text-5xl text-3xl tracking-tighter font-light leading-snug md:leading-tight"
                 >
                     {words.map((word, i) => {
                         const start = i * step;
