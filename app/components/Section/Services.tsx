@@ -9,6 +9,7 @@ import Pic3 from "@/public/services/3.webp";
 import Pic4 from "@/public/services/4.webp";
 import Pic5 from "@/public/services/5.webp";
 import Pic6 from "@/public/services/6.webp";
+import SecTitle from "../ui/SecTitle";
 
 const SERVICES = [
     {
@@ -108,14 +109,11 @@ export default function ServicesSection() {
                 {/* Content Section (Mobile bottom 58vh, Desktop left sticky column) */}
                 <section className="leftsec order-2 md:order-1 md:sticky md:top-22 w-full md:w-1/2 h-[58vh] md:h-screen flex-1 justify-between flex flex-col max-w-7xl mx-auto px-6 sm:px-12 md:px-16 pt-5 md:pt-16 pb-6 md:pb-40 text-black dark:text-white bg-white dark:bg-zinc-900 shrink-0">
                     <div className="content pl-0 md:pl-28">
-                        <div className="sectionTittle flex justify-between mb-3 md:mb-12 pb-3 md:pb-4 border-b border-black/15 dark:border-white/15">
-                            <h2 className="text-sm md:text-lg tracking-tighter">
-                                <span className="font-bold mr-2 md:mr-3 text-primary">02</span>
-                                What I can help with?
-                            </h2>
-                            <span className="font-semibold text-sm md:text-base">いち</span>
-                        </div>
-
+                        <SecTitle
+                            number="03"
+                            title="What can i help with?"
+                            subtitle="いち"
+                        />
                         <div className="top">
                             <div className="mb-4 md:mb-20">
                                 <h1 className="md:text-6xl text-3xl tracking-tighter leading-snug md:leading-tight transition-all duration-200">
@@ -142,9 +140,8 @@ export default function ServicesSection() {
                     <div className="footer pl-0 md:pl-28 mt-4 md:mt-0">
                         <div className="scrollProgress flex w-full">
                             <div
-                                className={`h-[2px] bg-primary transition-all duration-300 ${
-                                    activeIndex === 0 ? "w-1/3" : activeIndex === 1 ? "w-2/3" : "w-full"
-                                }`}
+                                className={`h-[2px] bg-primary transition-all duration-300 ${activeIndex === 0 ? "w-1/3" : activeIndex === 1 ? "w-2/3" : "w-full"
+                                    }`}
                             ></div>
                             <div className="h-[2px] bg-gray-200 dark:bg-zinc-800 flex-1"></div>
                         </div>
@@ -153,33 +150,30 @@ export default function ServicesSection() {
                             <button
                                 type="button"
                                 onClick={() => scrollToService(0)}
-                                className={`cursor-pointer transition-colors ${
-                                    activeIndex === 0
-                                        ? "font-bold text-primary"
-                                        : "text-neutral-400 hover:text-black dark:hover:text-white"
-                                }`}
+                                className={`cursor-pointer transition-colors ${activeIndex === 0
+                                    ? "font-bold text-primary"
+                                    : "text-neutral-400 hover:text-black dark:hover:text-white"
+                                    }`}
                             >
                                 Design
                             </button>
                             <button
                                 type="button"
                                 onClick={() => scrollToService(1)}
-                                className={`cursor-pointer transition-colors ${
-                                    activeIndex === 1
-                                        ? "font-bold text-primary"
-                                        : "text-neutral-400 hover:text-black dark:hover:text-white"
-                                }`}
+                                className={`cursor-pointer transition-colors ${activeIndex === 1
+                                    ? "font-bold text-primary"
+                                    : "text-neutral-400 hover:text-black dark:hover:text-white"
+                                    }`}
                             >
                                 Build
                             </button>
                             <button
                                 type="button"
                                 onClick={() => scrollToService(2)}
-                                className={`cursor-pointer transition-colors ${
-                                    activeIndex === 2
-                                        ? "font-bold text-primary"
-                                        : "text-neutral-400 hover:text-black dark:hover:text-white"
-                                }`}
+                                className={`cursor-pointer transition-colors ${activeIndex === 2
+                                    ? "font-bold text-primary"
+                                    : "text-neutral-400 hover:text-black dark:hover:text-white"
+                                    }`}
                             >
                                 Grow
                             </button>

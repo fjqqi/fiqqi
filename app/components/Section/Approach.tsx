@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useScroll, useTransform, type MotionValue } from "framer-motion";
+import SecTitle from "../ui/SecTitle";
 
 const PARAGRAPH =
     "I help brands stand out online: interfaces where considered design, restrained motion and honest performance all pull in one direction — turning an idea into a product people actually use.";
@@ -38,17 +39,15 @@ export default function ApproachSection() {
     return (
         <div className="w-full bg-gray-200/70 dark:bg-zinc-900 transition-colors">
             <section className="w-full max-w-7xl mx-auto px-6 sm:px-12 md:px-16 py-20 text-black dark:text-white">
-                <div className="sectionTittle flex justify-between mb-6 md:mb-12 pb-4 border-b border-black/15 dark:border-white/15">
-                    <h2 className="text-lg tracking-tighter">
-                        <span className="font-bold mr-3 text-primary">01</span>
-                        Approach
-                    </h2>
-                    <span className="font-semibold">いち</span>
-                </div>
+                <SecTitle
+                    number="01"
+                    title="Approach"
+                    subtitle="いち"
+                />
 
                 <div
                     ref={containerRef}
-                    className="md:text-5xl text-3xl tracking-tighter font-light leading-snug md:leading-tight"
+                    className="md:text-6xl text-xl tracking-tighter font-light leading-snug md:leading-tight"
                 >
                     {words.map((word, i) => {
                         const start = i * step;
