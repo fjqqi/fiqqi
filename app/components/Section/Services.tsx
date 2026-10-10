@@ -102,17 +102,17 @@ export default function ServicesSection() {
     return (
         <div
             ref={containerRef}
-            className="relative w-full bg-white dark:bg-zinc-900 transition-colors h-[350vh] md:h-auto"
+            className="relative w-full bg-white dark:bg-black transition-colors h-[350vh] md:h-auto"
         >
             {/* Sticky Container on mobile, static flex layout on desktop */}
             <div className="sticky top-20 md:static w-full h-[calc(100dvh-5rem)] md:h-auto flex flex-col md:flex-row items-start overflow-hidden md:overflow-visible">
                 {/* Content Section (Mobile bottom 58vh, Desktop left sticky column) */}
-                <section className="leftsec order-2 md:order-1 md:sticky md:top-22 w-full md:w-1/2 h-[58vh] md:h-screen flex-1 justify-between flex flex-col max-w-7xl mx-auto px-6 sm:px-12 md:px-16 pt-5 md:pt-16 pb-6 md:pb-40 text-black dark:text-white bg-white dark:bg-zinc-900 shrink-0">
+                <section className="leftsec order-2 md:order-1 md:sticky md:top-22 w-full md:w-1/2 h-[58vh] md:h-screen flex-1 justify-between flex flex-col max-w-7xl mx-auto px-6 sm:px-12 md:px-16 pt-5 md:pt-16 pb-6 md:pb-40 text-black dark:text-white bg-white dark:bg-black shrink-0">
                     <div className="content pl-0 md:pl-28">
                         <SecTitle
-                            number="03"
+                            number="04"
                             title="What can i help with?"
-                            subtitle="いち"
+                            subtitle="四"
                         />
                         <div className="top">
                             <div className="mb-4 md:mb-20">
@@ -182,9 +182,9 @@ export default function ServicesSection() {
                 </section>
 
                 {/* Right Column: 6 Images (Mobile top 42vh aperture with continuous scroll, Desktop right 540vh natural scroll) */}
-                <section className="rightsec order-1 md:order-2 w-full md:w-1/2 h-[42vh] md:h-auto overflow-hidden md:overflow-visible flex flex-col bg-gray-600 justify-between max-w-7xl mx-auto text-black border-b border-black/15 dark:border-white/15 md:border-b-0 shrink-0">
+                <section className="rightsec order-1 md:order-2 w-full md:w-1/2 h-[42vh] md:h-auto overflow-hidden md:overflow-visible flex flex-col bg-primary rounded-bl-[40px] justify-between max-w-7xl mx-auto text-black border-b border-black/15 dark:border-white/15 md:border-b-0 shrink-0">
                     <motion.div
-                        className="w-full flex flex-col"
+                        className="w-full flex flex-col p-10 pb-20 gap-10"
                         style={{ y: isMobile ? mobileY : 0 }}
                     >
                         <div className="h-[42vh] md:h-[90vh] flex-1 shrink-0 relative w-full">

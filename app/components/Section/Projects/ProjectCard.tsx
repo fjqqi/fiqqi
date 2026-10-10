@@ -6,16 +6,19 @@ import ProjectBrowserMockup from "./ProjectBrowserMockup";
 interface ProjectCardProps {
     project: Project;
     index: number;
+    className?: string;
 }
 
-export default function ProjectCard({ project, index }: ProjectCardProps) {
+export default function ProjectCard({ project, index, className }: ProjectCardProps) {
     return (
         <a
             href={project.url}
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`View ${project.title} project`}
-            className="group block w-[82vw] sm:w-[430px] md:w-[480px] lg:w-[530px] shrink-0  p-6 sm:p-7 md:p-8 text-white transition-all duration-300 hover:-translate-y-1.5 shadow-md hover:shadow-2xl cursor-pointer relative overflow-hidden focus:outline-none focus:ring-2 focus:ring-white/50"
+            className={`group block shrink-0 p-6 sm:p-7 md:p-8 text-white transition-all duration-300 hover:-translate-y-1.5 shadow-md hover:shadow-2xl cursor-pointer relative overflow-hidden focus:outline-none focus:ring-2 focus:ring-white/50 ${
+                className ?? "w-[82vw] sm:w-[430px] md:w-[480px] lg:w-[530px]"
+            }`}
             style={{ backgroundColor: project.bgColor }}
         >
             {/* Subtle Gradient Accent Overlay for depth */}

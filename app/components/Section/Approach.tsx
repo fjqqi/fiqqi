@@ -37,7 +37,7 @@ export default function ApproachSection() {
     const step = 1 / words.length;
 
     return (
-        <div className="w-full bg-gray-200/70 dark:bg-zinc-900 transition-colors">
+        <div className="w-full bg-gray-100 dark:bg-zinc-900 transition-colors">
             <section className="w-full max-w-7xl mx-auto px-6 sm:px-12 md:px-16 py-20 text-black dark:text-white">
                 <SecTitle
                     number="01"
@@ -47,7 +47,7 @@ export default function ApproachSection() {
 
                 <div
                     ref={containerRef}
-                    className="md:text-6xl text-xl tracking-tighter font-light leading-snug md:leading-tight"
+                    className="md:text-5xl w-9/10 text-xl tracking-tighter font-light leading-snug md:leading-tight"
                 >
                     {words.map((word, i) => {
                         const start = i * step;

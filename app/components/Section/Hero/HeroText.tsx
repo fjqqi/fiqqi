@@ -152,7 +152,7 @@ export default function HeroText() {
                             </div>
                             <span>through</span>
                             <div className="border border-black dark:border-white rounded-full w-11 h-11 flex items-center justify-center shrink-0">
-                                <InteractiveAsterisk className="w-6 h-6 text-primary" />
+                                <InteractiveAsterisk className="w-6 h-6 text-primary dark:text-lime-500" />
                             </div>
                         </motion.div>
                     </div>
@@ -164,7 +164,7 @@ export default function HeroText() {
                             onAnimationComplete={() => setH1Done(true)}
                             className="flex items-center justify-center gap-2"
                         >
-                            <span className="italic font-serif text-[#3f6212] dark:text-lime-500">
+                            <span className="italic font-serif text-[#3f6212] dark:text-green-900">
                                 design
                             </span>
                             <span>& code.</span>
@@ -180,7 +180,7 @@ export default function HeroText() {
                         animate={h1Done ? "visible" : "hidden"}
                         className="text-[15px] sm:text-base leading-snug text-black/80 dark:text-white/80 max-w-[280px]"
                     >
-                        making things for screens. sometimes with pixels, sometimes with code :3
+                        Hi, I'm Fiqqi. i love making things for screens. sometimes with pixels, sometimes with code
                     </motion.h4>
                 </div>
             </motion.div>
@@ -212,7 +212,7 @@ export default function HeroText() {
                         >
                             <span>through</span>
                             <div className="border border-black dark:border-white rounded-full w-16 h-16 flex items-center justify-center shrink-0">
-                                <InteractiveAsterisk className="w-9 h-9 text-primary" />
+                                <InteractiveAsterisk className="w-9 h-9 text-primary dark:text-lime-500" />
                             </div>
                             <span className="italic font-serif text-[#3f6212] dark:text-lime-500">
                                 design
@@ -223,14 +223,15 @@ export default function HeroText() {
                 </h1>
 
                 {/* Subtitle: reveals after h1 animation completes */}
-                <div className="overflow-hidden mt-6 pb-1 -mb-1">
+                <div className="overflow-hidden mt-6 pb-1 -mb-1 w-8/10">
                     <motion.h4
                         variants={subtextVariants}
                         initial="hidden"
                         animate={h1Done ? "visible" : "hidden"}
-                        className="text-lg text-black/80 dark:text-white/80"
+                        className="text-lg text-black/80 dark:text-white/80 tracking-tight"
                     >
-                        making things for screens — sometimes with pixels, sometimes with code.
+                        Hi, I'm <span className="text-primary dark:text-lime-500">Fiqqi</span> and i love making things for screens.
+                        sometimes with pixels, sometimes with code
                     </motion.h4>
                 </div>
             </motion.div>

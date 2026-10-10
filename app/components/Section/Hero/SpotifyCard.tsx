@@ -153,13 +153,13 @@ export default function SpotifyCard() {
             animate="visible"
             whileHover={{ scale: 1.015 }}
             whileTap={{ scale: 0.985 }}
-            className="spotifyCard group block w-full bg-white text-black p-2.5 rounded-[20px] shadow-sm hover:shadow-md transition-shadow duration-200"
+            className="spotifyCard group block w-full bg-white dark:bg-zinc-900/90 text-black dark:text-white p-2.5 rounded-[16px] shadow-sm dark:shadow-[0_4px_16px_rgba(0,0,0,0.4)] border border-transparent dark:border-white/15 hover:shadow-md transition-all duration-200"
         >
             <div className="flex items-center gap-2.5">
                 {/* Album Cover */}
                 <motion.div
                     variants={albumVariants}
-                    className="relative w-11 h-11 rounded-[10px] overflow-hidden shrink-0 shadow-inner bg-neutral-100"
+                    className="relative w-11 h-11 rounded-[10px] overflow-hidden shrink-0 shadow-inner bg-neutral-100 dark:bg-zinc-800"
                 >
                     <Image
                         src={albumImageUrl}
@@ -172,12 +172,12 @@ export default function SpotifyCard() {
 
                 {/* Song Details */}
                 <motion.div variants={itemVariants} className="min-w-0 flex-1">
-                    <div className="flex items-center gap-1.5 text-[14px] font-semibold text-neutral-800 leading-tight">
+                    <div className="flex items-center gap-1.5 text-[14px] font-semibold text-neutral-800 dark:text-zinc-100 leading-tight">
                         <span className="truncate max-w-[90px]">{title}</span>
                     </div>
 
-                    <div className="text-[12px] text-neutral-500 font-normal mt-0.5">
-                        <span className="truncate text-neutral-500 font-normal max-w-[75px]">{artist}</span>
+                    <div className="text-[12px] text-neutral-500 dark:text-zinc-400 font-normal mt-0.5">
+                        <span className="truncate text-neutral-500 dark:text-zinc-400 font-normal max-w-[75px]">{artist}</span>
                     </div>
                 </motion.div>
 
@@ -195,11 +195,11 @@ export default function SpotifyCard() {
 
             {/* Time / Progress Bar */}
             <motion.div variants={itemVariants} className="flex items-center gap-2 mt-3 px-0.5">
-                <span className="text-[10.5px] font-medium text-neutral-400 tabular-nums shrink-0">
+                <span className="text-[10.5px] font-medium text-neutral-400 dark:text-zinc-500 tabular-nums shrink-0">
                     {currentTime}
                 </span>
 
-                <div className="flex-1 h-1.5 bg-neutral-200/90 rounded-full overflow-hidden">
+                <div className="flex-1 h-1.5 bg-neutral-200/90 dark:bg-zinc-800 rounded-full overflow-hidden">
                     <motion.div
                         initial={{ width: 0 }}
                         animate={{ width: `${progressPercent}%` }}
@@ -208,11 +208,11 @@ export default function SpotifyCard() {
                                 ? { duration: 1.1, ease: [0.16, 1, 0.3, 1], delay: 0.55 }
                                 : { duration: 1, ease: "linear" }
                         }
-                        className="h-full bg-neutral-400 rounded-full"
+                        className="h-full bg-neutral-400 dark:bg-zinc-300 rounded-full"
                     />
                 </div>
 
-                <span className="text-[10.5px] font-medium text-neutral-400 tabular-nums shrink-0">
+                <span className="text-[10.5px] font-medium text-neutral-400 dark:text-zinc-500 tabular-nums shrink-0">
                     {remainingTime}
                 </span>
             </motion.div>

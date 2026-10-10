@@ -34,8 +34,13 @@ const buttonItemVariants: Variants = {
 
 export default function HeroSection() {
     return (
-        <div className="w-full flex flex-col  justify-between overflow-x-hidden">
-            <main className="w-full max-w-7xl   pb-16 mx-auto flex-1 flex flex-col justify-center px-6 sm:px-12 md:px-16 text-black dark:text-white">
+        <div className="relative isolate w-full flex flex-col justify-between overflow-x-hidden min-h-[calc(100dvh-5rem)] md:min-h-[calc(100dvh-5.5rem)]">
+
+            <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-0 -z-10 [background-image:linear-gradient(to_right,rgba(0,0,0,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.03)_1px,transparent_1px)] dark:[background-image:linear-gradient(to_right,rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.04)_1px,transparent_1px)] [background-size:20px_20px]"
+            />
+            <main className="w-full max-w-7xl pb-16 mx-auto flex-1 flex flex-col justify-center px-6 sm:px-12 md:px-16 text-black dark:text-white">
                 <div className="flex-1 flex flex-col md:flex-row w-full justify-between items-center md:py-12 gap-0 md:gap-12">
                     {/* Top Content: HeroText + Mobile Buttons (fills viewport so GreenCard is 30% visible before scroll) */}
                     <div className="w-full md:w-auto flex flex-col items-center md:items-start justify-center min-h-[calc(100dvh-256px-5rem)] md:min-h-0 py-6 md:py-0">
@@ -72,7 +77,9 @@ export default function HeroSection() {
                                 <ArrowDownRightIcon className="w-3.5 h-3.5 shrink-0 transition-transform group-hover:translate-x-0.5 group-hover:translate-y-0.5" />
                             </motion.div>
                         </motion.div>
-                        <GreenCard />
+                        <div className="relative top-8">
+                            <GreenCard />
+                        </div>
                     </div>
                 </div>
 
