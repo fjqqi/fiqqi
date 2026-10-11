@@ -15,7 +15,7 @@ export default function HeroBottom() {
                         ease: [0.16, 1, 0.3, 1],
                         delay: 0.6,
                     }}
-                    className="w-full h-[1px] bg-black/15 dark:bg-white/15 origin-left"
+                    className="w-full h-px bg-black/10 dark:bg-white/15 origin-left"
                 />
 
                 <motion.div

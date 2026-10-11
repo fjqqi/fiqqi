@@ -77,7 +77,7 @@ export default function HeroSection() {
                                 <ArrowDownRightIcon className="w-3.5 h-3.5 shrink-0 transition-transform group-hover:translate-x-0.5 group-hover:translate-y-0.5" />
                             </motion.div>
                         </motion.div>
-                        <div className="relative top-8">
+                        <div className="relative top-0 md:top-8">
                             <GreenCard />
                         </div>
                     </div>

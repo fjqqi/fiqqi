@@ -178,7 +178,7 @@ export default function HeroText() {
                         variants={subtextVariants}
                         initial="hidden"
                         animate={h1Done ? "visible" : "hidden"}
-                        className="text-[15px] sm:text-base leading-snug text-black/80 dark:text-white/80 max-w-[280px]"
+                        className="text-[15px] sm:text-base leading-snug text-black/80 dark:text-white/80 max-w-70"
                     >
                         Hi, I'm Fiqqi. i love making things for screens. sometimes with pixels, sometimes with code
                     </motion.h4>
