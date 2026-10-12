@@ -7,6 +7,7 @@ import Footer from "@/app/components/Footer";
 import SecTitle from "@/app/components/ui/SecTitle";
 import PageHeroHeader, { type MetaStatItem } from "@/app/components/ui/PageHeroHeader";
 import { ArrowDownRightIcon } from "@/app/components/Icons";
+import Button from "@/app/components/ui/Button";
 
 const CONTACT_STATS: MetaStatItem[] = [
     { label: "STATUS", value: "Open To New Project" },
@@ -172,24 +173,20 @@ export default function ContactPage() {
                                         BUDGET
                                     </span>
                                     <div className="flex flex-wrap gap-2 sm:gap-2.5">
-                                        {BUDGET_OPTIONS.map((option) => {
-                                            const isSelected = selectedBudget === option;
-                                            return (
-                                                <button
-                                                    key={option}
-                                                    type="button"
-                                                    onClick={() =>
-                                                        setSelectedBudget(isSelected ? null : option)
-                                                    }
-                                                    className={`px-3 sm:px-3.5 py-1.5 rounded-full border text-xs tracking-tight transition-all duration-150 cursor-pointer ${isSelected
-                                                        ? "bg-black text-white dark:bg-white dark:text-black border-black dark:border-white shadow-sm"
-                                                        : "border-black/20 dark:border-white/20 text-black/75 dark:text-white/75 hover:border-black/60 dark:hover:border-white/60"
-                                                        }`}
-                                                >
-                                                    {option}
-                                                </button>
-                                            );
-                                        })}
+                                        {BUDGET_OPTIONS.map((option) => (
+                                            <Button
+                                                key={option}
+                                                type="button"
+                                                variant="toggle"
+                                                size="sm"
+                                                isActive={selectedBudget === option}
+                                                onClick={() =>
+                                                    setSelectedBudget(selectedBudget === option ? null : option)
+                                                }
+                                            >
+                                                {option}
+                                            </Button>
+                                        ))}
                                     </div>
                                 </div>
 
@@ -214,15 +211,9 @@ export default function ContactPage() {
 
                                 {/* Submit Button */}
                                 <div className="pt-6 sm:pt-8 md:pt-10 flex items-center gap-4">
-                                    <motion.button
-                                        whileHover={{ scale: 1.02 }}
-                                        whileTap={{ scale: 0.98 }}
-                                        type="submit"
-                                        className="inline-flex items-center gap-2 px-5 sm:px-6 py-2.5 rounded-full border border-black dark:border-white text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors text-[11px] sm:text-xs font-medium tracking-wider uppercase cursor-pointer"
-                                    >
-                                        <span>SEND</span>
-                                        <ArrowDownRightIcon className="w-3.5 h-3.5" />
-                                    </motion.button>
+                                    <Button type="submit" icon={<ArrowDownRightIcon className="w-3.5 h-3.5" />}>
+                                        SEND
+                                    </Button>
 
                                     {submitted && (
                                         <span className="text-xs text-primary dark:text-lime-500 font-mono tracking-wider">
@@ -322,15 +313,14 @@ export default function ContactPage() {
                                 <span className="text-[9px] sm:text-[10px] font-mono tracking-widest uppercase text-black/50 dark:text-white/50 mb-2">
                                     RESUME
                                 </span>
-                                <motion.a
-                                    whileHover={{ scale: 1.02 }}
-                                    whileTap={{ scale: 0.98 }}
-                                    href="mailto:faqihzaky43@gmail.com?subject=CV%20Request%20-%20Fiqqi"
-                                    className="inline-flex items-center gap-2 px-5 sm:px-6 py-2.5 rounded-full border border-black dark:border-white text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors text-[11px] sm:text-xs font-medium tracking-wider uppercase cursor-pointer"
+                                <Button
+                                    href="https://drive.google.com/file/d/12Wn6d5WhnpKf5145MKd29kVlEg5oSRzN/view?usp=drive_link"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    icon={<ArrowDownRightIcon className="w-3.5 h-3.5" />}
                                 >
-                                    <span>DOWNLOAD CV</span>
-                                    <ArrowDownRightIcon className="w-3.5 h-3.5" />
-                                </motion.a>
+                                    DOWNLOAD CV
+                                </Button>
                             </div>
                         </div>
                     </motion.div>

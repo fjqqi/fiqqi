@@ -8,6 +8,7 @@ import SecTitle from "@/app/components/ui/SecTitle";
 import PageHeroHeader, { type MetaStatItem } from "@/app/components/ui/PageHeroHeader";
 import { PROJECTS } from "@/app/components/Section/Projects/projectsData";
 import WorkProjectCard from "./components/WorkProjectCard";
+import Button from "@/app/components/ui/Button";
 
 const WORK_STATS: MetaStatItem[] = [
     { label: "PROJECTS", value: "9" },
@@ -95,22 +96,18 @@ export default function WorkPage() {
                         variants={sectionItemVariants}
                         className="flex flex-wrap items-center gap-2.5 sm:gap-3 mt-6 sm:mt-8 md:mt-10 mb-8 sm:mb-12"
                     >
-                        {CATEGORIES.map((cat) => {
-                            const isActive = activeCategory === cat;
-                            return (
-                                <button
-                                    key={cat}
-                                    type="button"
-                                    onClick={() => setActiveCategory(cat)}
-                                    className={`px-4 sm:px-5 py-2 rounded-full border text-xs sm:text-sm font-medium uppercase tracking-wider transition-all duration-200 cursor-pointer ${isActive
-                                        ? "bg-black text-white dark:bg-white dark:text-black border-black dark:border-white shadow-sm"
-                                        : "border-black/20 dark:border-white/20 text-black/75 dark:text-white/75 hover:border-black/60 dark:hover:border-white/60"
-                                        }`}
-                                >
-                                    {cat}
-                                </button>
-                            );
-                        })}
+                        {CATEGORIES.map((cat) => (
+                            <Button
+                                key={cat}
+                                type="button"
+                                variant="toggle"
+                                size="md"
+                                isActive={activeCategory === cat}
+                                onClick={() => setActiveCategory(cat)}
+                            >
+                                {cat}
+                            </Button>
+                        ))}
                     </motion.div>
 
                     {/* 2-Column Projects Grid matching mockup */}

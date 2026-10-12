@@ -1,88 +1,11 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react"
+import { useState } from "react"
 import Image from "next/image"
 import Guwe from "@/public/guwe.webp"
-import { AsteriskIcon } from "@/app/components/Icons"
+import InteractiveAsterisk from "@/app/components/ui/InteractiveAsterisk"
 
 import { motion, type Variants } from "framer-motion"
-
-function InteractiveAsterisk({ className }: { className: string }) {
-    const ref = useRef<HTMLDivElement>(null);
-    const targetAngleRef = useRef(0);
-    const currentAngleRef = useRef(0);
-    const prevAngleRef = useRef<number | null>(null);
-
-    useEffect(() => {
-        let animId: number = 0;
-        let isAnimating = false;
-
-        const update = () => {
-            const diff = targetAngleRef.current - currentAngleRef.current;
-            if (Math.abs(diff) < 0.05) {
-                currentAngleRef.current = targetAngleRef.current;
-                if (ref.current) {
-                    ref.current.style.transform = `rotate(${currentAngleRef.current}deg)`;
-                }
-                isAnimating = false;
-                animId = 0;
-                return;
-            }
-
-            currentAngleRef.current += diff * 0.15;
-            if (ref.current) {
-                ref.current.style.transform = `rotate(${currentAngleRef.current}deg)`;
-            }
-            animId = requestAnimationFrame(update);
-        };
-
-        const handlePointerMove = (e: PointerEvent) => {
-            // Do not compute or animate on mobile touch scroll
-            if (e.pointerType === "touch") return;
-
-            const el = ref.current;
-            if (!el) return;
-            const rect = el.getBoundingClientRect();
-            if (rect.width === 0 && rect.height === 0) return;
-
-            const centerX = rect.left + rect.width / 2;
-            const centerY = rect.top + rect.height / 2;
-
-            const rad = Math.atan2(e.clientY - centerY, e.clientX - centerX);
-            const deg = rad * (180 / Math.PI);
-
-            if (prevAngleRef.current === null) {
-                prevAngleRef.current = deg;
-                currentAngleRef.current = deg;
-                targetAngleRef.current = deg;
-            } else {
-                let delta = deg - prevAngleRef.current;
-                while (delta > 180) delta -= 360;
-                while (delta < -180) delta += 360;
-                targetAngleRef.current += delta;
-                prevAngleRef.current = deg;
-            }
-
-            if (!isAnimating) {
-                isAnimating = true;
-                animId = requestAnimationFrame(update);
-            }
-        };
-
-        window.addEventListener("pointermove", handlePointerMove, { passive: true });
-
-        return () => {
-            window.removeEventListener("pointermove", handlePointerMove);
-            if (animId) cancelAnimationFrame(animId);
-        };
-    }, []);
-
-    return (
-        <div ref={ref} className="flex items-center justify-center will-change-transform origin-center">
-            <AsteriskIcon className={className} />
-        </div>
-    );
-}
 
 const containerVariants: Variants = {
     hidden: {},

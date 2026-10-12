@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Inria_Serif } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import "lenis/dist/lenis.css";
 import SmoothScroll from "./components/SmoothScroll";
@@ -29,7 +30,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${inter.variable} ${inriaSerif.variable} text-black dark:text-white h-full antialiased`}
     >
       <head>
-        <script
+        <Script
+          id="theme-initializer"
+          strategy="beforeInteractive"
           dangerouslySetInnerHTML={{
             __html: `try {
               var t = localStorage.getItem("theme");

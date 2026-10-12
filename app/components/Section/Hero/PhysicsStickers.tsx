@@ -192,43 +192,47 @@ export default function PhysicsStickers({
 
         Composite.add(engine.world, stickerBodies);
 
-        // Mouse & Touch interaction
-        const mouse = Mouse.create(container);
-        // Prevent Matter from capturing wheel/scroll
-        mouse.element.removeEventListener("mousewheel", (mouse as unknown as { mousewheel: EventListener }).mousewheel);
-        mouse.element.removeEventListener("DOMMouseScroll", (mouse as unknown as { mousewheel: EventListener }).mousewheel);
+        // Only attach mouse drag interaction on desktop (mouse/fine pointer)
+        // This ensures mobile touch scrolling is NEVER hijacked or lagged
+        const isFinePointer = typeof window !== "undefined" && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+        let mouseConstraint: Matter.MouseConstraint | null = null;
 
-        const mouseConstraint = MouseConstraint.create(engine, {
-            mouse: mouse,
-            constraint: {
-                stiffness: 0.2,
-                render: { visible: false },
-            },
-        });
+        if (isFinePointer) {
+            const mouse = Mouse.create(container);
+            mouse.element.removeEventListener("mousewheel", (mouse as unknown as { mousewheel: EventListener }).mousewheel);
+            mouse.element.removeEventListener("DOMMouseScroll", (mouse as unknown as { mousewheel: EventListener }).mousewheel);
 
-        Composite.add(engine.world, mouseConstraint);
+            mouseConstraint = MouseConstraint.create(engine, {
+                mouse: mouse,
+                constraint: {
+                    stiffness: 0.2,
+                    render: { visible: false },
+                },
+            });
 
-        // Track drag to prevent accidental click on links
-        Matter.Events.on(mouseConstraint, "startdrag", () => {
-            dragDistanceRef.current = 0;
-            isDraggingRef.current = false;
-        });
+            Composite.add(engine.world, mouseConstraint);
 
-        Matter.Events.on(mouseConstraint, "mousemove", () => {
-            if (mouseConstraint.body) {
-                dragDistanceRef.current += 1;
-                if (dragDistanceRef.current > 5) {
-                    isDraggingRef.current = true;
-                }
-            }
-        });
-
-        Matter.Events.on(mouseConstraint, "enddrag", () => {
-            setTimeout(() => {
-                isDraggingRef.current = false;
+            Matter.Events.on(mouseConstraint, "startdrag", () => {
                 dragDistanceRef.current = 0;
-            }, 50);
-        });
+                isDraggingRef.current = false;
+            });
+
+            Matter.Events.on(mouseConstraint, "mousemove", () => {
+                if (mouseConstraint?.body) {
+                    dragDistanceRef.current += 1;
+                    if (dragDistanceRef.current > 5) {
+                        isDraggingRef.current = true;
+                    }
+                }
+            });
+
+            Matter.Events.on(mouseConstraint, "enddrag", () => {
+                setTimeout(() => {
+                    isDraggingRef.current = false;
+                    dragDistanceRef.current = 0;
+                }, 50);
+            });
+        }
 
         // Cache sticker dimensions once to avoid layout thrashing during animation frames
         const stickerSizes = stickers.map((_, i) => {
@@ -263,22 +267,22 @@ export default function PhysicsStickers({
                 el.style.transform = `translate3d(${x}px, ${y}px, 0) rotate(${body.angle}rad)`;
 
                 if (
-                    Math.abs(body.velocity.x) > 0.04 ||
-                    Math.abs(body.velocity.y) > 0.04 ||
-                    Math.abs(body.angularVelocity) > 0.008
+                    Math.abs(body.velocity.x) > 0.08 ||
+                    Math.abs(body.velocity.y) > 0.08 ||
+                    Math.abs(body.angularVelocity) > 0.02
                 ) {
                     hasMovement = true;
                 }
             }
 
-            if (isDraggingRef.current || mouseConstraint.body) {
+            if (isDraggingRef.current || (mouseConstraint && mouseConstraint.body)) {
                 hasMovement = true;
             }
 
             if (!hasMovement) {
                 idleFrames++;
-                // When stickers settle (after ~1.5s idle), stop the RAF loop to save CPU & GPU
-                if (idleFrames > 90) {
+                // Stop the RAF loop once stickers settle (~0.8s of low movement)
+                if (idleFrames > 50) {
                     animId = 0;
                     return;
                 }
@@ -290,22 +294,32 @@ export default function PhysicsStickers({
         };
 
         const wakeUp = () => {
+            if (!isFinePointer) return; // Do not wake up on mobile touch
             idleFrames = 0;
             if (!animId && isRunning) {
                 animId = requestAnimationFrame(tick);
             }
         };
 
-        Matter.Events.on(mouseConstraint, "startdrag", wakeUp);
-        Matter.Events.on(mouseConstraint, "mousedown", wakeUp);
-        container.addEventListener("pointerdown", wakeUp, { passive: true });
+        if (mouseConstraint) {
+            Matter.Events.on(mouseConstraint, "startdrag", wakeUp);
+            Matter.Events.on(mouseConstraint, "mousedown", wakeUp);
+        }
+
+        // Hard safety timeout: unconditionally sleep the physics engine 2.5s after drop starts
+        const dropTimeout = setTimeout(() => {
+            if (animId) {
+                cancelAnimationFrame(animId);
+                animId = 0;
+            }
+        }, 2500);
 
         animId = requestAnimationFrame(tick);
 
         return () => {
             isRunning = false;
+            clearTimeout(dropTimeout);
             cancelAnimationFrame(animId);
-            container.removeEventListener("pointerdown", wakeUp);
             Composite.clear(engine.world, false);
             Engine.clear(engine);
         };
@@ -365,7 +379,7 @@ export default function PhysicsStickers({
                             rel="noopener noreferrer"
                             onClick={handleClick}
                             className={`${commonClass} ${s.textColor} ${ready ? "opacity-100" : "opacity-0"}`}
-                            style={{ touchAction: "none" }}
+                            style={{ touchAction: "pan-y" }}
                         >
                             {content}
                         </a>
@@ -379,7 +393,7 @@ export default function PhysicsStickers({
                             stickerRefs.current[i] = el;
                         }}
                         className={`${commonClass} ${s.textColor} ${ready ? "opacity-100" : "opacity-0"}`}
-                        style={{ touchAction: "none" }}
+                        style={{ touchAction: "pan-y" }}
                     >
                         {content}
                     </div>

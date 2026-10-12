@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { ArrowUpRightIcon } from "../../Icons";
+import Button from "../../ui/Button";
 
 export default function HeroBottom() {
     return (
@@ -34,22 +35,20 @@ export default function HeroBottom() {
 
                     {/* Desktop Buttons (hidden on mobile, where they appear above GreenCard) */}
                     <div className="hidden md:flex items-center gap-2">
-                        <motion.div
-                            whileTap={{ scale: 0.96 }}
-                            whileHover={{ scale: 1.02 }}
-                            className="group px-4 py-2 flex items-center font-light tracking-widest gap-2 rounded-full justify-center border border-black/80 dark:border-white/80 cursor-pointer text-sm hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors"
+                        <Button
+                            href="/contact"
+                            size="md"
+                            icon={<ArrowUpRightIcon className="w-4 h-4  stroke-[2.5]" />}
                         >
-                            <h1>SAY HELLO</h1>
-                            <ArrowUpRightIcon className="w-5 h-5 stroke-[2.5] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                        </motion.div>
-                        <motion.div
-                            whileTap={{ scale: 0.96 }}
-                            whileHover={{ scale: 1.02 }}
-                            className="group px-4 py-2 flex items-center font-light tracking-widest gap-2 rounded-full justify-center border border-black/80 dark:border-white/80 cursor-pointer text-sm hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors"
+                            SAY HELLO
+                        </Button>
+                        <Button
+                            href="/work"
+                            size="md"
+                            icon={<ArrowUpRightIcon className="w-4 h-4  stroke-[2.5]" />}
                         >
-                            <h1>SELECTED WORK</h1>
-                            <ArrowUpRightIcon className="w-5 h-5 stroke-[2.5] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                        </motion.div>
+                            SELECTED WORK
+                        </Button>
                     </div>
                 </motion.div>
             </section>

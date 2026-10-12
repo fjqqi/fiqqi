@@ -1,6 +1,7 @@
 "use client";
 
 import SecTitle from "../ui/SecTitle";
+import Button from "../ui/Button";
 import ProjectsSlider from "./Projects/ProjectsSlider";
 import ProjectCard from "./Projects/ProjectCard";
 import { PROJECTS } from "./Projects/projectsData";
@@ -103,27 +104,23 @@ export default function ProjectsSection() {
 
                 {PROJECTS.length > 4 && (
                     <div className="flex justify-center pt-2 pb-4">
-                        <button
-                            type="button"
+                        <Button
+                            variant="subtle"
+                            size="md"
                             onClick={() => setShowAllMobile((prev) => !prev)}
-                            className="group inline-flex items-center gap-2.5 px-6 py-3 rounded-full border border-black/15 dark:border-white/15 bg-black/5 dark:bg-white/5 hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black text-black dark:text-white text-sm font-medium tracking-tight backdrop-blur-sm transition-all duration-300 active:scale-95 shadow-sm cursor-pointer"
+                            icon={
+                                <svg
+                                    className={`w-4 h-4 transition-transform duration-300 ${showAllMobile ? "rotate-180" : ""}`}
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                >
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                                </svg>
+                            }
                         >
-                            <span>{showAllMobile ? "View less projects" : "View more projects"}</span>
-                            <svg
-                                className={`w-4 h-4 transition-transform duration-300 ${showAllMobile ? "rotate-180" : ""
-                                    }`}
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth={2}
-                                    d="M19 9l-7 7-7-7"
-                                />
-                            </svg>
-                        </button>
+                            {showAllMobile ? "View less projects" : "View more projects"}
+                        </Button>
                     </div>
                 )}
             </div>

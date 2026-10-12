@@ -107,25 +107,15 @@ function MarqueeRow({
     direction?: "left" | "right";
     speed?: number;
 }) {
-    // Quadruple items to ensure seamless loop on wide screens
-    const base = [...items, ...items];
-    const full = [...base, ...base];
+    // Duplicate items to ensure seamless loop
+    const full = [...items, ...items];
+    const animClass = direction === "left" ? "animate-marquee-left" : "animate-marquee-right";
 
     return (
         <div className="relative w-full overflow-hidden flex select-none py-1">
-            <motion.div
-                className="flex shrink-0 items-center whitespace-nowrap will-change-transform"
-                animate={{
-                    x: direction === "left" ? ["0%", "-50%"] : ["-50%", "0%"],
-                }}
-                transition={{
-                    x: {
-                        repeat: Infinity,
-                        repeatType: "loop",
-                        duration: speed,
-                        ease: "linear",
-                    },
-                }}
+            <div
+                className={`flex shrink-0 items-center whitespace-nowrap ${animClass}`}
+                style={{ animationDuration: `${speed}s` }}
             >
                 {full.map((item, idx) => (
                     <span key={idx} className="inline-flex items-center">
@@ -135,7 +125,7 @@ function MarqueeRow({
                         <AsteriskIcon className="w-3 h-3 sm:w-3.5 sm:h-3.5 md:w-4 md:h-4 text-[#5e8239] dark:text-lime-600 shrink-0 mx-3 sm:mx-4 md:mx-5" />
                     </span>
                 ))}
-            </motion.div>
+            </div>
         </div>
     );
 }

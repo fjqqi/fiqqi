@@ -2,6 +2,7 @@
 
 import { motion, type Variants } from "framer-motion";
 import { ArrowDownRightIcon } from "../Icons";
+import Button from "../ui/Button";
 import GreenCard from "./Hero/GreenCard";
 import HeroBottom from "./Hero/HeroBottom";
 import HeroText from "./Hero/HeroText";
@@ -58,23 +59,25 @@ export default function HeroSection() {
                             animate="visible"
                             className="flex md:hidden items-center justify-center gap-2.5 sm:gap-4 w-full max-w-[340px] mt-6"
                         >
-                            <motion.div
-                                variants={buttonItemVariants}
-                                whileTap={{ scale: 0.96 }}
-                                whileHover={{ scale: 1.02 }}
-                                className="group flex-1 py-2.5 px-3 flex items-center justify-center font-light tracking-wider gap-1.5 rounded-full border border-black/80 dark:border-white/80 text-[12px] sm:text-[13px] bg-white dark:bg-zinc-900 shadow-sm cursor-pointer hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors"
-                            >
-                                <h1>SAY HELLO</h1>
-                                <ArrowDownRightIcon className="w-3.5 h-3.5 shrink-0 transition-transform group-hover:translate-x-0.5 group-hover:translate-y-0.5" />
+                            <motion.div variants={buttonItemVariants} className="flex-1">
+                                <Button
+                                    href="/contact"
+                                    size="sm"
+                                    className="w-full"
+                                    icon={<ArrowDownRightIcon className="w-3.5 h-3.5 shrink-0" />}
+                                >
+                                    SAY HELLO
+                                </Button>
                             </motion.div>
-                            <motion.div
-                                variants={buttonItemVariants}
-                                whileTap={{ scale: 0.96 }}
-                                whileHover={{ scale: 1.02 }}
-                                className="group flex-1 py-2.5 px-3 flex items-center justify-center font-light tracking-wider gap-1.5 rounded-full border border-black/80 dark:border-white/80 text-[12px] sm:text-[13px] bg-white dark:bg-zinc-900 shadow-sm cursor-pointer hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors"
-                            >
-                                <h1>SELECTED WORK</h1>
-                                <ArrowDownRightIcon className="w-3.5 h-3.5 shrink-0 transition-transform group-hover:translate-x-0.5 group-hover:translate-y-0.5" />
+                            <motion.div variants={buttonItemVariants} className="flex-1">
+                                <Button
+                                    href="/work"
+                                    size="sm"
+                                    className="w-full"
+                                    icon={<ArrowDownRightIcon className="w-3.5 h-3.5 shrink-0" />}
+                                >
+                                    SELECTED WORK
+                                </Button>
                             </motion.div>
                         </motion.div>
                         <div className="relative top-0 md:top-8">

@@ -184,7 +184,7 @@ export default function ServicesSection() {
                 {/* Right Column: 6 Images (Mobile top 42vh aperture with continuous scroll, Desktop right 540vh natural scroll) */}
                 <section className="rightsec order-1 md:order-2 w-full md:w-1/2 h-[42vh] md:h-auto overflow-hidden md:overflow-visible flex flex-col bg-primary rounded-bl-[40px] justify-between max-w-7xl mx-auto text-black border-b border-black/15 dark:border-white/15 md:border-b-0 shrink-0">
                     <motion.div
-                        className="w-full flex flex-col p-10 pb-20 gap-10"
+                        className="w-full flex flex-col p-10 pb-20 gap-10 transform-gpu will-change-transform"
                         style={{ y: isMobile ? mobileY : 0 }}
                     >
                         <div className="h-[42vh] md:h-[90vh] flex-1 shrink-0 relative w-full">

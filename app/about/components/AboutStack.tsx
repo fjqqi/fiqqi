@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import SecTitle from "@/app/components/ui/SecTitle";
+import Button from "@/app/components/ui/Button";
 
 interface StackCategory {
     id: string;
@@ -157,17 +158,15 @@ export default function AboutStack() {
                     {CATEGORIES.map((cat) => {
                         const isActive = cat.id === activeTab;
                         return (
-                            <button
+                            <Button
                                 key={cat.id}
+                                variant="toggle"
+                                size="sm"
+                                isActive={isActive}
                                 onClick={() => setActiveTab(cat.id)}
-                                type="button"
-                                className={`px-5 py-2.5 rounded-full text-xs sm:text-sm font-medium tracking-wider uppercase transition-all cursor-pointer ${isActive
-                                    ? "bg-primary text-white shadow-md"
-                                    : "bg-white dark:bg-zinc-900 text-black/70 dark:text-white/70 border border-black/10 dark:border-white/10 hover:border-black/30 dark:hover:border-white/30"
-                                    }`}
                             >
                                 {cat.label}
-                            </button>
+                            </Button>
                         );
                     })}
                 </div>
