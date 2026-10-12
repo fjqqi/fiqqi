@@ -16,6 +16,14 @@ export default function InteractiveAsterisk({
     const prevAngleRef = useRef<number | null>(null);
 
     useEffect(() => {
+        // Completely disable on mobile and touch devices: zero event listeners, zero RAF loops
+        const isDesktopWithMouse =
+            typeof window !== "undefined" &&
+            window.matchMedia("(hover: hover) and (pointer: fine)").matches &&
+            !("ontouchstart" in window);
+
+        if (!isDesktopWithMouse) return;
+
         let animId: number = 0;
         let isAnimating = false;
 
@@ -79,7 +87,7 @@ export default function InteractiveAsterisk({
     }, []);
 
     return (
-        <div ref={ref} className="flex items-center justify-center will-change-transform origin-center">
+        <div ref={ref} className="flex items-center justify-center md:will-change-transform origin-center">
             <AsteriskIcon className={className} />
         </div>
     );
