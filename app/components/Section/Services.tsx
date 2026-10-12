@@ -10,8 +10,9 @@ import Pic4 from "@/public/services/4.webp";
 import Pic5 from "@/public/services/5.webp";
 import Pic6 from "@/public/services/6.webp";
 import SecTitle from "../ui/SecTitle";
+import { useLanguage } from "@/app/context/LanguageContext";
 
-const SERVICES = [
+const SERVICES_EN = [
     {
         title: "Design",
         description:
@@ -28,6 +29,27 @@ const SERVICES = [
         title: "Grow",
         description:
             "Continuous performance audits, Core Web Vitals optimization, and conversion-focused iteration to scale traffic into lasting user engagement.",
+        tags: ["SEO & PERFORMANCE", "ANALYTICS", "OPTIMIZATION"],
+    },
+];
+
+const SERVICES_ID = [
+    {
+        title: "Design",
+        description:
+            "Prototipe dan sistem desain di Figma: grid, tipografi, dan status komponen. Desain yang siap diimplementasikan langsung ke kode.",
+        tags: ["UI / UX", "DESIGN SYSTEM", "PROTOTYPING"],
+    },
+    {
+        title: "Build",
+        description:
+            "Aplikasi web siap produksi yang dibangun dengan Next.js, TypeScript, dan CSS bersih. Cepat, tangguh, dan responsif di semua perangkat.",
+        tags: ["NEXT.JS", "TYPESCRIPT", "TAILWIND CSS"],
+    },
+    {
+        title: "Grow",
+        description:
+            "Audit performa berkala, optimasi Core Web Vitals, dan iterasi fokus konversi untuk mengembangkan interaksi pengguna yang berkelanjutan.",
         tags: ["SEO & PERFORMANCE", "ANALYTICS", "OPTIMIZATION"],
     },
 ];
@@ -55,6 +77,7 @@ export default function ServicesSection() {
     //    - Progress 0.66 - 1.00: Grow   (Images 5 & 6)
     // =========================================================================
 
+    const { language } = useLanguage();
     const containerRef = useRef<HTMLDivElement>(null);
     const [activeIndex, setActiveIndex] = useState(0);
     const activeIndexRef = useRef(0);
@@ -102,7 +125,8 @@ export default function ServicesSection() {
         window.scrollTo({ top: targetScroll, behavior: "smooth" });
     };
 
-    const currentService = SERVICES[activeIndex];
+    const services = language === "id" ? SERVICES_ID : SERVICES_EN;
+    const currentService = services[activeIndex];
 
     return (
         <div

@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import SecTitle from "../ui/SecTitle";
 import { AsteriskIcon } from "@/app/components/Icons";
+import { useLanguage } from "@/app/context/LanguageContext";
 
 interface StatItem {
     id: string;
@@ -11,7 +12,7 @@ interface StatItem {
     label: string;
 }
 
-const STATS: StatItem[] = [
+const STATS_EN: StatItem[] = [
     {
         id: "experience",
         value: 2,
@@ -31,6 +32,29 @@ const STATS: StatItem[] = [
         id: "Design",
         value: 99,
         label: "Design Created",
+    },
+];
+
+const STATS_ID: StatItem[] = [
+    {
+        id: "experience",
+        value: 2,
+        label: "tahun pengalaman",
+    },
+    {
+        id: "Projects",
+        value: 27,
+        label: "proyek selesai",
+    },
+    {
+        id: "clients",
+        value: 5,
+        label: "% payload lebih hemat setelah perbaikan memory leak",
+    },
+    {
+        id: "Design",
+        value: 99,
+        label: "desain dibuat",
     },
 ];
 
@@ -131,6 +155,9 @@ function MarqueeRow({
 }
 
 export default function NumbersSection() {
+    const { language } = useLanguage();
+    const stats = language === "id" ? STATS_ID : STATS_EN;
+
     return (
         <div className="w-full bg-gray-200/70 dark:bg-zinc-900 transition-colors">
             <section className="w-full max-w-7xl mx-auto px-6 sm:px-12 md:px-16 pt-20 pb-16 text-black dark:text-white">
@@ -143,7 +170,7 @@ export default function NumbersSection() {
                 <div className="w-full max-w-7xl mx-auto">
                     {/* Numbers Grid */}
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-x-6 sm:gap-x-10 md:gap-x-12 gap-y-10 sm:gap-y-12">
-                        {STATS.map((stat, index) => (
+                        {stats.map((stat, index) => (
                             <motion.div
                                 key={stat.id}
                                 initial={{ opacity: 0, y: 20 }}

@@ -3,8 +3,9 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import SecTitle from "@/app/components/ui/SecTitle";
+import { useLanguage } from "@/app/context/LanguageContext";
 
-const EXPERIENCES = [
+const EXPERIENCES_EN = [
     {
         id: "makassarwebsite",
         rolePrefix: "Frontend",
@@ -25,8 +26,31 @@ const EXPERIENCES = [
     },
 ];
 
+const EXPERIENCES_ID = [
+    {
+        id: "makassarwebsite",
+        rolePrefix: "Frontend",
+        roleSuffix: "Developer",
+        company: "MakassarWebsite.com",
+        period: "2024 - Sekarang",
+        description:
+            "Bertanggung jawab atas arsitektur front-end, membangun aplikasi web responsif dengan Next.js, dan merancang interaksi UI yang taktil.",
+    },
+    {
+        id: "sankreatif",
+        rolePrefix: "Graphic",
+        roleSuffix: "Designer",
+        company: "San Kreatif Studio",
+        period: "2025 - Sekarang",
+        description:
+            "Bertanggung jawab atas sistem identitas brand, panduan tipografi, dan aset kreatif digital marketing.",
+    },
+];
+
 export default function ExperienceSection() {
+    const { language } = useLanguage();
     const [hoveredId, setHoveredId] = useState<string | null>(null);
+    const experiences = language === "id" ? EXPERIENCES_ID : EXPERIENCES_EN;
 
     return (
         <section className="w-full pt-4 pb-12 sm:pb-16 md:pb-24">
@@ -35,7 +59,7 @@ export default function ExperienceSection() {
 
             {/* Experience Rows */}
             <div className="mt-6 sm:mt-8 flex flex-col">
-                {EXPERIENCES.map((exp, idx) => (
+                {experiences.map((exp, idx) => (
                     <motion.div
                         key={exp.id}
                         initial={{ opacity: 0, y: 24 }}
@@ -99,7 +123,7 @@ export default function ExperienceSection() {
                         </div>
 
                         {/* Divider Line */}
-                        {idx < EXPERIENCES.length - 1 && (
+                        {idx < experiences.length - 1 && (
                             <div className="w-full h-px bg-black/15 dark:bg-white/15 my-4" />
                         )}
                     </motion.div>

@@ -4,6 +4,8 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import SecTitle from "@/app/components/ui/SecTitle";
 
+import { useLanguage } from "@/app/context/LanguageContext";
+
 interface EducationItem {
     id: string;
     rolePrefix: string;
@@ -13,7 +15,7 @@ interface EducationItem {
     description: string;
 }
 
-const EDUCATION_ITEMS: EducationItem[] = [
+const EDUCATION_ITEMS_EN: EducationItem[] = [
     {
         id: "informatics",
         rolePrefix: "Software",
@@ -25,8 +27,22 @@ const EDUCATION_ITEMS: EducationItem[] = [
     },
 ];
 
+const EDUCATION_ITEMS_ID: EducationItem[] = [
+    {
+        id: "informatics",
+        rolePrefix: "Software",
+        roleSuffix: "Engineering",
+        institution: "Universitas Dipa Makassar",
+        period: "2020 - 2024",
+        description:
+            "Fokus pada Rekayasa Perangkat Lunak, Sistem Web, Struktur Data, dan Interaksi Manusia-Komputer.",
+    },
+];
+
 export default function EducationSection() {
+    const { language } = useLanguage();
     const [hoveredId, setHoveredId] = useState<string | null>(null);
+    const educationItems = language === "id" ? EDUCATION_ITEMS_ID : EDUCATION_ITEMS_EN;
 
     return (
         <section className="w-full pt-4 pb-12 sm:pb-16 md:pb-24">
@@ -35,7 +51,7 @@ export default function EducationSection() {
 
             {/* Education Rows */}
             <div className="mt-6 sm:mt-8 flex flex-col">
-                {EDUCATION_ITEMS.map((edu, idx) => (
+                {educationItems.map((edu, idx) => (
                     <motion.div
                         key={edu.id}
                         initial={{ opacity: 0, y: 24 }}
@@ -99,7 +115,7 @@ export default function EducationSection() {
                         </div>
 
                         {/* Divider Line */}
-                        {idx < EDUCATION_ITEMS.length - 1 && (
+                        {idx < educationItems.length - 1 && (
                             <div className="w-full h-px bg-black/15 dark:bg-white/15 my-4" />
                         )}
                     </motion.div>

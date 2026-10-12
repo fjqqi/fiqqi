@@ -4,6 +4,7 @@ import { useState } from "react"
 import Image from "next/image"
 import Guwe from "@/public/guwe.webp"
 import InteractiveAsterisk from "@/app/components/ui/InteractiveAsterisk"
+import { useLanguage } from "@/app/context/LanguageContext"
 
 import { motion, type Variants } from "framer-motion"
 
@@ -49,6 +50,7 @@ const subtextVariants: Variants = {
 
 export default function HeroText() {
     const [h1Done, setH1Done] = useState(false);
+    const { language } = useLanguage();
 
     return (
         <div>
@@ -103,7 +105,9 @@ export default function HeroText() {
                         animate={h1Done ? "visible" : "hidden"}
                         className="text-[15px] sm:text-base leading-snug text-black/80 dark:text-white/80 max-w-70"
                     >
-                        Hi, I'm Fiqqi. i love making things for screens. sometimes with pixels, sometimes with code
+                        {language === "id"
+                            ? "Saya bisa bantu bangun web anda dan membuat hal menarik untuk layar"
+                            : "Hi, I'm Fiqqi. i love making things for screens. sometimes with pixels, sometimes with code"}
                     </motion.h4>
                 </div>
             </motion.div>
@@ -153,8 +157,17 @@ export default function HeroText() {
                         animate={h1Done ? "visible" : "hidden"}
                         className="text-lg text-black/80 dark:text-white/80 tracking-tight"
                     >
-                        Hi, I'm <span className="text-primary dark:text-lime-600">Fiqqi</span> and i love making things for screens.
-                        sometimes with pixels, sometimes with code
+                        {language === "id" ? (
+                            <>
+                                Saya bisa bantu bangun <span className="text-primary dark:text-lime-600">web anda</span> dan membuat hal menarik untuk layar.
+                                terkadang lewat piksel, terkadang lewat kode
+                            </>
+                        ) : (
+                            <>
+                                Hi, I'm <span className="text-primary dark:text-lime-600">Fiqqi</span> and i love making things for screens.
+                                sometimes with pixels, sometimes with code
+                            </>
+                        )}
                     </motion.h4>
                 </div>
             </motion.div>

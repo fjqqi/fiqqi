@@ -6,11 +6,18 @@ import { motion, type Variants } from "framer-motion";
 import PageHeroHeader, { type MetaStatItem } from "@/app/components/ui/PageHeroHeader";
 import Button from "@/app/components/ui/Button";
 import { ArrowDownRightIcon } from "@/app/components/Icons";
+import { useLanguage } from "@/app/context/LanguageContext";
 
-const ABOUT_STATS: MetaStatItem[] = [
+const ABOUT_STATS_EN: MetaStatItem[] = [
     { label: "BASED IN", value: "Makassar, INA" },
     { label: "EXPERIENCE", value: "Since 2022" },
-    { label: "LANGUANGE", value: "INDO - ENG C1" },
+    { label: "LANGUAGE", value: "INDO - ENG C1" },
+];
+
+const ABOUT_STATS_ID: MetaStatItem[] = [
+    { label: "LOKASI", value: "Makassar, INA" },
+    { label: "PENGALAMAN", value: "Sejak 2022" },
+    { label: "BAHASA", value: "INDO - ENG C1" },
 ];
 
 const containerVariants: Variants = {
@@ -53,6 +60,13 @@ const LOREM_TEXT =
     "Lorem ipsum dolor sit amet consectetur adipiscing elit. Amet consectetur adipiscing elit quisque faucibus ex sapien. Quisque faucibus ex sapien vitae pellentesque sem placerat. Vitae pellentesque sem placerat in id cursus mi.";
 
 export default function GetToKnowMe() {
+    const { language } = useLanguage();
+    const stats = language === "id" ? ABOUT_STATS_ID : ABOUT_STATS_EN;
+    const description =
+        language === "id"
+            ? "Halo, saya Fiqqi. Saya seorang Frontend Web Developer"
+            : "Hi. Im Fiqqi Im a Frontend Web Developer";
+
     return (
         <motion.section
             variants={containerVariants}
@@ -64,8 +78,8 @@ export default function GetToKnowMe() {
             <PageHeroHeader
                 titlePrefix="About"
                 titleHighlight="Me"
-                description="Hi. Im Fiqqi Im a Frontend Web Developer"
-                stats={ABOUT_STATS}
+                description={description}
+                stats={stats}
             />
 
             {/* Photo + 3 Paragraphs Row */}

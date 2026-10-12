@@ -4,6 +4,7 @@ import { useEffect, useState, useSyncExternalStore } from "react";
 import { MoonIcon, SunIcon } from "./Icons";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
+import { useLanguage } from "@/app/context/LanguageContext";
 
 function subscribe(callback: () => void) {
     const observer = new MutationObserver(callback);
@@ -35,6 +36,7 @@ const NAV_LINKS = [
 export default function Navbar() {
     const theme = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
     const [isOpen, setIsOpen] = useState(false);
+    const { language, toggleLanguage } = useLanguage();
 
     const toggleTheme = () => {
         const nextTheme = theme === "dark" ? "light" : "dark";
@@ -86,7 +88,19 @@ export default function Navbar() {
                         ))}
                     </ul>
 
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-2 sm:gap-3">
+                        {/* Language Toggle (ID / ENG) */}
+                        <button
+                            onClick={toggleLanguage}
+                            type="button"
+                            aria-label={`Switch language to ${language === "en" ? "Bahasa Indonesia" : "English"}`}
+                            className="h-10 px-2.5 sm:px-3 rounded-full border border-black/15 dark:border-white/20 bg-white/70 dark:bg-zinc-900/70 flex items-center justify-center gap-1 text-[11px] font-mono tracking-wider text-black dark:text-white hover:scale-105 active:scale-95 transition-all shadow-sm cursor-pointer select-none"
+                        >
+                            <span className={language === "id" ? "font-bold text-primary dark:text-lime-400" : "opacity-40"}>ID</span>
+                            <span className="opacity-25">/</span>
+                            <span className={language === "en" ? "font-bold text-primary dark:text-lime-400" : "opacity-40"}>ENG</span>
+                        </button>
+
                         {/* Light / Dark Mode Toggle */}
                         <button
                             onClick={toggleTheme}

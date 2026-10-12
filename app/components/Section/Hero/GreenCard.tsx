@@ -30,8 +30,8 @@ export default function GreenCard() {
                 }}
             /> */}
 
-            {/* Interactive Physics Stickers with 4px Gap */}
-            <PhysicsStickers />
+            {/* Interactive Physics Stickers with 8px Gap and generous spacing above SpotifyCard */}
+            <PhysicsStickers floorOffset={116} padding={20} />
 
             {/* Bottom Row: Spotify Card + Diagonal Arrow Button */}
             <div className="relative z-10 flex items-end gap-2 w-full">

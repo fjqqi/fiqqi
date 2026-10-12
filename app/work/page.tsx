@@ -9,10 +9,16 @@ import PageHeroHeader, { type MetaStatItem } from "@/app/components/ui/PageHeroH
 import { PROJECTS } from "@/app/components/Section/Projects/projectsData";
 import WorkProjectCard from "./components/WorkProjectCard";
 import Button from "@/app/components/ui/Button";
+import { useLanguage } from "@/app/context/LanguageContext";
 
-const WORK_STATS: MetaStatItem[] = [
+const WORK_STATS_EN: MetaStatItem[] = [
     { label: "PROJECTS", value: "9" },
     { label: "YEARS", value: "2024 -2026" },
+];
+
+const WORK_STATS_ID: MetaStatItem[] = [
+    { label: "PROYEK", value: "9" },
+    { label: "TAHUN", value: "2024 -2026" },
 ];
 
 const CATEGORIES = ["ALL", "WEBSITE", "DESIGN", "MOBILE"] as const;
@@ -44,6 +50,7 @@ const sectionItemVariants: Variants = {
 };
 
 export default function WorkPage() {
+    const { language } = useLanguage();
     const [activeCategory, setActiveCategory] = useState<string>("ALL");
 
     const filteredProjects =
@@ -55,13 +62,19 @@ export default function WorkPage() {
                     p.category?.toUpperCase() === activeCategory
             );
 
+    const stats = language === "id" ? WORK_STATS_ID : WORK_STATS_EN;
+    const description =
+        language === "id"
+            ? "Beberapa proyek dan desain pilihan saya yang dibangun untuk berbagai klien dan agensi."
+            : "some of my highlighted project and design for some compnay and my work for ageny lorem ipsum";
+
     return (
         <>
             <Navbar />
 
             <main
                 id="main-content"
-                className="w-full min-h-screen bg-white dark:bg-black text-black dark:text-white transition-colors duration-200 overflow-x-hidden"
+                className="w-full min-h-screen bg-white dark:bg-black text-black dark:text-white transition-colors duration-200 overflow-x-clip"
             >
                 <motion.div
                     variants={pageVariants}
@@ -86,8 +99,8 @@ export default function WorkPage() {
                         <PageHeroHeader
                             titlePrefix="Selected"
                             titleHighlight="Work"
-                            description="some of my highlighted project and design for some compnay and my work for ageny lorem ipsum"
-                            stats={WORK_STATS}
+                            description={description}
+                            stats={stats}
                         />
                     </motion.div>
 

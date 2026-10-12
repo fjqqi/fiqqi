@@ -3,9 +3,13 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform, type MotionValue } from "framer-motion";
 import SecTitle from "../ui/SecTitle";
+import { useLanguage } from "@/app/context/LanguageContext";
 
-const PARAGRAPH =
+const PARAGRAPH_EN =
     "I help brands stand out online: interfaces where considered design, restrained motion and honest performance all pull in one direction — turning an idea into a product people actually use.";
+
+const PARAGRAPH_ID =
+    "Saya membantu brand tampil menonjol secara online: antarmuka dengan desain matang, animasi elegan, dan performa optimal — mengubah ide menjadi produk yang benar-benar digunakan orang.";
 
 interface WordProps {
     children: string;
@@ -27,13 +31,15 @@ function Word({ children, progress, range }: WordProps) {
 }
 
 export default function ApproachSection() {
+    const { language } = useLanguage();
     const containerRef = useRef<HTMLDivElement>(null);
     const { scrollYProgress } = useScroll({
         target: containerRef,
         offset: ["start 0.85", "start 0.35"],
     });
 
-    const words = PARAGRAPH.split(" ");
+    const paragraph = language === "id" ? PARAGRAPH_ID : PARAGRAPH_EN;
+    const words = paragraph.split(" ");
     const step = 1 / words.length;
 
     return (

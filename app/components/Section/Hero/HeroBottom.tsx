@@ -3,8 +3,11 @@
 import { motion } from "framer-motion";
 import { ArrowUpRightIcon } from "../../Icons";
 import Button from "../../ui/Button";
+import { useLanguage } from "@/app/context/LanguageContext";
 
 export default function HeroBottom() {
+    const { language } = useLanguage();
+
     return (
         <>
             <section className="bg-white dark:bg-black">
@@ -30,7 +33,7 @@ export default function HeroBottom() {
                     className="bottomHero text-black dark:text-white max-w-7xl mx-auto w-full py-6 md:py-8 px-6 sm:px-12 md:px-16 flex flex-col sm:flex-row justify-between items-center gap-4"
                 >
                     <h1 className="text-sm tracking-tighter text-center sm:text-left">
-                        Based in Makassar, Indonesia
+                        {language === "id" ? "Berbasis di Makassar, Indonesia" : "Based in Makassar, Indonesia"}
                     </h1>
 
                     {/* Desktop Buttons (hidden on mobile, where they appear above GreenCard) */}

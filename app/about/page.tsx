@@ -43,13 +43,13 @@ export default function AboutPage() {
 
             <main
                 id="main-content"
-                className="w-full min-h-screen bg-white dark:bg-black text-black dark:text-white transition-colors duration-200 overflow-x-hidden"
+                className="w-full min-h-screen bg-white dark:bg-black text-black dark:text-white transition-colors duration-200 overflow-x-clip"
             >
                 <motion.div
                     variants={pageVariants}
                     initial="hidden"
                     animate="visible"
-                    className="w-full max-w-7xl mx-auto px-5 sm:px-8 md:px-16 pt-24 sm:pt-28 md:pt-40 pb-8 md:pb-12 flex flex-col"
+                    className="w-full max-w-7xl mx-auto px-5 sm:px-8 md:px-16 pt-24 sm:pt-28 md:pt-40 pb-16 md:pb-24 flex flex-col"
                 >
                     {/* Section 01: Header */}
                     <motion.div variants={sectionItemVariants}>
@@ -75,17 +75,11 @@ export default function AboutPage() {
                     <motion.div variants={sectionItemVariants}>
                         <EducationSection />
                     </motion.div>
-                </motion.div>
 
-                {/* Section 04: Contact */}
-                <motion.div
-                    initial={{ opacity: 0, y: 40 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-80px" }}
-                    transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-                    className="w-full pb-8 md:pb-16"
-                >
-                    <ContactSection />
+                    {/* Section 04: Contact */}
+                    <motion.div variants={sectionItemVariants} className="w-full pt-4 sm:pt-8 md:pt-12">
+                        <ContactSection className="py-4 sm:py-6 md:py-10 px-0" />
+                    </motion.div>
                 </motion.div>
             </main>
 

@@ -42,18 +42,18 @@ export default function SmoothScroll({
 }: {
     children: ReactNode;
 }) {
-    const [isTouchDevice, setIsTouchDevice] = useState(false);
+    const [isDesktop, setIsDesktop] = useState(false);
 
     useEffect(() => {
-        const isTouch =
-            "ontouchstart" in window ||
-            navigator.maxTouchPoints > 0 ||
-            window.matchMedia("(pointer: coarse)").matches;
-        setIsTouchDevice(isTouch);
+        // Only enable Lenis on desktop with mouse (fine pointer and no touch)
+        const hasFinePointer =
+            window.matchMedia("(hover: hover) and (pointer: fine)").matches &&
+            !("ontouchstart" in window);
+        setIsDesktop(hasFinePointer);
     }, []);
 
-    // On touch/mobile devices, bypass Lenis completely for native 120Hz momentum scrolling without frame drops
-    if (isTouchDevice) {
+    // On mobile and touch devices, never mount Lenis. Native OS momentum scroll is 100% unblocked and buttery smooth.
+    if (!isDesktop) {
         return <>{children}</>;
     }
 

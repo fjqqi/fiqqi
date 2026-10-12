@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import PhysicsStickers, { StickerData } from "@/app/components/Section/Hero/PhysicsStickers";
 import Button from "@/app/components/ui/Button";
 import { FacebookIcon, InstagramIcon, TelegramIcon, WhatsappIcon } from "@/app/components/Icons";
+import { useLanguage } from "@/app/context/LanguageContext";
 
 const SOCIAL_STICKERS: StickerData[] = [
     {
@@ -37,7 +38,8 @@ const SOCIAL_STICKERS: StickerData[] = [
     },
 ];
 
-export default function ContactSection() {
+export default function ContactSection({ className = "" }: { className?: string } = {}) {
+    const { language } = useLanguage();
     const [copied, setCopied] = useState(false);
     const [isDesktop, setIsDesktop] = useState(false);
 
@@ -55,12 +57,12 @@ export default function ContactSection() {
     };
 
     return (
-        <section id="contact" className="w-full max-w-7xl mx-auto px-6 sm:px-12 md:px-16 py-20 md:py-32">
+        <section id="contact" className={`w-full max-w-7xl mx-auto px-6 sm:px-12 md:px-16 ${className || "py-20 md:py-32"}`}>
             <motion.div
-                initial={{ opacity: 0, y: 40 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+                viewport={{ once: true, margin: "0px" }}
+                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                 className="relative w-full rounded-[32px] sm:rounded-[44px] md:rounded-[52px] bg-[#2d4e16] dark:bg-[#254212] md:backdrop-blur-2xl border border-white/25 dark:border-white/15 shadow-[inset_0_1px_2px_rgba(255,255,255,0.35),0_24px_60px_rgba(45,78,22,0.35)] flex flex-col md:flex-row items-start md:items-center justify-between px-7 sm:px-14 md:px-16 lg:px-20 py-10 md:py-14 md:min-h-[480px] lg:h-[500px] overflow-hidden select-none"
             >
                 {/* Subtle Glass Gradient Overlay */}
@@ -73,7 +75,9 @@ export default function ContactSection() {
                     </h2>
 
                     <p className="mt-3 sm:mt-4 text-xs sm:text-sm md:text-base text-white/85 font-light leading-relaxed max-w-md">
-                        Open to freelance, product teams and interesting experiments with motion
+                        {language === "id"
+                            ? "Terbuka untuk freelance, tim produk, dan kolaborasi kreatif motion."
+                            : "Open to freelance, product teams and interesting experiments with motion"}
                     </p>
 
                     <Button

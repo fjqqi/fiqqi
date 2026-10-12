@@ -62,6 +62,7 @@ export const DEFAULT_HERO_STICKERS: StickerData[] = [
 export interface PhysicsStickersProps {
     stickers?: StickerData[];
     floorOffset?: number;
+    padding?: number;
     triggerOnScroll?: boolean;
     className?: string;
     size?: StickerSize;
@@ -69,7 +70,8 @@ export interface PhysicsStickersProps {
 
 export default function PhysicsStickers({
     stickers = DEFAULT_HERO_STICKERS,
-    floorOffset = 110,
+    floorOffset = 148,
+    padding = 20,
     triggerOnScroll = false,
     className = "",
     size = "default",
@@ -89,9 +91,9 @@ export default function PhysicsStickers({
 
         const { Engine, Bodies, Composite, Mouse, MouseConstraint } = Matter;
 
-        // Snappy gravity for crisp, fluid falling
+        // Snappy, energetic gravity with natural physical momentum
         const engine = Engine.create({
-            gravity: { x: 0, y: 1.5, scale: 0.001 },
+            gravity: { x: 0, y: 1.05, scale: 0.001 },
         });
 
         // If container is hidden (e.g. display:none or 0 dimensions), bail out immediately
@@ -102,23 +104,24 @@ export default function PhysicsStickers({
         const H = container.offsetHeight || rect.height || 360;
         const floorY = H - floorOffset;
 
-        // Boundaries: floor at bottom; perfectly slick walls (friction: 0) to prevent wedging
-        const floor = Bodies.rectangle(W / 2, floorY + 15, W * 2.5, 30, {
+        // Boundaries: walls inset by padding matching box padding; floor at bottom; perfectly slick walls
+        const wallThickness = 60;
+        const floor = Bodies.rectangle(W / 2, floorY + wallThickness / 2, W * 3, wallThickness, {
             isStatic: true,
-            restitution: 0.12,
+            restitution: 0.1,
             friction: 0.3,
         });
-        const leftWall = Bodies.rectangle(-10, -500, 20, 3000, {
+        const leftWall = Bodies.rectangle(padding - wallThickness / 2, H / 2, wallThickness, H * 4, {
             isStatic: true,
             restitution: 0.1,
             friction: 0.0,
         });
-        const rightWall = Bodies.rectangle(W + 10, -500, 20, 3000, {
+        const rightWall = Bodies.rectangle((W - padding) + wallThickness / 2, H / 2, wallThickness, H * 4, {
             isStatic: true,
             restitution: 0.1,
             friction: 0.0,
         });
-        const ceiling = Bodies.rectangle(W / 2, -1200, W * 3, 40, {
+        const ceiling = Bodies.rectangle(W / 2, -1500, W * 3, 40, {
             isStatic: true,
         });
 
@@ -146,14 +149,14 @@ export default function PhysicsStickers({
             const w = el ? el.offsetWidth : fallbackW;
             const h = el ? el.offsetHeight : fallbackH;
 
-            // 4px physics gap: expand collision hull slightly
-            const bodyW = w + 4;
-            const bodyH = h + 4;
+            // 8px physics gap: expand collision hull by 8px (4px on each side) so visible elements have an 8px gap/margin
+            const bodyW = w + 8;
+            const bodyH = h + 8;
             const radius = Math.min(bodyW, bodyH) / 2;
 
-            // Ensure sticker spawns safely between walls without clipping
-            const minX = bodyW / 2 + 6;
-            const maxX = Math.max(minX, W - bodyW / 2 - 6);
+            // Ensure sticker spawns safely within the padded walls without clipping
+            const minX = padding + bodyW / 2 + 2;
+            const maxX = Math.max(minX, W - padding - bodyW / 2 - 2);
 
             // open-work drops centrally to cap the pile cleanly; others are randomly distributed
             const isTop = item.id === "open-work";
@@ -161,31 +164,31 @@ export default function PhysicsStickers({
                 ? Math.max(minX, Math.min(maxX, W * 0.5 + (Math.random() - 0.5) * 20))
                 : minX + Math.random() * (maxX - minX);
 
-            // Compact staggered drop height: starts just above the card for instant, fluid cascade
+            // Snappy staggered drop height: brisk sequential cascade
             const dropRank = dropOrder.indexOf(index);
             const startY = -40 - dropRank * 48;
 
             // Subtle angle for open-work so it rests balanced; dynamic angle for others
             const randomAngle = isTop
-                ? (Math.random() - 0.5) * 0.18
-                : (Math.random() - 0.5) * 0.55;
+                ? (Math.random() - 0.5) * 0.14
+                : (Math.random() - 0.5) * 0.45;
 
             const body = Bodies.rectangle(startX, startY, bodyW, bodyH, {
-                chamfer: { radius },
-                restitution: isTop ? 0.12 : 0.18,
-                friction: 0.12,          // Slick dynamic friction: slides smoothly over other stickers
-                frictionAir: 0.012,       // Low air resistance for snappy, natural drop
-                frictionStatic: 0.05,     // Extremely low static friction: prevents wedging or sticking
+                chamfer: { radius, quality: 8 },
+                restitution: isTop ? 0.1 : 0.14,
+                friction: 0.12,          // Slick dynamic friction
+                frictionAir: 0.016,       // Crisp air resistance for responsive falling
+                frictionStatic: 0.04,     // Very low static friction: prevents wedging or sticking
                 density: 0.002,
                 angle: randomAngle,
             });
 
-            // Gentle initial tumbling spin and downward velocity
+            // Gentle tumbling spin and brisk initial downward momentum
             const randomSpin = isTop
                 ? (Math.random() - 0.5) * 0.02
-                : (Math.random() - 0.5) * 0.04;
+                : (Math.random() - 0.5) * 0.035;
             Matter.Body.setAngularVelocity(body, randomSpin);
-            Matter.Body.setVelocity(body, { x: (Math.random() - 0.5) * 0.8, y: 1.2 });
+            Matter.Body.setVelocity(body, { x: (Math.random() - 0.5) * 0.4, y: 0.6 });
 
             stickerBodies.push(body);
         });
@@ -308,13 +311,13 @@ export default function PhysicsStickers({
             Matter.Events.on(mouseConstraint, "mousedown", wakeUp);
         }
 
-        // Generous safety timeout: only sleeps after 8 seconds if somehow not already settled
+        // Generous safety timeout: sleeps after 12 seconds if somehow not already settled
         const safetyTimeout = setTimeout(() => {
             if (animId) {
                 cancelAnimationFrame(animId);
                 animId = 0;
             }
-        }, 8000);
+        }, 12000);
 
         animId = requestAnimationFrame(tick);
 
