@@ -9,6 +9,7 @@ import ContactSection from "../components/Section/Contact";
 import EducationSection from "./components/EducationSection";
 import Footer from "../components/Footer";
 
+
 const pageVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
@@ -48,7 +49,7 @@ export default function AboutPage() {
                     variants={pageVariants}
                     initial="hidden"
                     animate="visible"
-                    className="w-full max-w-7xl mx-auto px-5 sm:px-8 md:px-16 pt-24 sm:pt-28 md:pt-36 pb-8 md:pb-12 flex flex-col"
+                    className="w-full max-w-7xl mx-auto px-5 sm:px-8 md:px-16 pt-24 sm:pt-28 md:pt-40 pb-8 md:pb-12 flex flex-col"
                 >
                     {/* Section 01: Header */}
                     <motion.div variants={sectionItemVariants}>

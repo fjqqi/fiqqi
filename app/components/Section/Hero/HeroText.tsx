@@ -152,7 +152,7 @@ export default function HeroText() {
                             </div>
                             <span>through</span>
                             <div className="border border-black dark:border-white rounded-full w-11 h-11 flex items-center justify-center shrink-0">
-                                <InteractiveAsterisk className="w-6 h-6 text-primary dark:text-lime-500" />
+                                <InteractiveAsterisk className="w-6 h-6 text-primary dark:text-lime-600" />
                             </div>
                         </motion.div>
                     </div>
@@ -212,9 +212,9 @@ export default function HeroText() {
                         >
                             <span>through</span>
                             <div className="border border-black dark:border-white rounded-full w-16 h-16 flex items-center justify-center shrink-0">
-                                <InteractiveAsterisk className="w-9 h-9 text-primary dark:text-lime-500" />
+                                <InteractiveAsterisk className="w-9 h-9 text-primary dark:text-lime-600" />
                             </div>
-                            <span className="italic font-serif text-[#3f6212] dark:text-lime-500">
+                            <span className="italic font-serif text-[#3f6212] dark:text-lime-600">
                                 design
                             </span>
                             <span>& code.</span>
@@ -230,7 +230,7 @@ export default function HeroText() {
                         animate={h1Done ? "visible" : "hidden"}
                         className="text-lg text-black/80 dark:text-white/80 tracking-tight"
                     >
-                        Hi, I'm <span className="text-primary dark:text-lime-500">Fiqqi</span> and i love making things for screens.
+                        Hi, I'm <span className="text-primary dark:text-lime-600">Fiqqi</span> and i love making things for screens.
                         sometimes with pixels, sometimes with code
                     </motion.h4>
                 </div>

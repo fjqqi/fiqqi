@@ -132,7 +132,7 @@ function MarqueeRow({
                         <span className="font-black text-base sm:text-lg md:text-xl lg:text-2xl tracking-wider uppercase text-neutral-700 dark:text-neutral-300">
                             {item}
                         </span>
-                        <AsteriskIcon className="w-3 h-3 sm:w-3.5 sm:h-3.5 md:w-4 md:h-4 text-[#5e8239] dark:text-lime-500 shrink-0 mx-3 sm:mx-4 md:mx-5" />
+                        <AsteriskIcon className="w-3 h-3 sm:w-3.5 sm:h-3.5 md:w-4 md:h-4 text-[#5e8239] dark:text-lime-600 shrink-0 mx-3 sm:mx-4 md:mx-5" />
                     </span>
                 ))}
             </motion.div>

@@ -140,7 +140,7 @@ export default function ServicesSection() {
                     <div className="footer pl-0 md:pl-28 mt-4 md:mt-0">
                         <div className="scrollProgress flex w-full">
                             <div
-                                className={`h-[2px] bg-primary transition-all duration-300 ${activeIndex === 0 ? "w-1/3" : activeIndex === 1 ? "w-2/3" : "w-full"
+                                className={`h-[2px] bg-primary dark:bg-lime-600 transition-all duration-300 ${activeIndex === 0 ? "w-1/3" : activeIndex === 1 ? "w-2/3" : "w-full"
                                     }`}
                             ></div>
                             <div className="h-[2px] bg-gray-200 dark:bg-zinc-800 flex-1"></div>
@@ -151,7 +151,7 @@ export default function ServicesSection() {
                                 type="button"
                                 onClick={() => scrollToService(0)}
                                 className={`cursor-pointer transition-colors ${activeIndex === 0
-                                    ? "font-bold text-primary"
+                                    ? " text-primary  dark:text-lime-600"
                                     : "text-neutral-400 hover:text-black dark:hover:text-white"
                                     }`}
                             >
@@ -161,7 +161,7 @@ export default function ServicesSection() {
                                 type="button"
                                 onClick={() => scrollToService(1)}
                                 className={`cursor-pointer transition-colors ${activeIndex === 1
-                                    ? "font-bold text-primary"
+                                    ? " text-primary  dark:text-lime-600"
                                     : "text-neutral-400 hover:text-black dark:hover:text-white"
                                     }`}
                             >
@@ -171,7 +171,7 @@ export default function ServicesSection() {
                                 type="button"
                                 onClick={() => scrollToService(2)}
                                 className={`cursor-pointer transition-colors ${activeIndex === 2
-                                    ? "font-bold text-primary"
+                                    ? "text-primary dark:text-lime-600"
                                     : "text-neutral-400 hover:text-black dark:hover:text-white"
                                     }`}
                             >

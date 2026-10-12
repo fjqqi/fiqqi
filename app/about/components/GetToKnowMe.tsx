@@ -1,96 +1,23 @@
 "use client";
 
-import { useEffect, useRef } from "react";
 import Image from "next/image";
 import MePic from "@/public/me.webp";
-import { AsteriskIcon } from "@/app/components/Icons";
-
-function InteractiveAsterisk({ className }: { className: string }) {
-    const ref = useRef<HTMLDivElement>(null);
-    const targetAngleRef = useRef(0);
-    const currentAngleRef = useRef(0);
-    const prevAngleRef = useRef<number | null>(null);
-
-    useEffect(() => {
-        let animId: number = 0;
-        let isAnimating = false;
-
-        const update = () => {
-            const diff = targetAngleRef.current - currentAngleRef.current;
-            if (Math.abs(diff) < 0.05) {
-                currentAngleRef.current = targetAngleRef.current;
-                if (ref.current) {
-                    ref.current.style.transform = `rotate(${currentAngleRef.current}deg)`;
-                }
-                isAnimating = false;
-                animId = 0;
-                return;
-            }
-
-            currentAngleRef.current += diff * 0.15;
-            if (ref.current) {
-                ref.current.style.transform = `rotate(${currentAngleRef.current}deg)`;
-            }
-            animId = requestAnimationFrame(update);
-        };
-
-        const handlePointerMove = (e: PointerEvent) => {
-            // Do not compute or animate on mobile touch scroll
-            if (e.pointerType === "touch") return;
-
-            const el = ref.current;
-            if (!el) return;
-            const rect = el.getBoundingClientRect();
-            if (rect.width === 0 && rect.height === 0) return;
-
-            const centerX = rect.left + rect.width / 2;
-            const centerY = rect.top + rect.height / 2;
-
-            const rad = Math.atan2(e.clientY - centerY, e.clientX - centerX);
-            const deg = rad * (180 / Math.PI);
-
-            if (prevAngleRef.current === null) {
-                prevAngleRef.current = deg;
-                currentAngleRef.current = deg;
-                targetAngleRef.current = deg;
-            } else {
-                let delta = deg - prevAngleRef.current;
-                while (delta > 180) delta -= 360;
-                while (delta < -180) delta += 360;
-                targetAngleRef.current += delta;
-                prevAngleRef.current = deg;
-            }
-
-            if (!isAnimating) {
-                isAnimating = true;
-                animId = requestAnimationFrame(update);
-            }
-        };
-
-        window.addEventListener("pointermove", handlePointerMove, { passive: true });
-
-        return () => {
-            window.removeEventListener("pointermove", handlePointerMove);
-            if (animId) cancelAnimationFrame(animId);
-        };
-    }, []);
-
-    return (
-        <div ref={ref} className="flex items-center justify-center will-change-transform origin-center">
-            <AsteriskIcon className={className} />
-        </div>
-    );
-}
-
 import { motion, type Variants } from "framer-motion";
+import PageHeroHeader, { type MetaStatItem } from "@/app/components/ui/PageHeroHeader";
+
+const ABOUT_STATS: MetaStatItem[] = [
+    { label: "BASED IN", value: "Makassar, INA" },
+    { label: "EXPERIENCE", value: "Since 2022" },
+    { label: "LANGUANGE", value: "INDO - ENG C1" },
+];
 
 const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
         opacity: 1,
         transition: {
-            staggerChildren: 0.12,
-            delayChildren: 0.08,
+            staggerChildren: 0.16,
+            delayChildren: 0.1,
         },
     },
 };
@@ -120,19 +47,6 @@ const imageVariants: Variants = {
     },
 };
 
-const badgeVariants: Variants = {
-    hidden: { opacity: 0, scale: 0.75, rotate: -30 },
-    visible: {
-        opacity: 1,
-        scale: 1,
-        rotate: 0,
-        transition: {
-            duration: 0.8,
-            ease: [0.16, 1, 0.3, 1],
-        },
-    },
-};
-
 const LOREM_TEXT =
     "Lorem ipsum dolor sit amet consectetur adipiscing elit. Amet consectetur adipiscing elit quisque faucibus ex sapien. Quisque faucibus ex sapien vitae pellentesque sem placerat. Vitae pellentesque sem placerat in id cursus mi.";
 
@@ -144,65 +58,13 @@ export default function GetToKnowMe() {
             animate="visible"
             className="w-full"
         >
-            {/* Big Headline: About Me ✳ */}
-            <motion.div
-                variants={fadeUpVariants}
-                className="pt-2 sm:pt-0 pb-3 sm:pb-6 flex items-center gap-3 sm:gap-4 flex-wrap"
-            >
-                <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight font-normal text-black dark:text-white flex items-center gap-2 sm:gap-4">
-                    <span>About</span>
-                    <span className="font-serif italic text-primary dark:text-lime-400 font-normal">
-                        Me
-                    </span>
-                </h1>
-
-                {/* Moving Asterisk badge matching Hero */}
-                <motion.div
-                    variants={badgeVariants}
-                    className="border border-black dark:border-white rounded-full w-10 h-10 sm:w-14 sm:h-14 md:w-20 md:h-20 flex items-center justify-center shrink-0"
-                >
-                    <InteractiveAsterisk className="w-5 h-5 sm:w-7 sm:h-7 md:w-10 md:h-10 text-primary dark:text-lime-400" />
-                </motion.div>
-            </motion.div>
-
-            {/* Under Headline Meta Row */}
-            <motion.div
-                variants={fadeUpVariants}
-                className="flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6 pb-4 pt-2"
-            >
-                <p className="text-sm sm:text-base text-black/85 dark:text-white/85 font-normal max-w-xs leading-snug">
-                    Hi. Im Fiqqi Im a Frontend Web Developer
-                </p>
-
-                <div className="grid grid-cols-3 gap-2 sm:flex sm:items-center sm:gap-8 md:gap-14">
-                    <div className="flex flex-col">
-                        <span className="text-[9px] sm:text-[10px] font-mono tracking-widest uppercase text-black/50 dark:text-white/50 mb-1">
-                            BASED IN
-                        </span>
-                        <span className="text-xs sm:text-sm md:text-base font-medium text-black dark:text-white tracking-tighter">
-                            Makassar, INA
-                        </span>
-                    </div>
-
-                    <div className="flex flex-col">
-                        <span className="text-[9px] sm:text-[10px] font-mono tracking-widest uppercase text-black/50 dark:text-white/50 mb-1">
-                            EXPERIENCE
-                        </span>
-                        <span className="text-xs sm:text-sm md:text-base font-medium text-black dark:text-white tracking-tighter">
-                            Since 2022
-                        </span>
-                    </div>
-
-                    <div className="flex flex-col">
-                        <span className="text-[9px] sm:text-[10px] font-mono tracking-widest uppercase text-black/50 dark:text-white/50 mb-1">
-                            LANGUANGE
-                        </span>
-                        <span className="text-xs sm:text-sm md:text-base font-medium text-black dark:text-white tracking-tighter">
-                            INDO - ENG C1
-                        </span>
-                    </div>
-                </div>
-            </motion.div>
+            {/* Dynamic Page Hero Header matching Contact */}
+            <PageHeroHeader
+                titlePrefix="About"
+                titleHighlight="Me"
+                description="Hi. Im Fiqqi Im a Frontend Web Developer"
+                stats={ABOUT_STATS}
+            />
 
             {/* Photo + 3 Paragraphs Row */}
             <div className="grid grid-cols-1 md:grid-cols-12 mt-6 sm:mt-10 md:mt-16 gap-6 sm:gap-8 md:gap-12 items-start pb-8 sm:pb-12 md:pb-16">

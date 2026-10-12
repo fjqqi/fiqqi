@@ -55,7 +55,7 @@ export default function EducationSection() {
                         >
                             {/* Badge */}
                             <div className="w-auto md:w-[260px] shrink-0">
-                                <span className="inline-flex items-center gap-1.5 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-[4px] bg-[#203f0d] text-white text-xs sm:text-sm md:text-base">
+                                <span className="inline-flex items-center gap-1.5 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-[4px] bg-primary dark:bg-lime-600 text-white text-xs sm:text-sm md:text-base">
                                     <span>{edu.rolePrefix}</span>
                                     <span className="font-serif italic font-normal text-white">
                                         {edu.roleSuffix}

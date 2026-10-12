@@ -71,7 +71,7 @@ export default function Navbar() {
         <nav className="fixed top-0 left-0 right-0 z-50 w-full border-b border-black/15 dark:border-white/15 bg-white/80 dark:bg-black/80 backdrop-blur-md transition-colors duration-200">
             <div className="w-full px-6 sm:px-12 md:px-16 lg:px-24 py-4 md:py-6 flex justify-center">
                 <div className="flex justify-between items-center w-full max-w-6xl">
-                    <Link href="/" className="text-primary font-bold text-2xl tracking-tighter">
+                    <Link href="/" className="text-primary font-bold text-2xl tracking-tighter dark:text-lime-600">
                         ぴき.
                     </Link>
 
