@@ -7,4 +7,6 @@ export interface Project {
     image: string;
     bgColor: string;
     accentColor?: string;
+    tags?: string[];
+    type?: string;
 }

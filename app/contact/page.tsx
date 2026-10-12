@@ -55,10 +55,10 @@ const sectionItemVariants: Variants = {
 };
 
 const BUDGET_OPTIONS = [
-    "< $1K",
-    "$1K — $3K",
-    "$3K — $7K",
-    "$7K+",
+    "< Rp.200.000",
+    "Rp.200.000 - Rp.500.000",
+    "Rp.500.000 - Rp.2.000.000",
+    "> Rp.2.000.000",
     "LET'S DISCUSS",
 ];
 
@@ -76,7 +76,7 @@ export default function ContactPage() {
         const body = encodeURIComponent(
             `Name: ${name}\nEmail: ${email}\nBudget: ${selectedBudget || "Not specified"}\n\nMessage:\n${message}`
         );
-        window.location.href = `mailto:Faqihzaky43@gmail.com?subject=${subject}&body=${body}`;
+        window.location.href = `mailto:faqihzaky43@gmail.com?subject=${subject}&body=${body}`;
 
         setSubmitted(true);
         setTimeout(() => setSubmitted(false), 4000);
@@ -126,7 +126,7 @@ export default function ContactPage() {
                         className="grid grid-cols-1 md:grid-cols-12 mt-6 sm:mt-10 md:mt-16 gap-6 sm:gap-8 md:gap-12 items-start pb-8 sm:pb-12 md:pb-16"
                     >
                         {/* Left Column: Form Card */}
-                        <div className="md:col-span-7 w-full bg-[#f6f6f6] dark:bg-zinc-900/60 rounded-xl sm:rounded-2xl p-6 sm:p-10 md:p-12 border border-black/[0.04] dark:border-white/[0.06] transition-colors">
+                        <div className="md:col-span-7 w-full bg-[#f6f6f6] dark:bg-zinc-900/60   p-6 sm:p-10 md:p-12   transition-colors">
                             <form onSubmit={handleSubmit} className="flex flex-col">
                                 {/* Field: NAME */}
                                 <div className="flex flex-col">
@@ -181,11 +181,10 @@ export default function ContactPage() {
                                                     onClick={() =>
                                                         setSelectedBudget(isSelected ? null : option)
                                                     }
-                                                    className={`px-3 sm:px-3.5 py-1.5 rounded-full border text-xs tracking-tight transition-all duration-150 cursor-pointer ${
-                                                        isSelected
-                                                            ? "bg-black text-white dark:bg-white dark:text-black border-black dark:border-white shadow-sm"
-                                                            : "border-black/20 dark:border-white/20 text-black/75 dark:text-white/75 hover:border-black/60 dark:hover:border-white/60"
-                                                    }`}
+                                                    className={`px-3 sm:px-3.5 py-1.5 rounded-full border text-xs tracking-tight transition-all duration-150 cursor-pointer ${isSelected
+                                                        ? "bg-black text-white dark:bg-white dark:text-black border-black dark:border-white shadow-sm"
+                                                        : "border-black/20 dark:border-white/20 text-black/75 dark:text-white/75 hover:border-black/60 dark:hover:border-white/60"
+                                                        }`}
                                                 >
                                                     {option}
                                                 </button>
@@ -237,12 +236,12 @@ export default function ContactPage() {
                         {/* Right Column: Direct Channels & Resume */}
                         <div className="md:col-span-5 w-full flex flex-col space-y-6 sm:space-y-8">
                             {/* Direct Channels Card */}
-                            <div className="bg-[#2d4e0e] dark:bg-[#254209] text-white rounded-xl sm:rounded-2xl p-6 sm:p-8 shadow-sm">
-                                <h3 className="text-lg sm:text-xl font-normal text-white">
+                            <div className="bg-primary dark:bg-primary text-white  p-6 sm:p-8 shadow-sm">
+                                <h3 className="  tracking-tighter  font-normal text-white">
                                     Direct Channels
                                 </h3>
 
-                                <div className="w-full h-px bg-white/20 mt-3 sm:mt-4 mb-5 sm:mb-6" />
+                                <div className="w-full h-px bg-white/20 mt-3 sm:mt-4 mb-3 sm:mb-4" />
 
                                 <div className="flex flex-col space-y-4 sm:space-y-5">
                                     {/* Email */}
@@ -251,10 +250,10 @@ export default function ContactPage() {
                                             EMAIL
                                         </span>
                                         <a
-                                            href="mailto:Faqihzaky43@gmail.com"
+                                            href="mailto:faqihzaky43@gmail.com"
                                             className="text-sm sm:text-base md:text-lg font-normal text-white hover:underline transition-all block break-all"
                                         >
-                                            Faqihzaky43@gmail.com
+                                            faqihzaky43@gmail.com
                                         </a>
                                     </div>
 
