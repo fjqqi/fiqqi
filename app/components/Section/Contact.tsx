@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import PhysicsStickers, { StickerData } from "@/app/components/Section/Hero/PhysicsStickers";
 import Button from "@/app/components/ui/Button";
@@ -39,6 +39,14 @@ const SOCIAL_STICKERS: StickerData[] = [
 
 export default function ContactSection() {
     const [copied, setCopied] = useState(false);
+    const [isDesktop, setIsDesktop] = useState(false);
+
+    useEffect(() => {
+        const check = () => setIsDesktop(window.innerWidth >= 768);
+        check();
+        window.addEventListener("resize", check);
+        return () => window.removeEventListener("resize", check);
+    }, []);
 
     const handleCopyEmail = () => {
         navigator.clipboard.writeText("faqihzaky43@gmail.com");
@@ -109,14 +117,16 @@ export default function ContactSection() {
                 </div>
 
                 {/* Desktop Falling Stickers Area using PhysicsStickers */}
-                <div className="hidden md:block md:absolute md:right-4 md:top-0 md:bottom-0 md:w-[460px] lg:w-[540px] md:h-full z-10 pointer-events-auto overflow-hidden">
-                    <PhysicsStickers
-                        stickers={SOCIAL_STICKERS}
-                        floorOffset={30}
-                        triggerOnScroll={true}
-                        size="lg"
-                    />
-                </div>
+                {isDesktop && (
+                    <div className="hidden md:block md:absolute md:right-4 md:top-0 md:bottom-0 md:w-[460px] lg:w-[540px] md:h-full z-10 pointer-events-auto overflow-hidden">
+                        <PhysicsStickers
+                            stickers={SOCIAL_STICKERS}
+                            floorOffset={30}
+                            triggerOnScroll={true}
+                            size="lg"
+                        />
+                    </div>
+                )}
             </motion.div>
         </section>
     );

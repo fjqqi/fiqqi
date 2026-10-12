@@ -1,7 +1,7 @@
 "use client";
 
 import { ReactLenis, useLenis } from "lenis/react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import type { ReactNode } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -42,6 +42,21 @@ export default function SmoothScroll({
 }: {
     children: ReactNode;
 }) {
+    const [isTouchDevice, setIsTouchDevice] = useState(false);
+
+    useEffect(() => {
+        const isTouch =
+            "ontouchstart" in window ||
+            navigator.maxTouchPoints > 0 ||
+            window.matchMedia("(pointer: coarse)").matches;
+        setIsTouchDevice(isTouch);
+    }, []);
+
+    // On touch/mobile devices, bypass Lenis completely for native 120Hz momentum scrolling without frame drops
+    if (isTouchDevice) {
+        return <>{children}</>;
+    }
+
     return (
         <ReactLenis
             root
@@ -50,7 +65,6 @@ export default function SmoothScroll({
                 lerp: 0.1,
                 smoothWheel: true,
                 syncTouch: false,
-                touchMultiplier: 1,
             }}
         >
             <LenisScrollTriggerSync />

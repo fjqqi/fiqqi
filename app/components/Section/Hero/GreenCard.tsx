@@ -15,9 +15,9 @@ export default function GreenCard() {
                 ease: [0.16, 1, 0.3, 1],
                 delay: 0.25,
             }}
-            className="relative w-full h-[360px] md:w-[340px] md:h-[450px] p-3.5 rounded-[20px] bg-primary/75 dark:bg-[#1a2f07]/85 backdrop-blur-md md:backdrop-blur-2xl backdrop-saturate-150 border border-white/30 
+            className="relative w-full h-[360px] md:w-[340px] md:h-[450px] p-3.5 rounded-[20px] bg-[#375D05] md:bg-primary/75 dark:bg-[#1a2f07] md:dark:bg-[#1a2f07]/85 md:backdrop-blur-2xl md:backdrop-saturate-150 border border-white/30 
             shadow-xl
-            dark:border-white/15 dark:shadow-[inset_0_1px_1px_rgba(255,255,255,0.1),0_20px_45px_rgba(0,0,0,0.5)] flex flex-col justify-end overflow-hidden will-change-transform"
+            dark:border-white/15 dark:shadow-[inset_0_1px_1px_rgba(255,255,255,0.1),0_20px_45px_rgba(0,0,0,0.5)] flex flex-col justify-end overflow-hidden"
         >
             {/* Subtle Glass Sheen / Reflection */}
             <div className="absolute inset-0 bg-gradient-to-br from-white/25 via-transparent to-black/10 dark:from-white/10 dark:via-transparent dark:to-black/30 pointer-events-none rounded-[20px] z-0" />
