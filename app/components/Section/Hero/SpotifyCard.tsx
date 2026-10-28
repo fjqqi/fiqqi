@@ -153,7 +153,7 @@ export default function SpotifyCard() {
             animate="visible"
             whileHover={{ scale: 1.015 }}
             whileTap={{ scale: 0.985 }}
-            className="spotifyCard group block w-full bg-white dark:bg-zinc-900/90 text-black dark:text-white p-2.5 rounded-[16px] shadow-sm dark:shadow-[0_4px_16px_rgba(0,0,0,0.4)] border border-transparent dark:border-white/15 hover:shadow-md transition-all duration-200"
+            className="spotifyCard group block w-full bg-white dark:bg-zinc-900/90 text-gray-800 dark:text-white p-2.5 rounded-[16px] shadow-sm dark:shadow-[0_4px_16px_rgba(0,0,0,0.4)] border border-transparent dark:border-white/15 hover:shadow-md transition-all duration-200"
         >
             <div className="flex items-center gap-2.5">
                 {/* Album Cover */}

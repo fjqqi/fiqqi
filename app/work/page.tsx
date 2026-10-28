@@ -11,17 +11,7 @@ import WorkProjectCard from "./components/WorkProjectCard";
 import Button from "@/app/components/ui/Button";
 import { useLanguage } from "@/app/context/LanguageContext";
 
-const WORK_STATS_EN: MetaStatItem[] = [
-    { label: "PROJECTS", value: "9" },
-    { label: "YEARS", value: "2024 -2026" },
-];
-
-const WORK_STATS_ID: MetaStatItem[] = [
-    { label: "PROYEK", value: "9" },
-    { label: "TAHUN", value: "2024 -2026" },
-];
-
-const CATEGORIES = ["ALL", "WEBSITE", "DESIGN", "MOBILE"] as const;
+const CATEGORIES = ["ALL", "WEBSITE", "DESIGN", "UI", "MOBILE"] as const;
 
 const pageVariants: Variants = {
     hidden: { opacity: 0 },
@@ -59,10 +49,14 @@ export default function WorkPage() {
             : PROJECTS.filter(
                 (p) =>
                     p.type?.toUpperCase() === activeCategory ||
-                    p.category?.toUpperCase() === activeCategory
+                    p.category?.toUpperCase() === activeCategory ||
+                    (activeCategory === "DESIGN" && p.type?.toUpperCase() === "UI")
             );
 
-    const stats = language === "id" ? WORK_STATS_ID : WORK_STATS_EN;
+    const stats: MetaStatItem[] = [
+        { label: language === "id" ? "PROYEK" : "PROJECTS", value: `${PROJECTS.length}` },
+        { label: language === "id" ? "TAHUN" : "YEARS", value: "2024 -2026" },
+    ];
     const description =
         language === "id"
             ? "Beberapa proyek dan desain pilihan saya yang dibangun untuk berbagai klien dan agensi."
@@ -74,7 +68,7 @@ export default function WorkPage() {
 
             <main
                 id="main-content"
-                className="w-full min-h-screen bg-white dark:bg-black text-black dark:text-white transition-colors duration-200 overflow-x-clip"
+                className="w-full min-h-screen bg-white dark:bg-black text-gray-800 dark:text-white transition-colors duration-200 overflow-x-clip"
             >
                 <motion.div
                     variants={pageVariants}

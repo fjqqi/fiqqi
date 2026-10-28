@@ -82,11 +82,11 @@ export default function EducationSection() {
                             {/* Institution & Description */}
                             <div className="flex-1 w-full">
                                 <div className="flex items-baseline justify-between gap-2 md:block">
-                                    <h3 className="text-lg sm:text-xl md:text-2xl font-medium tracking-tighter text-black dark:text-white group-hover:text-primary dark:group-hover:text-lime-400 transition-colors">
+                                    <h3 className="text-lg sm:text-xl md:text-2xl font-medium tracking-tighter text-gray-800 dark:text-white group-hover:text-primary dark:group-hover:text-lime-400 transition-colors">
                                         {edu.institution}
                                     </h3>
                                     {/* Mobile inline period */}
-                                    <span className="md:hidden text-xs sm:text-sm tracking-tight font-normal text-black/60 dark:text-white/60 font-sans shrink-0">
+                                    <span className="md:hidden text-xs sm:text-sm tracking-tight font-normal text-gray-800/60 dark:text-white/60 font-sans shrink-0">
                                         {edu.period}
                                     </span>
                                 </div>
@@ -98,7 +98,7 @@ export default function EducationSection() {
                                             animate={{ opacity: 1, height: "auto", marginTop: 8 }}
                                             exit={{ opacity: 0, height: 0, marginTop: 0 }}
                                             transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
-                                            className="text-xs sm:text-sm text-black/60 dark:text-white/60 font-light leading-relaxed max-w-xl overflow-hidden"
+                                            className="text-xs sm:text-sm text-gray-800/60 dark:text-white/60 font-light leading-relaxed max-w-xl overflow-hidden"
                                         >
                                             {edu.description}
                                         </motion.p>
@@ -108,7 +108,7 @@ export default function EducationSection() {
 
                             {/* Period on desktop */}
                             <div className="hidden md:block shrink-0 text-right">
-                                <span className="text-sm sm:text-base tracking-tight font-normal text-black/80 dark:text-white/80 font-sans">
+                                <span className="text-sm sm:text-base tracking-tight font-normal text-gray-800/80 dark:text-white/80 font-sans">
                                     {edu.period}
                                 </span>
                             </div>

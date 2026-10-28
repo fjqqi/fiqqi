@@ -43,7 +43,7 @@ export default function AboutPage() {
 
             <main
                 id="main-content"
-                className="w-full min-h-screen bg-white dark:bg-black text-black dark:text-white transition-colors duration-200 overflow-x-clip"
+                className="w-full min-h-screen bg-white dark:bg-black text-gray-800 dark:text-white transition-colors duration-200 overflow-x-clip"
             >
                 <motion.div
                     variants={pageVariants}

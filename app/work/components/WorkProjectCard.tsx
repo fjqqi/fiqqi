@@ -39,11 +39,11 @@ export default function WorkProjectCard({ project, index }: WorkProjectCardProps
 
             {/* Bottom Project Info */}
             <div className="mt-4 sm:mt-5 flex flex-col">
-                <h3 className="text-2xl sm:text-3xl md:text-[2rem] font-normal tracking-tight text-black dark:text-white group-hover:text-primary dark:group-hover:text-lime-500 transition-colors">
+                <h3 className="text-2xl sm:text-3xl md:text-[2rem] font-normal tracking-tight text-gray-800 dark:text-white group-hover:text-primary dark:group-hover:text-lime-500 transition-colors">
                     {project.title}
                 </h3>
 
-                <p className="text-xs sm:text-sm text-black/60 dark:text-white/60 font-light mt-1">
+                <p className="text-xs sm:text-sm text-gray-800/60 dark:text-white/60 font-light mt-1">
                     {project.category} • {project.link}
                 </p>
 
@@ -53,7 +53,7 @@ export default function WorkProjectCard({ project, index }: WorkProjectCardProps
                         {project.tags.map((tag) => (
                             <span
                                 key={tag}
-                                className="px-3 py-1 rounded-full border border-black/20 dark:border-white/20 text-[10px] sm:text-[11px] font-mono uppercase tracking-wider text-black/75 dark:text-white/75"
+                                className="px-3 py-1 rounded-full border border-black/20 dark:border-white/20 text-[10px] sm:text-[11px] font-mono uppercase tracking-wider text-gray-800/75 dark:text-white/75"
                             >
                                 {tag}
                             </span>

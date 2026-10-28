@@ -31,7 +31,7 @@ export default function ProjectsSection() {
 
         mm.add("(min-width: 768px)", () => {
             const getScrollAmount = () => {
-                return Math.max(0, track.scrollWidth - window.innerWidth + 160);
+                return Math.max(0, track.scrollWidth - window.innerWidth + 200);
             };
 
             gsap.to(track, {
@@ -83,7 +83,7 @@ export default function ProjectsSection() {
             ref={sectionRef}
             className="relative z-20 w-full min-h-0 md:min-h-[600px] md:h-screen flex flex-col justify-start md:justify-center overflow-visible md:overflow-hidden dark:bg-zinc-950 transition-colors py-12 md:py-12"
         >
-            <div className="w-full max-w-7xl mx-auto pt-4 md:pt-16 px-6 sm:px-12 md:px-16 text-black dark:text-white shrink-0 mb-6 md:mb-8">
+            <div className="w-full max-w-7xl mx-auto pt-4 md:pt-16 px-6 sm:px-12 md:px-16 text-gray-800 dark:text-white shrink-0 mb-6 md:mb-8">
                 <SecTitle
                     number="02"
                     title="Selected Work"

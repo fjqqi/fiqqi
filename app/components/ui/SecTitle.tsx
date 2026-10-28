@@ -17,7 +17,7 @@ export default function SecTitle({
 }: SecTitleProps) {
     return (
         <div className={`w-full ${className}`.trim()}>
-            <section className="text-black dark:text-white">
+            <section className="text-gray-800 dark:text-white">
                 <div
                     className={`sectionTittle flex justify-between ${mb} pb-4 border-b border-black/15 dark:border-white/15`}
                 >

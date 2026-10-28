@@ -34,7 +34,7 @@ export const DEFAULT_HERO_STICKERS: StickerData[] = [
     {
         id: "web-dev",
         label: "Web Developer",
-        textColor: "text-black dark:text-zinc-100",
+        textColor: "text-gray-800 dark:text-zinc-100",
     },
     {
         id: "ui-ux",
@@ -44,12 +44,12 @@ export const DEFAULT_HERO_STICKERS: StickerData[] = [
     {
         id: "front-end",
         label: "Front - End",
-        textColor: "text-black dark:text-zinc-100",
+        textColor: "text-gray-800 dark:text-zinc-100",
     },
     {
         id: "mobile-dev",
         label: "Mobile Developer",
-        textColor: "text-black dark:text-zinc-100",
+        textColor: "text-gray-800 dark:text-zinc-100",
     },
     {
         id: "open-work",
@@ -370,7 +370,7 @@ export default function PhysicsStickers({
 
                 const zIndex = s.id === "open-work" ? "z-30" : "z-20";
                 const commonClass =
-                    `absolute top-0 left-0 bg-white dark:bg-zinc-900/90 text-black/80 shadow-lg font-mono tracking-tighter dark:text-zinc-100 border border-transparent dark:border-white/15 select-none rounded-full inline-flex items-center justify-center cursor-grab active:cursor-grabbing !transition-none will-change-transform ${sizeClass} ${zIndex}`;
+                    `absolute top-0 left-0 bg-white dark:bg-zinc-900/90 text-gray-800/80 shadow-lg font-mono tracking-tighter dark:text-zinc-100 border border-transparent dark:border-white/15 select-none rounded-full inline-flex items-center justify-center cursor-grab active:cursor-grabbing !transition-none will-change-transform ${sizeClass} ${zIndex}`;
 
                 if (s.href) {
                     return (

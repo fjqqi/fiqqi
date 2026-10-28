@@ -6,10 +6,10 @@ import SecTitle from "../ui/SecTitle";
 import { useLanguage } from "@/app/context/LanguageContext";
 
 const PARAGRAPH_EN =
-    "I help brands stand out online: interfaces where considered design, restrained motion and honest performance all pull in one direction — turning an idea into a product people actually use.";
+    "I help brands grow online through thoughtful design and seamless digital experiences that look great, feel intuitive, and put people first—turning ideas into meaningful products that connect with people and make everyday interactions feel effortless.";
 
 const PARAGRAPH_ID =
-    "Saya membantu brand tampil menonjol secara online: antarmuka dengan desain matang, animasi elegan, dan performa optimal — mengubah ide menjadi produk yang benar-benar digunakan orang.";
+    "Aku bantu brand berkembang di dunia digital lewat desain yang matang dan pengalaman digital yang menarik, mudah digunakan, dan mengutamakan kenyamanan pengguna—mengubah ide menjadi produk digital yang bermakna dan terasa nyaman digunakan sehari-hari.";
 
 interface WordProps {
     children: string;
@@ -23,7 +23,7 @@ function Word({ children, progress, range }: WordProps) {
     return (
         <motion.span
             style={{ opacity }}
-            className="inline-block mr-[0.25em] last:mr-0 text-black dark:text-white"
+            className="inline-block mr-[0.25em] last:mr-0 text-gray-800 dark:text-white"
         >
             {children}
         </motion.span>
@@ -44,7 +44,7 @@ export default function ApproachSection() {
 
     return (
         <div className="w-full bg-gray-100 dark:bg-zinc-900 transition-colors">
-            <section className="w-full max-w-7xl mx-auto px-6 sm:px-12 md:px-16 py-20 text-black dark:text-white">
+            <section className="w-full max-w-7xl mx-auto px-6 sm:px-12 md:px-16 py-20 text-gray-800 dark:text-white">
                 <SecTitle
                     number="01"
                     title="Approach"

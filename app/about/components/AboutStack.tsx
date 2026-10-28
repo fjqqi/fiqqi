@@ -146,7 +146,7 @@ export default function AboutStack() {
 
     return (
         <section className="w-full bg-zinc-100/70 dark:bg-zinc-950/70 py-20 transition-colors border-y border-black/10 dark:border-white/10">
-            <div className="w-full max-w-7xl mx-auto px-6 sm:px-12 md:px-16 text-black dark:text-white">
+            <div className="w-full max-w-7xl mx-auto px-6 sm:px-12 md:px-16 text-gray-800 dark:text-white">
                 <SecTitle
                     number="03"
                     title="The Toolkit & Stack"
@@ -191,19 +191,19 @@ export default function AboutStack() {
                                         <h4 className="text-lg sm:text-xl font-semibold tracking-tight group-hover:text-primary dark:group-hover:text-lime-400 transition-colors">
                                             {item.name}
                                         </h4>
-                                        <span className="font-mono text-[11px] px-2.5 py-1 rounded-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 text-black/60 dark:text-white/60 shrink-0">
+                                        <span className="font-mono text-[11px] px-2.5 py-1 rounded-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 text-gray-800/60 dark:text-white/60 shrink-0">
                                             {item.level}
                                         </span>
                                     </div>
                                     <p className="text-xs font-mono uppercase tracking-wider text-primary dark:text-lime-400 mb-4">
                                         {item.role}
                                     </p>
-                                    <p className="text-sm leading-relaxed text-black/70 dark:text-white/70 font-light">
+                                    <p className="text-sm leading-relaxed text-gray-800/70 dark:text-white/70 font-light">
                                         {item.description}
                                     </p>
                                 </div>
 
-                                <div className="mt-6 pt-4 border-t border-black/5 dark:border-white/5 flex items-center justify-between text-xs text-black/40 dark:text-white/40 font-mono">
+                                <div className="mt-6 pt-4 border-t border-black/5 dark:border-white/5 flex items-center justify-between text-xs text-gray-800/40 dark:text-white/40 font-mono">
                                     <span>#{activeTab}</span>
                                     <span>0{idx + 1}</span>
                                 </div>

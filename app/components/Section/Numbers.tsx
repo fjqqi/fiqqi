@@ -25,13 +25,13 @@ const STATS_EN: StatItem[] = [
     },
     {
         id: "clients",
-        value: 5,
-        label: "% smaller payload after fixing a memory leak",
+        value: 10,
+        label: "+ Technologies & Frameworks",
     },
     {
         id: "Design",
         value: 99,
-        label: "Design Created",
+        label: "+ Design Created",
     },
 ];
 
@@ -48,13 +48,13 @@ const STATS_ID: StatItem[] = [
     },
     {
         id: "clients",
-        value: 5,
-        label: "% payload lebih hemat setelah perbaikan memory leak",
+        value: 10,
+        label: "+ Technologies & Frameworks",
     },
     {
         id: "Design",
         value: 99,
-        label: "desain dibuat",
+        label: "+ desain dibuat",
     },
 ];
 
@@ -160,7 +160,7 @@ export default function NumbersSection() {
 
     return (
         <div className="w-full bg-gray-200/70 dark:bg-zinc-900 transition-colors">
-            <section className="w-full max-w-7xl mx-auto px-6 sm:px-12 md:px-16 pt-20 pb-16 text-black dark:text-white">
+            <section className="w-full max-w-7xl mx-auto px-6 sm:px-12 md:px-16 pt-20 pb-16 text-gray-800 dark:text-white">
                 <SecTitle
                     number="03"
                     title="Numbers and Stacks"
@@ -179,7 +179,7 @@ export default function NumbersSection() {
                                 transition={{ duration: 0.5, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
                                 className="flex flex-col items-start"
                             >
-                                <div className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold tracking-tighter leading-none text-black dark:text-white tabular-nums select-none">
+                                <div className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold tracking-tighter leading-none text-gray-800 dark:text-white tabular-nums select-none">
                                     <AnimatedCounter value={stat.value} />
                                 </div>
 

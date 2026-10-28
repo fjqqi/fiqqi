@@ -30,9 +30,9 @@ export default function HeroBottom() {
                         ease: [0.16, 1, 0.3, 1],
                         delay: 0.75,
                     }}
-                    className="bottomHero text-black dark:text-white max-w-7xl mx-auto w-full py-6 md:py-8 px-6 sm:px-12 md:px-16 flex flex-col sm:flex-row justify-between items-center gap-4"
+                    className="bottomHero text-gray-800/50 dark:text-white max-w-7xl mx-auto w-full py-6 md:py-8 px-6 sm:px-12 md:px-16 flex flex-col sm:flex-row justify-between items-center gap-4"
                 >
-                    <h1 className="text-sm tracking-tighter text-center sm:text-left">
+                    <h1 className="text-sm  tracking-widest  uppercase text-center sm:text-left">
                         {language === "id" ? "Berbasis di Makassar, Indonesia" : "Based in Makassar, Indonesia"}
                     </h1>
 

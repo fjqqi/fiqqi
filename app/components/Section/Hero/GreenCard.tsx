@@ -42,7 +42,7 @@ export default function GreenCard() {
                 <a
                     href="#about"
                     aria-label="Open"
-                    className="w-[52px] h-[52px] rounded-full bg-white dark:bg-zinc-900/90 text-black dark:text-white border border-transparent dark:border-white/15 flex items-center justify-center shrink-0 shadow-sm dark:shadow-[0_4px_14px_rgba(0,0,0,0.4)] hover:scale-105 active:scale-95 transition-all group"
+                    className="w-[52px] h-[52px] rounded-full bg-white dark:bg-zinc-900/90 text-gray-800 dark:text-white border border-transparent dark:border-white/15 flex items-center justify-center shrink-0 shadow-sm dark:shadow-[0_4px_14px_rgba(0,0,0,0.4)] hover:scale-105 active:scale-95 transition-all group"
                 >
                     <ArrowUpRightIcon className="w-5 h-5 stroke-[2.5] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </a>

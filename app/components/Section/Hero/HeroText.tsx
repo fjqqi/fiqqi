@@ -61,7 +61,7 @@ export default function HeroText() {
                 animate="visible"
                 className="flex md:hidden flex-col items-center text-center"
             >
-                <h1 className="text-[2.25rem] sm:text-[2.75rem] tracking-tighter leading-[1.15] font-normal flex flex-col items-center">
+                <h1 className="text-[2.25rem] sm:text-[2.75rem] text-gray-800 dark:text-white tracking-tighter leading-[1.15] font-normal flex flex-col items-center">
                     {/* Line 1: text */}
                     <div className="overflow-hidden pb-1 -mb-1">
                         <motion.span variants={itemVariants} className="block">
@@ -103,11 +103,12 @@ export default function HeroText() {
                         variants={subtextVariants}
                         initial="hidden"
                         animate={h1Done ? "visible" : "hidden"}
-                        className="text-[15px] sm:text-base leading-snug text-black/80 dark:text-white/80 max-w-70"
+                        className="text-[15px] sm:text-base leading-snug text-gray-800/80 dark:text-white/80 max-w-70"
                     >
-                        {language === "id"
-                            ? "Saya bisa bantu bangun web anda dan membuat hal menarik untuk layar"
-                            : "Hi, I'm Fiqqi. i love making things for screens. sometimes with pixels, sometimes with code"}
+                        <>
+                            Hi, I'm <span className="text-primary dark:text-lime-600">Fiqqi</span> 🧑‍💻 i love making things for screens.
+                            sometimes with pixels, sometimes with code
+                        </>
                     </motion.h4>
                 </div>
             </motion.div>
@@ -119,7 +120,7 @@ export default function HeroText() {
                 animate="visible"
                 className="hidden md:block"
             >
-                <h1 className="text-[4rem] tracking-tighter leading-[1.1] font-normal">
+                <h1 className="text-[4rem] text-gray-800 dark:text-white tracking-tighter leading-[1.1] font-normal">
                     {/* First line: text + pill */}
                     <div className="overflow-hidden pb-1.5 -mb-1.5">
                         <motion.div variants={itemVariants} className="flex items-center gap-4">
@@ -150,24 +151,19 @@ export default function HeroText() {
                 </h1>
 
                 {/* Subtitle: reveals after h1 animation completes */}
-                <div className="overflow-hidden mt-6 pb-1 -mb-1 w-8/10">
+                <div className="overflow-hidden mt-6 pb-1 -mb-1 w-9/10">
                     <motion.h4
                         variants={subtextVariants}
                         initial="hidden"
                         animate={h1Done ? "visible" : "hidden"}
-                        className="text-lg text-black/80 dark:text-white/80 tracking-tight"
+                        className="text-2xl  text-gray-800/60 dark:text-white/80 tracking-tighter"
                     >
-                        {language === "id" ? (
-                            <>
-                                Saya bisa bantu bangun <span className="text-primary dark:text-lime-600">web anda</span> dan membuat hal menarik untuk layar.
-                                terkadang lewat piksel, terkadang lewat kode
-                            </>
-                        ) : (
-                            <>
-                                Hi, I'm <span className="text-primary dark:text-lime-600">Fiqqi</span> and i love making things for screens.
-                                sometimes with pixels, sometimes with code
-                            </>
-                        )}
+
+                        <>
+                            Hi, I'm <span className="text-primary dark:text-lime-600">Fiqqi</span> 🧑‍💻 i love making things for screens.
+                            sometimes with pixels, sometimes with code
+                        </>
+
                     </motion.h4>
                 </div>
             </motion.div>

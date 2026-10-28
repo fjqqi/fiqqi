@@ -81,7 +81,7 @@ export default function PageHeroHeader({
                 <div className="overflow-hidden pb-2 -mb-2">
                     <motion.h1
                         variants={titleVariants}
-                        className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight font-normal text-black dark:text-white flex items-center gap-2 sm:gap-4 flex-wrap"
+                        className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight font-normal text-gray-800 dark:text-white flex items-center gap-2 sm:gap-4 flex-wrap"
                     >
                         <span>{titlePrefix}</span>
                         <span className="font-serif italic text-primary dark:text-lime-600 font-normal">
@@ -108,7 +108,7 @@ export default function PageHeroHeader({
                 <div className="overflow-hidden pb-1 -mb-1">
                     <motion.p
                         variants={subtextVariants}
-                        className="text-sm sm:text-base text-black/85 dark:text-white/85 font-normal max-w-xs leading-snug"
+                        className="text-sm sm:text-base text-gray-800/85 dark:text-white/85 font-normal max-w-xs leading-snug"
                     >
                         {description}
                     </motion.p>
@@ -121,10 +121,10 @@ export default function PageHeroHeader({
                     >
                         {stats.map((stat) => (
                             <div key={stat.label} className="flex flex-col">
-                                <span className="text-[9px] sm:text-[10px] font-mono tracking-widest uppercase text-black/50 dark:text-white/50 mb-1">
+                                <span className="text-[9px] sm:text-[10px] font-mono tracking-widest uppercase text-gray-800/50 dark:text-white/50 mb-1">
                                     {stat.label}
                                 </span>
-                                <span className="text-xs sm:text-sm md:text-base font-medium text-black dark:text-white tracking-tighter">
+                                <span className="text-xs sm:text-sm md:text-base font-medium text-gray-800 dark:text-white tracking-tighter">
                                     {stat.value}
                                 </span>
                             </div>

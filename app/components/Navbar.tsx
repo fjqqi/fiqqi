@@ -78,7 +78,7 @@ export default function Navbar() {
                     </Link>
 
                     {/* Desktop Navigation Links */}
-                    <ul className="hidden md:flex gap-10 text-black dark:text-white tracking-widest font-light text-sm">
+                    <ul className="hidden md:flex gap-10 text-gray-800 dark:text-white tracking-widest font-light text-sm">
                         {NAV_LINKS.map((link) => (
                             <li key={link.href}>
                                 <Link href={link.href} className="hover:text-primary transition-colors">
@@ -89,16 +89,25 @@ export default function Navbar() {
                     </ul>
 
                     <div className="flex items-center gap-2 sm:gap-3">
-                        {/* Language Toggle (ID / ENG) */}
+                        {/* Language Toggle */}
                         <button
                             onClick={toggleLanguage}
                             type="button"
                             aria-label={`Switch language to ${language === "en" ? "Bahasa Indonesia" : "English"}`}
-                            className="h-10 px-2.5 sm:px-3 rounded-full border border-black/15 dark:border-white/20 bg-white/70 dark:bg-zinc-900/70 flex items-center justify-center gap-1 text-[11px] font-mono tracking-wider text-black dark:text-white hover:scale-105 active:scale-95 transition-all shadow-sm cursor-pointer select-none"
+                            className="w-10 h-10 rounded-full border border-black/15 dark:border-white/20 bg-white/70 dark:bg-zinc-900/70 flex items-center justify-center text-xs font-mono font-medium tracking-wider text-gray-800 dark:text-white hover:border-black/30 dark:hover:border-white/40 hover:scale-105 active:scale-95 transition-all  cursor-pointer select-none overflow-hidden"
                         >
-                            <span className={language === "id" ? "font-bold text-primary dark:text-lime-400" : "opacity-40"}>ID</span>
-                            <span className="opacity-25">/</span>
-                            <span className={language === "en" ? "font-bold text-primary dark:text-lime-400" : "opacity-40"}>ENG</span>
+                            <AnimatePresence mode="wait" initial={false}>
+                                <motion.span
+                                    key={language}
+                                    initial={{ opacity: 0, y: 4 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0, y: -4 }}
+                                    transition={{ duration: 0.15, ease: "easeOut" }}
+                                    className="uppercase font-medium"
+                                >
+                                    {language}
+                                </motion.span>
+                            </AnimatePresence>
                         </button>
 
                         {/* Light / Dark Mode Toggle */}
@@ -106,7 +115,7 @@ export default function Navbar() {
                             onClick={toggleTheme}
                             type="button"
                             aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
-                            className="w-10 h-10 rounded-full border border-black/15 dark:border-white/20 bg-white/70 dark:bg-zinc-900/70 flex items-center justify-center text-black dark:text-white hover:scale-105 active:scale-95 transition-all shadow-sm cursor-pointer"
+                            className="w-10 h-10 rounded-full border border-black/15 dark:border-white/20 bg-white/70 dark:bg-zinc-900/70 flex items-center justify-center text-gray-800 dark:text-white hover:scale-105 active:scale-95 transition-all cursor-pointer"
                         >
                             {theme === "dark" ? (
                                 <SunIcon className="w-5 h-5 text-amber-400 transition-transform duration-200 hover:rotate-45" />
@@ -121,7 +130,7 @@ export default function Navbar() {
                             type="button"
                             aria-label={isOpen ? "Close menu" : "Open menu"}
                             aria-expanded={isOpen}
-                            className="md:hidden w-10 h-10 rounded-full border border-black/15 dark:border-white/20 bg-white/70 dark:bg-zinc-900/70 flex flex-col items-center justify-center gap-1 text-black dark:text-white hover:scale-105 active:scale-95 transition-all shadow-sm cursor-pointer"
+                            className="md:hidden w-10 h-10 rounded-full border border-black/15 dark:border-white/20 bg-white/70 dark:bg-zinc-900/70 flex flex-col items-center justify-center gap-1 text-gray-800 dark:text-white hover:scale-105 active:scale-95 transition-all  cursor-pointer"
                         >
                             <motion.span
                                 animate={isOpen ? { rotate: 45, y: 5.5 } : { rotate: 0, y: 0 }}
@@ -151,7 +160,7 @@ export default function Navbar() {
                         animate={{ opacity: 1, height: "auto" }}
                         exit={{ opacity: 0, height: 0 }}
                         transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                        className="md:hidden overflow-hidden border-t border-black/10 dark:border-white/10 bg-white/95 dark:bg-black/95 backdrop-blur-xl"
+                        className="md:hidden overflow-hidden border-t  dark:border-white/10 bg-white/95 dark:bg-black/95 backdrop-blur-xl"
                     >
                         <div className="px-6 sm:px-12 py-6">
                             <motion.ul
@@ -166,7 +175,7 @@ export default function Navbar() {
                                         transition: { staggerChildren: 0.04, staggerDirection: -1 },
                                     },
                                 }}
-                                className="flex flex-col gap-4 text-black dark:text-white tracking-widest font-light text-base"
+                                className="flex flex-col gap-4 text-gray-800 dark:text-white tracking-widest font-light text-base"
                             >
                                 {NAV_LINKS.map((link) => (
                                     <motion.li

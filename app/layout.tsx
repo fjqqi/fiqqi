@@ -28,7 +28,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${inter.variable} ${inriaSerif.variable} text-black dark:text-white h-full antialiased`}
+      className={`${inter.variable} ${inriaSerif.variable} text-gray-800 dark:text-white h-full antialiased`}
     >
       <head>
         <Script

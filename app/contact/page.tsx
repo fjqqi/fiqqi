@@ -89,7 +89,7 @@ export default function ContactPage() {
 
             <main
                 id="main-content"
-                className="w-full min-h-screen bg-white dark:bg-black text-black dark:text-white transition-colors duration-200 overflow-x-clip"
+                className="w-full min-h-screen bg-white dark:bg-black text-gray-800 dark:text-white transition-colors duration-200 overflow-x-clip"
             >
                 <motion.div
                     variants={pageVariants}
@@ -133,7 +133,7 @@ export default function ContactPage() {
                                 <div className="flex flex-col">
                                     <label
                                         htmlFor="contact-name"
-                                        className="text-[9px] sm:text-[10px] font-mono tracking-widest uppercase text-black/50 dark:text-white/50 mb-1 sm:mb-2"
+                                        className="text-[9px] sm:text-[10px] font-mono tracking-widest uppercase text-gray-800/50 dark:text-white/50 mb-1 sm:mb-2"
                                     >
                                         NAME
                                     </label>
@@ -144,7 +144,7 @@ export default function ContactPage() {
                                         onChange={(e) => setName(e.target.value)}
                                         placeholder="What should I call you"
                                         required
-                                        className="w-full bg-transparent border-b border-black/15 dark:border-white/15 pb-3 sm:pb-4 text-sm sm:text-base text-black dark:text-white placeholder:text-black/35 dark:placeholder:text-white/35 focus:outline-none focus:border-black dark:focus:border-white transition-colors"
+                                        className="w-full bg-transparent border-b border-black/15 dark:border-white/15 pb-3 sm:pb-4 text-sm sm:text-base text-gray-800 dark:text-white placeholder:text-gray-800/35 dark:placeholder:text-white/35 focus:outline-none focus:border-black dark:focus:border-white transition-colors"
                                     />
                                 </div>
 
@@ -152,7 +152,7 @@ export default function ContactPage() {
                                 <div className="flex flex-col mt-6 sm:mt-8 md:mt-10">
                                     <label
                                         htmlFor="contact-email"
-                                        className="text-[9px] sm:text-[10px] font-mono tracking-widest uppercase text-black/50 dark:text-white/50 mb-1 sm:mb-2"
+                                        className="text-[9px] sm:text-[10px] font-mono tracking-widest uppercase text-gray-800/50 dark:text-white/50 mb-1 sm:mb-2"
                                     >
                                         EMAIL
                                     </label>
@@ -163,13 +163,13 @@ export default function ContactPage() {
                                         onChange={(e) => setEmail(e.target.value)}
                                         placeholder="you@company.com"
                                         required
-                                        className="w-full bg-transparent border-b border-black/15 dark:border-white/15 pb-3 sm:pb-4 text-sm sm:text-base text-black dark:text-white placeholder:text-black/35 dark:placeholder:text-white/35 focus:outline-none focus:border-black dark:focus:border-white transition-colors"
+                                        className="w-full bg-transparent border-b border-black/15 dark:border-white/15 pb-3 sm:pb-4 text-sm sm:text-base text-gray-800 dark:text-white placeholder:text-gray-800/35 dark:placeholder:text-white/35 focus:outline-none focus:border-black dark:focus:border-white transition-colors"
                                     />
                                 </div>
 
                                 {/* Field: BUDGET */}
                                 <div className="flex flex-col mt-6 sm:mt-8 md:mt-10">
-                                    <span className="text-[9px] sm:text-[10px] font-mono tracking-widest uppercase text-black/50 dark:text-white/50 mb-2 sm:mb-3">
+                                    <span className="text-[9px] sm:text-[10px] font-mono tracking-widest uppercase text-gray-800/50 dark:text-white/50 mb-2 sm:mb-3">
                                         BUDGET
                                     </span>
                                     <div className="flex flex-wrap gap-2 sm:gap-2.5">
@@ -194,7 +194,7 @@ export default function ContactPage() {
                                 <div className="flex flex-col mt-6 sm:mt-8 md:mt-10">
                                     <label
                                         htmlFor="contact-message"
-                                        className="text-[9px] sm:text-[10px] font-mono tracking-widest uppercase text-black/50 dark:text-white/50 mb-1 sm:mb-2"
+                                        className="text-[9px] sm:text-[10px] font-mono tracking-widest uppercase text-gray-800/50 dark:text-white/50 mb-1 sm:mb-2"
                                     >
                                         MESSAGE
                                     </label>
@@ -205,7 +205,7 @@ export default function ContactPage() {
                                         onChange={(e) => setMessage(e.target.value)}
                                         placeholder="A few words about the project, timeline and goals"
                                         required
-                                        className="w-full bg-transparent border-b border-black/15 dark:border-white/15 pb-3 sm:pb-4 text-sm sm:text-base text-black dark:text-white placeholder:text-black/35 dark:placeholder:text-white/35 focus:outline-none focus:border-black dark:focus:border-white transition-colors resize-none"
+                                        className="w-full bg-transparent border-b border-black/15 dark:border-white/15 pb-3 sm:pb-4 text-sm sm:text-base text-gray-800 dark:text-white placeholder:text-gray-800/35 dark:placeholder:text-white/35 focus:outline-none focus:border-black dark:focus:border-white transition-colors resize-none"
                                     />
                                 </div>
 
@@ -310,7 +310,7 @@ export default function ContactPage() {
 
                             {/* Resume Download CV Section */}
                             <div className="flex flex-col items-start pt-1">
-                                <span className="text-[9px] sm:text-[10px] font-mono tracking-widest uppercase text-black/50 dark:text-white/50 mb-2">
+                                <span className="text-[9px] sm:text-[10px] font-mono tracking-widest uppercase text-gray-800/50 dark:text-white/50 mb-2">
                                     RESUME
                                 </span>
                                 <Button
