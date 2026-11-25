@@ -54,7 +54,7 @@ export default function AboutPage() {
                     {/* Section 01: Header */}
                     <motion.div variants={sectionItemVariants}>
                         <SecTitle
-                            number="01"
+                            number="02"
                             title="Get To Know Me"
                             subtitle="経歴"
                             mb="mb-4 sm:mb-6 md:mb-10"
@@ -78,7 +78,11 @@ export default function AboutPage() {
 
                     {/* Section 04: Contact */}
                     <motion.div variants={sectionItemVariants} className="w-full pt-4 sm:pt-8 md:pt-12">
-                        <ContactSection className="py-4 sm:py-6 md:py-10 px-0" />
+                        <ContactSection
+                            className="py-4 sm:py-6 md:py-10 px-0"
+                            sectionNumber="04"
+                            sectionSubtitle="四"
+                        />
                     </motion.div>
                 </motion.div>
             </main>

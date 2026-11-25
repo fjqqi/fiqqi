@@ -157,7 +157,7 @@ export default function ServicesSection() {
                                 {currentService.tags.map((tag) => (
                                     <li
                                         key={tag}
-                                        className="py-1 px-2.5 md:py-2 md:px-3 flex items-center justify-center font-light tracking-wider gap-1.5 rounded-full border border-black/80 dark:border-white/80 bg-white dark:bg-zinc-900 shadow-sm cursor-pointer hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors text-xs md:text-sm"
+                                        className="py-1 px-2.5 md:py-2 md:px-3 flex items-center justify-center font-light tracking-wider gap-1.5 rounded-full border border-gray-500 dark:border-white/80 bg-white dark:bg-zinc-900  cursor-pointer hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors text-xs md:text-sm"
                                     >
                                         {tag}
                                     </li>
@@ -211,7 +211,7 @@ export default function ServicesSection() {
                 </section>
 
                 {/* Right Column: 6 Images (Mobile top 42vh aperture with continuous scroll, Desktop right 540vh natural scroll) */}
-                <section className="rightsec order-1 md:order-2 w-full md:w-1/2 h-[42vh] md:h-auto overflow-hidden md:overflow-visible flex flex-col bg-primary rounded-bl-[40px] justify-between max-w-7xl mx-auto text-gray-800 border-b border-black/15 dark:border-white/15 md:border-b-0 shrink-0">
+                <section className="rightsec order-1 md:order-2 w-full md:w-1/2 h-[42vh] md:h-auto overflow-hidden md:overflow-visible flex flex-col bg-primary  justify-between max-w-7xl mx-auto text-gray-800 border-b border-black/15 dark:border-white/15 md:border-b-0 shrink-0">
                     <motion.div
                         className="w-full flex flex-col p-4 sm:p-6 md:p-10 pb-12 md:pb-20 gap-4 sm:gap-6 md:gap-10"
                         style={{ y: isMobile ? mobileY : 0 }}

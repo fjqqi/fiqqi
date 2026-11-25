@@ -8,6 +8,8 @@ import SecTitle from "@/app/components/ui/SecTitle";
 import PageHeroHeader, { type MetaStatItem } from "@/app/components/ui/PageHeroHeader";
 import { ArrowDownRightIcon } from "@/app/components/Icons";
 import Button from "@/app/components/ui/Button";
+import { useLanguage } from "@/app/context/LanguageContext";
+import profile from "@/app/data/profile.json";
 
 const CONTACT_STATS: MetaStatItem[] = [
     { label: "STATUS", value: "Open To New Project" },
@@ -55,7 +57,7 @@ const sectionItemVariants: Variants = {
     },
 };
 
-const BUDGET_OPTIONS = [
+const BUDGET_OPTIONS_ID = [
     "< Rp.200.000",
     "Rp.200.000 - Rp.500.000",
     "Rp.500.000 - Rp.2.000.000",
@@ -63,21 +65,35 @@ const BUDGET_OPTIONS = [
     "LET'S DISCUSS",
 ];
 
+const BUDGET_OPTIONS_EN = [
+    "< $50",
+    "$50 - $150",
+    "$150 - $500",
+    "> $500",
+    "LET'S DISCUSS",
+];
+
 export default function ContactPage() {
+    const { language } = useLanguage();
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
-    const [selectedBudget, setSelectedBudget] = useState<string | null>(null);
+    const [selectedBudgetIndex, setSelectedBudgetIndex] = useState<number | null>(null);
     const [message, setMessage] = useState("");
     const [submitted, setSubmitted] = useState(false);
+
+    const budgetOptions = language === "en" ? BUDGET_OPTIONS_EN : BUDGET_OPTIONS_ID;
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
 
+        const selectedBudgetText =
+            selectedBudgetIndex !== null ? budgetOptions[selectedBudgetIndex] : "Not specified";
+
         const subject = encodeURIComponent(`Project Inquiry from ${name || "Client"}`);
         const body = encodeURIComponent(
-            `Name: ${name}\nEmail: ${email}\nBudget: ${selectedBudget || "Not specified"}\n\nMessage:\n${message}`
+            `Name: ${name}\nEmail: ${email}\nBudget: ${selectedBudgetText}\n\nMessage:\n${message}`
         );
-        window.location.href = `mailto:faqihzaky43@gmail.com?subject=${subject}&body=${body}`;
+        window.location.href = `mailto:${profile.email}?subject=${subject}&body=${body}`;
 
         setSubmitted(true);
         setTimeout(() => setSubmitted(false), 4000);
@@ -101,7 +117,7 @@ export default function ContactPage() {
                     <div className="overflow-hidden pb-1 -mb-1">
                         <motion.div variants={maskItemVariants}>
                             <SecTitle
-                                number="01"
+                                number="03"
                                 title="Contact"
                                 subtitle={
                                     <span className="w-6 h-[3px] bg-primary dark:bg-lime-600 inline-block rounded-full align-middle" />
@@ -173,15 +189,15 @@ export default function ContactPage() {
                                         BUDGET
                                     </span>
                                     <div className="flex flex-wrap gap-2 sm:gap-2.5">
-                                        {BUDGET_OPTIONS.map((option) => (
+                                        {budgetOptions.map((option, idx) => (
                                             <Button
                                                 key={option}
                                                 type="button"
                                                 variant="toggle"
                                                 size="sm"
-                                                isActive={selectedBudget === option}
+                                                isActive={selectedBudgetIndex === idx}
                                                 onClick={() =>
-                                                    setSelectedBudget(selectedBudget === option ? null : option)
+                                                    setSelectedBudgetIndex(selectedBudgetIndex === idx ? null : idx)
                                                 }
                                             >
                                                 {option}
@@ -241,10 +257,10 @@ export default function ContactPage() {
                                             EMAIL
                                         </span>
                                         <a
-                                            href="mailto:faqihzaky43@gmail.com"
+                                            href={`mailto:${profile.email}`}
                                             className="text-sm sm:text-base md:text-lg font-normal text-white hover:underline transition-all block break-all"
                                         >
-                                            faqihzaky43@gmail.com
+                                            {profile.email}
                                         </a>
                                     </div>
 
@@ -254,10 +270,10 @@ export default function ContactPage() {
                                             PHONE
                                         </span>
                                         <a
-                                            href="tel:+62085791290386"
+                                            href={profile.phone.tel}
                                             className="text-sm sm:text-base md:text-lg font-normal text-white hover:underline transition-all block"
                                         >
-                                            (+62) 085791290386
+                                            {profile.phone.display}
                                         </a>
                                     </div>
 
@@ -267,12 +283,12 @@ export default function ContactPage() {
                                             TELEGRAM
                                         </span>
                                         <a
-                                            href="https://t.me/sawitbukanpohon"
+                                            href={profile.socials.telegram.url}
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             className="text-sm sm:text-base md:text-lg font-normal text-white hover:underline transition-all block"
                                         >
-                                            @sawitbukanpohon
+                                            {profile.socials.telegram.handle}
                                         </a>
                                     </div>
 
@@ -282,12 +298,12 @@ export default function ContactPage() {
                                             GITHUB
                                         </span>
                                         <a
-                                            href="https://github.com/fjqqi"
+                                            href={profile.socials.github.url}
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             className="text-sm sm:text-base md:text-lg font-normal text-white hover:underline transition-all block"
                                         >
-                                            @fjqqi
+                                            {profile.socials.github.handle}
                                         </a>
                                     </div>
 
@@ -297,12 +313,27 @@ export default function ContactPage() {
                                             INSTAGRAM
                                         </span>
                                         <a
-                                            href="https://instagram.com/fjqqi"
+                                            href={profile.socials.instagram.url}
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             className="text-sm sm:text-base md:text-lg font-normal text-white hover:underline transition-all block"
                                         >
-                                            @fjqqi
+                                            {profile.socials.instagram.handle}
+                                        </a>
+                                    </div>
+
+                                    {/* LinkedIn */}
+                                    <div className="flex flex-col">
+                                        <span className="text-[9px] sm:text-[10px] font-mono tracking-widest uppercase text-white/60 mb-1">
+                                            LINKEDIN
+                                        </span>
+                                        <a
+                                            href={profile.socials.linkedin.url}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="text-sm sm:text-base md:text-lg font-normal text-white hover:underline transition-all block"
+                                        >
+                                            {profile.socials.linkedin.handle}
                                         </a>
                                     </div>
                                 </div>
@@ -314,7 +345,7 @@ export default function ContactPage() {
                                     RESUME
                                 </span>
                                 <Button
-                                    href="https://drive.google.com/file/d/12Wn6d5WhnpKf5145MKd29kVlEg5oSRzN/view?usp=drive_link"
+                                    href={language === "id" ? profile.cv.id : profile.cv.en}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     icon={<ArrowDownRightIcon className="w-3.5 h-3.5" />}

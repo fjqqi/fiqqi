@@ -12,6 +12,13 @@ export const PROJECTS: Project[] = [
         bgColor: "#2d4e16",
         accentColor: "#39651c",
         tags: ["REACT", "NEST JS"],
+        role: "Frontend Developer",
+        year: "2025",
+        client: "Bukit Baruga",
+        description: {
+            en: "Corporate website for Bukit Baruga, a premier residential development in Makassar. Built a modern, responsive marketing site showcasing property listings, facilities, and community features. Focused on performance optimization and SEO to drive organic traffic and lead generation.",
+            id: "Website korporat untuk Bukit Baruga, pengembangan perumahan terkemuka di Makassar. Membangun situs pemasaran yang modern dan responsif yang menampilkan daftar properti, fasilitas, dan fitur komunitas. Fokus pada optimasi performa dan SEO untuk mendorong trafik organik dan generasi prospek.",
+        },
     },
     {
         id: "katakaltim",
@@ -24,6 +31,13 @@ export const PROJECTS: Project[] = [
         bgColor: "#0066f5",
         accentColor: "#1a75f8",
         tags: ["NEXT JS", "REACT", "TYPESCRIPT"],
+        role: "Frontend Developer",
+        year: "2024",
+        client: "Katakaltim Media",
+        description: {
+            en: "News and media portal for Katakaltim, a digital media platform covering news from East Kalimantan. Developed a fast, SEO-optimized news site with server-side rendering, dynamic content loading, and a clean reading experience optimized for both desktop and mobile devices.",
+            id: "Portal berita dan media untuk Katakaltim, platform media digital yang meliput berita dari Kalimantan Timur. Mengembangkan situs berita yang cepat dan teroptimasi SEO dengan server-side rendering, pemuatan konten dinamis, dan pengalaman membaca yang bersih untuk desktop maupun perangkat mobile.",
+        },
     },
     {
         id: "idnlab",
@@ -36,6 +50,13 @@ export const PROJECTS: Project[] = [
         bgColor: "#0053cf",
         accentColor: "#0562e8",
         tags: ["NEXT JS", "TAILWIND CSS", "NODE.JS"],
+        role: "Frontend Developer",
+        year: "2024",
+        client: "IDNLAB",
+        description: {
+            en: "Company profile and services website for IDNLAB, a technology solutions provider. Created a sleek, professional web presence highlighting their services, portfolio, and team. Implemented modern animations, responsive layouts, and an intuitive information architecture.",
+            id: "Website profil perusahaan dan layanan untuk IDNLAB, penyedia solusi teknologi. Membuat kehadiran web yang profesional dan modern yang menyoroti layanan, portofolio, dan tim mereka. Mengimplementasikan animasi modern, layout responsif, dan arsitektur informasi yang intuitif.",
+        },
     },
     {
         id: "baruga-property-cms",
@@ -48,6 +69,13 @@ export const PROJECTS: Project[] = [
         bgColor: "#162b20",
         accentColor: "#223f30",
         tags: ["FIGMA", "DESIGN SYSTEM", "DASHBOARD UI"],
+        role: "UI/UX Designer",
+        year: "2025",
+        client: "Bukit Baruga",
+        description: {
+            en: "Complete design system and UI/UX for a property management CMS dashboard. Designed a comprehensive admin interface for managing property listings, customer inquiries, content, and analytics. Created reusable component libraries, consistent design tokens, and intuitive workflows for content managers.",
+            id: "Sistem desain lengkap dan UI/UX untuk dashboard CMS manajemen properti. Merancang antarmuka admin yang komprehensif untuk mengelola daftar properti, pertanyaan pelanggan, konten, dan analitik. Membuat library komponen yang dapat digunakan kembali, token desain yang konsisten, dan alur kerja intuitif untuk pengelola konten.",
+        },
     },
     {
         id: "kopidukasi",
@@ -60,6 +88,13 @@ export const PROJECTS: Project[] = [
         bgColor: "#241d18",
         accentColor: "#352b23",
         tags: ["BRANDING", "CREATIVE DIRECTION", "VISUAL DESIGN"],
+        role: "Creative Designer",
+        year: "2024",
+        client: "Kopidukasi",
+        description: {
+            en: "Brand identity and visual design for Kopidukasi, a coffee education platform on Instagram. Developed the complete visual language including logo, color palette, typography system, and social media content templates. Created a cohesive brand experience that communicates coffee knowledge through engaging visual storytelling.",
+            id: "Identitas brand dan desain visual untuk Kopidukasi, platform edukasi kopi di Instagram. Mengembangkan bahasa visual lengkap termasuk logo, palet warna, sistem tipografi, dan template konten media sosial. Menciptakan pengalaman brand yang kohesif yang mengomunikasikan pengetahuan kopi melalui penceritaan visual yang menarik.",
+        },
     },
 ];
 

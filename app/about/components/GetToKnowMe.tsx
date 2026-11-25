@@ -7,6 +7,7 @@ import PageHeroHeader, { type MetaStatItem } from "@/app/components/ui/PageHeroH
 import Button from "@/app/components/ui/Button";
 import { ArrowDownRightIcon } from "@/app/components/Icons";
 import { useLanguage } from "@/app/context/LanguageContext";
+import profile from "@/app/data/profile.json";
 
 const ABOUT_STATS_EN: MetaStatItem[] = [
     { label: "BASED IN", value: "Makassar, INA" },
@@ -56,9 +57,6 @@ const imageVariants: Variants = {
     },
 };
 
-const LOREM_TEXT =
-    "Lorem ipsum dolor sit amet consectetur adipiscing elit. Amet consectetur adipiscing elit quisque faucibus ex sapien. Quisque faucibus ex sapien vitae pellentesque sem placerat. Vitae pellentesque sem placerat in id cursus mi.";
-
 export default function GetToKnowMe() {
     const { language } = useLanguage();
     const stats = language === "id" ? ABOUT_STATS_ID : ABOUT_STATS_EN;
@@ -98,21 +96,34 @@ export default function GetToKnowMe() {
                     </div>
                 </motion.div>
 
-                {/* Right Column: 3 Paragraphs + 3 Buttons */}
+                {/* Right Column: Bio Paragraphs + 3 Buttons */}
                 <motion.div
                     variants={fadeUpVariants}
                     className="md:col-span-7 flex flex-col h-full space-y-4"
                 >
                     <p className="text-sm sm:text-base md:text-lg leading-relaxed text-[#3a3a3a] dark:text-zinc-300 font-light">
-                        {LOREM_TEXT}
+                        I’m Fiqqi, a web developer and UI/UX designer based in Makassar, Indonesia. I build digital experiences that combine thoughtful design, intuitive interfaces, and functional development. I care about creating websites that not only look good but also perform well, load fast, and are optimized for search engines (SEO).
                     </p>
 
                     <p className="text-sm sm:text-base md:text-lg leading-relaxed text-[#3a3a3a] dark:text-zinc-300 font-light">
-                        {LOREM_TEXT}
+                        Right now, I’m a freelance web developer at{" "}
+                        <a
+                            href="https://makassarwebsite.com"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="underline underline-offset-4 text-primary dark:text-lime-500 hover:opacity-80 transition-opacity"
+                        >
+                            makassarwebsite.com
+                        </a>
+                        , building and designing frontend interfaces and custom web applications using modern technologies. I work across the entire process, from translating ideas and business requirements into visual interfaces to developing responsive, functional, and user-friendly websites.
                     </p>
 
                     <p className="text-sm sm:text-base md:text-lg leading-relaxed text-[#3a3a3a] dark:text-zinc-300 font-light">
-                        {LOREM_TEXT}
+                        I’m a fresh graduate in Software Engineering from Universitas Dipa Makassar, with hands-on experience working on web development and UI/UX projects for different clients and industries.
+                    </p>
+
+                    <p className="text-sm sm:text-base md:text-lg leading-relaxed text-[#3a3a3a] dark:text-zinc-300 font-light">
+                        I love building and exploring aesthetic websites, experimenting with layouts, typography, interactions, and visual details. I’m always curious about how design and technology can come together to create meaningful digital experiences.
                     </p>
 
                     {/* Button Pills Row */}
@@ -122,14 +133,14 @@ export default function GetToKnowMe() {
                         </Button>
 
                         <Button
-                            href="mailto:faqihzaky43@gmail.com?subject=Hire%20Inquiry"
+                            href={`mailto:${profile.email}?subject=Hire%20Inquiry`}
                             icon={<ArrowDownRightIcon className="w-3.5 h-3.5" />}
                         >
                             HIRE ME
                         </Button>
 
                         <Button
-                            href="https://drive.google.com/file/d/12Wn6d5WhnpKf5145MKd29kVlEg5oSRzN/view?usp=drive_link"
+                            href={language === "id" ? profile.cv.id : profile.cv.en}
                             target="_blank"
                             rel="noopener noreferrer"
                             icon={<ArrowDownRightIcon className="w-3.5 h-3.5" />}

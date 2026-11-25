@@ -1,0 +1,30 @@
+{
+  "email": "faqihzaky43@gmail.com",
+  "phone": {
+    "display": "+62 851-8330-3866",
+    "tel": "tel:+6285183303866",
+    "whatsapp": "https://wa.me/6285183303866"
+  },
+  "socials": {
+    "instagram": {
+      "handle": "@fjqqi",
+      "url": "https://instagram.com/fjqqi"
+    },
+    "github": {
+      "handle": "@fjqqi",
+      "url": "https://github.com/fjqqi"
+    },
+    "telegram": {
+      "handle": "@cihuyg",
+      "url": "https://t.me/cihuyg"
+    },
+    "linkedin": {
+      "handle": "Faqih Basri",
+      "url": "https://www.linkedin.com/in/faqih-basri-a54656299/"
+    }
+  },
+  "cv": {
+    "id": "https://drive.google.com/file/d/1ZEN8oW9Mr5bT0L8ffjwrShQhJWpXNM_n/view?usp=drive_link",
+    "en": "https://drive.google.com/file/d/13u6eRyJ3qikS8QjGvJovKyq7g4fjscCo/view?usp=drive_link"
+  }
+}

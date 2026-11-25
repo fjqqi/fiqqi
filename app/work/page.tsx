@@ -60,7 +60,7 @@ export default function WorkPage() {
     const description =
         language === "id"
             ? "Beberapa proyek dan desain pilihan saya yang dibangun untuk berbagai klien dan agensi."
-            : "some of my highlighted project and design for some compnay and my work for ageny lorem ipsum";
+            : "Selected projects and UI/UX work, crafted in collaboration with clients and creative agencies."
 
     return (
         <>

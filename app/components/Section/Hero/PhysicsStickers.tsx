@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import Matter from "matter-js";
 import { useInView } from "framer-motion";
 import { GithubIcon, LinkedInIcon, FacebookIcon, InstagramIcon, TelegramIcon, WhatsappIcon } from "@/app/components/Icons";
+import profile from "@/app/data/profile.json";
 
 export interface StickerData {
     id: string;
@@ -22,14 +23,14 @@ export const DEFAULT_HERO_STICKERS: StickerData[] = [
         label: "LinkedIn",
         textColor: "text-[#0A66C2] dark:text-[#38bdf8]",
         icon: "linkedin",
-        href: "https://linkedin.com",
+        href: profile.socials.linkedin.url,
     },
     {
         id: "github",
         label: "Github",
         textColor: "text-[#6366F1] dark:text-[#818cf8]",
         icon: "github",
-        href: "https://github.com/fjqqi",
+        href: profile.socials.github.url,
     },
     {
         id: "web-dev",

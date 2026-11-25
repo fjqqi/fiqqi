@@ -33,15 +33,15 @@ export type ButtonProps = ButtonAsButton | ButtonAsLink;
 
 const variantStyles: Record<ButtonVariant, (isActive?: boolean) => string> = {
     outline: () =>
-        "border border-black dark:border-white text-gray-800 dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-gray-800 bg-transparent",
+        "border border-gray-400 dark:border-white text-gray-800 dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-gray-800 bg-transparent",
     solid: () =>
-        "border border-black dark:border-white bg-black text-white dark:bg-white dark:text-gray-800 hover:bg-neutral-800 dark:hover:bg-neutral-200 shadow-sm",
+        "border border-gray-400 dark:border-white bg-black text-white dark:bg-white dark:text-gray-800 hover:bg-neutral-800 dark:hover:bg-neutral-200 shadow-sm",
     toggle: (isActive) =>
         isActive
-            ? "border border-black dark:border-white bg-black text-white dark:bg-white dark:text-gray-800 shadow-sm"
-            : "border border-black/20 dark:border-white/20 text-gray-800/75 dark:text-white/75 hover:border-black/60 dark:hover:border-white/60 bg-transparent",
+            ? "border border-gray-400 dark:border-white bg-black text-white dark:bg-white dark:text-gray-800 shadow-sm"
+            : "border border-gray-400/20 dark:border-white/20 text-gray-800/75 dark:text-white/75 hover:border-gray-400/60 dark:hover:border-white/60 bg-transparent",
     subtle: () =>
-        "border border-black/15 dark:border-white/15 bg-black/5 dark:bg-white/5 hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-gray-800 text-gray-800 dark:text-white backdrop-blur-xs",
+        "border border-gray-400/15 dark:border-white/15 bg-black/5 dark:bg-white/5 hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-gray-800 text-gray-800 dark:text-white backdrop-blur-xs",
 };
 
 const sizeStyles: Record<ButtonSize, string> = {
