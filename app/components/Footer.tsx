@@ -1,10 +1,16 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { GithubIcon, InstagramIcon, TelegramIcon, WhatsappIcon } from "./Icons";
 import { useLanguage } from "@/app/context/LanguageContext";
 import profile from "@/app/data/profile.json";
+
+if (typeof window !== "undefined") {
+    gsap.registerPlugin(ScrollTrigger);
+}
 
 const SOCIAL_ICON_LINKS = [
     {
@@ -61,18 +67,78 @@ const LINK_COLUMNS = [
 export default function Footer() {
     const year = new Date().getFullYear();
     const { language } = useLanguage();
+    const footerRef = useRef<HTMLElement>(null);
+    const contentRef = useRef<HTMLDivElement>(null);
+    const wordmarkRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const footer = footerRef.current;
+        const content = contentRef.current;
+        const wordmark = wordmarkRef.current;
+        if (!footer || !content) return;
+
+        const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        if (prefersReducedMotion) return;
+
+        const ctx = gsap.context(() => {
+            // Curtain-reveal parallax: footer content glides down from behind the page edge as it enters
+            gsap.fromTo(
+                content,
+                { yPercent: -35 },
+                {
+                    yPercent: 0,
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: footer,
+                        start: "top bottom",
+                        end: "bottom bottom",
+                        scrub: true,
+                        invalidateOnRefresh: true,
+                    },
+                }
+            );
+
+            // Subtle secondary depth parallax on the giant wordmark
+            if (wordmark) {
+                gsap.fromTo(
+                    wordmark,
+                    { yPercent: -15 },
+                    {
+                        yPercent: 0,
+                        ease: "none",
+                        scrollTrigger: {
+                            trigger: footer,
+                            start: "top bottom",
+                            end: "bottom bottom",
+                            scrub: true,
+                            invalidateOnRefresh: true,
+                        },
+                    }
+                );
+            }
+        }, footerRef);
+
+        const refreshTimer = setTimeout(() => {
+            ScrollTrigger.refresh();
+        }, 200);
+
+        return () => {
+            clearTimeout(refreshTimer);
+            ctx.revert();
+        };
+    }, []);
 
     return (
-        <footer className="w-full bg-[#111111] dark:bg-[#0a0a0a] text-white overflow-hidden relative border-t border-white/10">
-            <div className="w-full max-w-7xl mx-auto px-6 sm:px-12 md:px-16 pt-14 sm:pt-16 md:pt-20 pb-6 sm:pb-8 flex flex-col justify-between">
+        <footer
+            ref={footerRef}
+            className="w-full bg-[#111111] dark:bg-[#0a0a0a] text-white overflow-hidden relative border-t border-white/10"
+        >
+            <div
+                ref={contentRef}
+                className="w-full max-w-7xl mx-auto px-6 sm:px-12 md:px-16 pt-14 sm:pt-16 md:pt-20 pb-6 sm:pb-8 flex flex-col justify-between will-change-transform"
+            >
                 {/* Top Grid: Description + Social Icons on Left, 3-Column Links on Right */}
-                <motion.div
-                    initial={{ opacity: 0, y: 24 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-40px" }}
-                    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                    className="flex flex-col md:flex-row justify-between gap-12 md:gap-16"
-                >
+                <div className="flex flex-col md:flex-row justify-between gap-12 md:gap-16">
                     {/* Left Column */}
                     <div className="flex flex-col justify-between gap-10 md:gap-16 max-w-xs">
                         <p className="text-sm text-white/60 font-light leading-relaxed">
@@ -129,20 +195,17 @@ export default function Footer() {
                             </div>
                         ))}
                     </div>
-                </motion.div>
+                </div>
 
                 {/* Giant Oversized Brand Wordmark */}
-                <motion.div
-                    initial={{ opacity: 0, y: 40 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-40px" }}
-                    transition={{ duration: 0.9, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-                    className="mt-14 sm:mt-16 md:mt-20 mb-8 sm:mb-10 select-none"
+                <div
+                    ref={wordmarkRef}
+                    className="mt-14 sm:mt-16 md:mt-20 mb-8 sm:mb-10 select-none will-change-transform"
                 >
                     <h2 className="text-[clamp(5.5rem,24vw,17rem)] font-bold tracking-tighter leading-[0.88] text-white">
                         ぴき.
                     </h2>
-                </motion.div>
+                </div>
 
                 {/* Bottom Copyright Bar */}
                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs text-white/40 font-light">
